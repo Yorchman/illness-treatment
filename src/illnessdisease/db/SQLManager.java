@@ -22,14 +22,23 @@ public void connect(String path, String classname) {
 	}}
 
 public void createTables() {
-	
-/*Statement patient= this.connection.createStatement();
-String patienth= "CREATE TABLE patients"
+	try {
+Statement statement= this.connection.createStatement();
+String patient= "CREATE TABLE patients"
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-		+ " name TEXT NOT NULL";
+		+ " name TEXT NOT NULL,"
+		+ " gender TEXT NULL )";
 		//+ " dob "
-		//+ " gender TEXT NULL "*/
-		
+		statement.execute(patient);
+
+String sideEffects="CREATE TABLE sideEffects"//Esto esta incompleto y mal.
+		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
+		+ " name TEXT NOT NULL,"
+		+ "  )";
+		statement.execute(sideEffects);
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
 
 }
 }
