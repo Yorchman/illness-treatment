@@ -4,6 +4,7 @@ import java.io.*;
 
 public class SQLManager {
 	private Connection connection;
+//	private Statement statement;
 	
 
 public void connect(String path, String classname) {
@@ -20,8 +21,20 @@ public void connect(String path, String classname) {
 		//System.out.println("La conexion no pudo establecerse con éxito");
 	}}
 
+public void createTables() {
+	
+/*Statement patient= this.connection.createStatement();
+String patienth= "CREATE TABLE patients"
+		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
+		+ " name TEXT NOT NULL";
+		//+ " dob "
+		//+ " gender TEXT NULL "*/
+		
 
 }
+}
+
+
 
 
 
