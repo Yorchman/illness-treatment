@@ -67,15 +67,74 @@ String medicines ="CREATE TABLE medicines "
 		statement.execute(medicines);
 		
 String symptoms ="CREATE TABLE symptoms "
-		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-		+ " name TEXT NOT NULL,"
+		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT, "
+		+ " name TEXT NOT NULL, "
 		+ " diagnosis TEXT, "
 		+ " areas TEXT, "
 		+ " duration INTEGER, "
 		+ "  )";
 		statement.execute(symptoms);
 		
-String patientillness
+String patient_illness= "CREATE TABLE patient_illness"
+		+ "(patient.id INTEGER, "
+		+ "illness.id INTEGER, "  
+		+ "PRIMARY KEY (patient.id, illness.id), "
+		+ " FOREIGN KEY (patient.id) REFERENCES patient(id), "
+		+ " FOREIGN KEY (illness.id) REFERENCES illness(id), "
+		+ ")";
+		statement.execute(patient_illness);
+
+String patient_intolerance= "CREATE TABLE patient_intolerance"
+		+ "(patient.id INTEGER, "
+		+ "intolerance.id INTEGER, "
+		+ "PRIMARY KEY (patient.id, intolerance.id), "
+		+ " FOREIGN KEY (patient.id) REFERENCES patient(id), "
+		+ " FOREIGN KEY (intolerance.id) REFERENCES intolerance(id), "
+		+ " )";
+		statement.execute(patient_intolerance);
+		
+String patient_symptoms= "CREATE TABLE patient_symptoms"
+		+ "(patient.id INTEGER, "
+		+ "symptoms.id INTEGER, "
+		+ "PRIMARY KEY (patient.id, symptoms.id), "
+		+ " FOREIGN KEY (patient.id) REFERENCES patient(id), "
+		+ " FOREIGN KEY (symptoms.id) REFERENCES symptoms(id), "
+		+ " )";
+		statement.execute(patient_symptoms);
+
+String patient_medicines= "CREATE TABLE patient_medicines"
+		+ "(patient.id INTEGER, "
+		+ "medicines.id INTEGER, "
+		+ "PRIMARY KEY (patient.id, symptoms.id), "
+		+ " FOREIGN KEY (patient.id) REFERENCES patient(id), "
+		+ " FOREIGN KEY (medicines.id) REFERENCES medicines(id), "
+		+ " )";
+		statement.execute(patient_medicines);
+
+String illness_symptoms = "CREATE TABLE illness_symptoms"
+		+ "(illness.id INTEGER, "
+		+ "symptoms.id INTEGER, "
+		+ " FOREIGN KEY (illness.id) REFERENCES illness(id), "
+		+ " FOREIGN KEY (symptoms.id) REFERENCES symptoms(id), "
+		+ " )";
+		statement.execute(illness_symptoms);
+
+String illness_medicines= "CREATE TABLE illness_medicines"
+		+ "(illness.id INTEGER, "
+		+ "medicines.id INTEGER, "
+		+ " FOREIGN KEY (illness.id) REFERENCES illness(id), "
+		+ " FOREIGN KEY (medicines.id) REFERENCES medicines(id), "
+		+ " )";
+		statement.execute(illness_medicines);
+
+String medicines_sidEffects= "CREATE TABLE medicines_sidEffects"
+		+ "(medicines.id INTEGER, "
+		+ "sidEffects.id INTEGER, "
+		+ " FOREIGN KEY (medicines.id) REFERENCES medicines(id), "
+		+ " FOREIGN KEY (sidEffects.id) REFERENCES sidEffects(id), "
+		+ " )";
+		statement.execute(medicines_sidEffects);
+		
 	}catch(Exception e) {
 		e.printStackTrace();
 	}
