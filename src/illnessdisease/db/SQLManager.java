@@ -75,13 +75,14 @@ String symptoms ="CREATE TABLE symptoms "
 		+ "  )";
 		statement.execute(symptoms);
 		
-
-
+String patientillness
 	}catch(Exception e) {
 		e.printStackTrace();
 	}
-
 }
+
+
+
 }
 
 
