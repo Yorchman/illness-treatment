@@ -27,62 +27,30 @@ Statement statement= this.connection.createStatement();
 String patient= "CREATE TABLE patients"
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ " name TEXT NOT NULL,"
-		+ " gender TEXT NULL ,"
-		+ " SSN INTEGER ,"
-		+ " )";
+		+ " gender TEXT NULL )";
 		//+ " dob "
 		statement.execute(patient);
 
-String sideEffects="CREATE TABLE sideEffects"
+String sideEffects="CREATE TABLE sideEffects"//Esto esta incompleto y mal.
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ " name TEXT NOT NULL,"
-		+ " duration INTEGER NOT NULL, "
-		+ "area TEXT, "
 		+ "  )";
 		statement.execute(sideEffects);
-
-String illness ="CREATE TABLE illness "
-		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-		+ " name TEXT NOT NULL,"
-		+ " type TEXT,"
-		+ " causes TEXT,"
-		+ "contagious BOOLEAN, "
-		+ "  )";
-		statement.execute(illness);
-		
-String intolerance ="CREATE TABLE intolerance "
-		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-		+ " name TEXT NOT NULL,"
-		+ "  )";
-		statement.execute(intolerance);
-		
-String medicines ="CREATE TABLE medicines "
-		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-		+ " name TEXT NOT NULL,"
-		+ " activeprinciple TEXT, "
-		+ " restrictions TEXT, "
-		+ " price TEXT, "
-		+ " SSCover BOOLEAN "
-		+ "  )";
-		statement.execute(medicines);
-		
-String symptoms ="CREATE TABLE symptoms "
-		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-		+ " name TEXT NOT NULL,"
-		+ " diagnosis TEXT, "
-		+ " areas TEXT, "
-		+ " duration INTEGER, "
-		+ "  )";
-		statement.execute(symptoms);
-		
-
-
 	}catch(Exception e) {
 		e.printStackTrace();
 	}
 
 }
-}
+ 
+public void Insert_patients(Integer id, String name, String type, String causes, boolean contagious) {
+	try {
+		Statement statement2= this.connection.createStatement();
+		String sql="INSERT INTO "
+		}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}}
 
 
 
