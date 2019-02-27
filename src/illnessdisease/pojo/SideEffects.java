@@ -10,12 +10,12 @@ public class SideEffects implements Serializable{
 
 	private Integer id;
 	private String name;
-	private Double duration;
+	private Integer duration;
 	private String area;
 	public SideEffects() {
 		super();
 	}
-	public SideEffects(Integer id, String name, Double duration, String area) {
+	public SideEffects(Integer id, String name, Integer duration, String area) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -34,10 +34,10 @@ public class SideEffects implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Double getDuration() {
+	public Integer getDuration() {
 		return duration;
 	}
-	public void setDuration(Double duration) {
+	public void setDuration(Integer duration) {
 		this.duration = duration;
 	}
 	public String getArea() {

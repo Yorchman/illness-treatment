@@ -13,11 +13,11 @@ public class Symptoms  implements Serializable{
 	private String name;
 	private String Diagnosis;
 	private String Areas;
-	private Double Duration;
+	private Integer Duration;
 	public Symptoms() {
 		super();
 	}
-	public Symptoms(Integer id, String name, String diagnosis, String areas, Double duration) {
+	public Symptoms(Integer id, String name, String diagnosis, String areas, Integer duration) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -49,10 +49,10 @@ public class Symptoms  implements Serializable{
 	public void setAreas(String areas) {
 		Areas = areas;
 	}
-	public Double getDuration() {
+	public Integer getDuration() {
 		return Duration;
 	}
-	public void setDuration(Double duration) {
+	public void setDuration(Integer duration) {
 		Duration = duration;
 	}
 	@Override

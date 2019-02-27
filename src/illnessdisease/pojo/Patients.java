@@ -10,10 +10,51 @@ public class Patients implements Serializable { /**
 //Implement serializable, import, rishtclick
 
 	private Integer id;
+	private Integer SSN;
 	private String name;
 	private Date DOB;
 	private String gender;
-	
+	public Patients() {
+		super();
+	}
+	public Patients(Integer id, Integer sSN, String name, Date dOB, String gender) {
+		super();
+		this.id = id;
+		SSN = sSN;
+		this.name = name;
+		DOB = dOB;
+		this.gender = gender;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Integer getSSN() {
+		return SSN;
+	}
+	public void setSSN(Integer sSN) {
+		SSN = sSN;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Date getDOB() {
+		return DOB;
+	}
+	public void setDOB(Date dOB) {
+		DOB = dOB;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -21,7 +62,6 @@ public class Patients implements Serializable { /**
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -38,53 +78,7 @@ public class Patients implements Serializable { /**
 			return false;
 		return true;
 	}
-
-	public Patients(Integer id, String name, Date dOB, String gender) {
-		super();
-		this.id = id;
-		this.name = name;
-		DOB = dOB;
-		this.gender = gender;
-	}
-
-	public Patients() {
-		super();
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Date getDOB() {
-		return DOB;
-	}
-
-	public void setDOB(Date dOB) {
-		DOB = dOB;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
 	
 	
-
-		
 
 	}

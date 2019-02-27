@@ -10,12 +10,12 @@ public class Medicines implements Serializable {
 	private String name;
 	private String activePrinciple;
 	private String restrictions;
-	private Integer price;
+	private Double price;
 	private Boolean seguridadSocial;
 	public Medicines() {
 		super();
 	}
-	public Medicines(Integer id, String name, String activePrinciple, String restrictions, Integer price,
+	public Medicines(Integer id, String name, String activePrinciple, String restrictions, Double price,
 			boolean seguridadSocial) {
 		super();
 		this.id = id;
@@ -49,10 +49,10 @@ public class Medicines implements Serializable {
 	public void setRestrictions(String restrictions) {
 		this.restrictions = restrictions;
 	}
-	public Integer getPrice() {
+	public Double getPrice() {
 		return price;
 	}
-	public void setPrice(Integer price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 	public boolean isSeguridadSocial() {
