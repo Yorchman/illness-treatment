@@ -3,6 +3,7 @@ import java.sql.*;
 
 import illnessdisease.pojo.Illnesses;
 import illnessdisease.pojo.Patients;
+import illnessdisease.pojo.Symptoms;
 
 import java.io.*;
 
@@ -164,15 +165,15 @@ public void Insert_illness(Illnesses i) {
 	}
 }
 
-public void Insert_patients(Patients p) {
+public void Insert_symptoms(Symptoms s) {
 	try {
 		
-		String sql="INSERT INTO patients( id, SSn, name, DOB, gender) "+ "VALUES (?,?,?,?,?);";
+		String sql="INSERT INTO patients( id, name, diagnosis, areas, duration) "+ "VALUES (?,?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
-		prep.setInt(1, p.getSSN());
-		prep.setString(2, p.getName());
-		prep.setDate(3, p.getDOB());
-		prep.setString(4, p.getGender());
+		prep.setString(1, s.getName());
+		prep.setString(2, s.getDiagnosis());
+		prep.setString(3, s.getAreas());
+		prep.setInt(4, s.getDuration());
 	
 		prep.executeUpdate();
 		prep.close();}
