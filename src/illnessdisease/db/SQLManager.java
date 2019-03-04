@@ -150,7 +150,7 @@ String medicines_sidEffects= "CREATE TABLE medicines_sidEffects"
 public void Insert_illness(Illnesses i) {
 	try {
 		
-		String sql="INSERT INTO ilnesses( id, name, type, causes, contagious) "+ "VALUES (?,?,?,?,?);";
+		String sql="INSERT INTO illnesses( id, name, type, causes, contagious) "+ "VALUES (?,?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, i.getName());
 		prep.setString(2, i.getType());
@@ -167,7 +167,7 @@ public void Insert_illness(Illnesses i) {
 public void Insert_patients(Patients p) {
 	try {
 		
-		String sql="INSERT INTO ilnesses( id, name, type, causes, contagious) "+ "VALUES (?,?,?,?,?);";
+		String sql="INSERT INTO illnesses( id, name, type, causes, contagious) "+ "VALUES (?,?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, p.getSSN());
 		prep.setString(2, p.getName());
