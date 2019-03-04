@@ -1,5 +1,8 @@
 package illnessdisease.db;
 import java.sql.*;
+
+import illnessdisease.pojo.Illnesses;
+
 import java.io.*;
 
 public class SQLManager {
@@ -80,15 +83,23 @@ String symptoms ="CREATE TABLE symptoms "
 
 
 
-public void Insert_patients(Integer id, String name, String type, String causes, boolean contagious) {
+public void Insert_illness(Illnesses i) {
 	try {
-		Statement statement2= this.connection.createStatement();
-		String sql="INSERT INTO ilnesses( id, name, type, causes, contagious) "+ "VALUES ('" + id + "', '" + name	+ "','"+ type +"','"+ causes +"','"+contagious+"');";
-		statement2.executeUpdate(sql);
-		statement2.close();
-		}
+		
+		String sql="INSERT INTO ilnesses( id, name, type, causes, contagious) "+ "VALUES (?,?,?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, i.getName());
+		prep.setString(2, i.getType());
+		prep.setString(3, i.getCauses());
+		prep.setBoolean(4, i.isContagious());
+	
+		prep.executeUpdate();
+		prep.close();}
 	catch(Exception e) {
 		e.printStackTrace();
 	}
-}}
+}
+		
+
+}
 		
