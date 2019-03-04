@@ -167,7 +167,7 @@ public void Insert_illness(Illnesses i) {
 public void Insert_patients(Patients p) {
 	try {
 		
-		String sql="INSERT INTO illnesses( id, name, type, causes, contagious) "+ "VALUES (?,?,?,?,?);";
+		String sql="INSERT INTO patients( id, SSn, name, DOB, gender) "+ "VALUES (?,?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, p.getSSN());
 		prep.setString(2, p.getName());
@@ -181,6 +181,7 @@ public void Insert_patients(Patients p) {
 	}
 }
 		
+
 
 }
 		
