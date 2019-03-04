@@ -2,7 +2,7 @@ package illnessdisease.db;
 import java.sql.*;
 
 import illnessdisease.pojo.Illnesses;
-import illnessdisease.pojo.Patients;
+import illnessdisease.pojo.Medicines;
 
 import java.io.*;
 
@@ -150,7 +150,7 @@ String medicines_sidEffects= "CREATE TABLE medicines_sidEffects"
 public void Insert_illness(Illnesses i) {
 	try {
 		
-		String sql="INSERT INTO illnesses( id, name, type, causes, contagious) "+ "VALUES (?,?,?,?,?);";
+		String sql="INSERT INTO ilnesses( id, name, type, causes, contagious) "+ "VALUES (?,?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, i.getName());
 		prep.setString(2, i.getType());
@@ -163,24 +163,23 @@ public void Insert_illness(Illnesses i) {
 		e.printStackTrace();
 	}
 }
-
-public void Insert_patients(Patients p) {
+	
+public void Insert_Medicines(Medicines i) {
 	try {
 		
-		String sql="INSERT INTO illnesses( id, name, type, causes, contagious) "+ "VALUES (?,?,?,?,?);";
+		String sql="INSERT INTO medicines( id, name, activePrinciple, restrictions, price, seguridadSocial) "+ "VALUES (?,?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
-		prep.setInt(1, p.getSSN());
-		prep.setString(2, p.getName());
-		prep.setDate(3, p.getDOB());
-		prep.setString(4, p.getGender());
-	
+		prep.setString(1, i.getName());
+		prep.setString(2, i.getActivePrinciple());
+		prep.setString(3, i.getRestrictions());
+		prep.setDouble(4, i.getPrice());
+		prep.setBoolean(5, i.isSeguridadSocial());
 		prep.executeUpdate();
 		prep.close();}
 	catch(Exception e) {
 		e.printStackTrace();
 	}
 }
-		
 
 }
 		
