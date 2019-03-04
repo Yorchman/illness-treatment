@@ -165,15 +165,32 @@ public void Insert_illness(Illnesses i) {
 	}
 }
 
-public void Insert_symptoms(Symptoms s) {
+public void Insert_patients(Patients p) {
 	try {
 		
-		String sql="INSERT INTO patients( id, name, diagnosis, areas, duration) "+ "VALUES (?,?,?,?,?);";
+		String sql="INSERT INTO patients( id, SSn, name, DOB, gender) "+ "VALUES (?,?,?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setInt(1, p.getSSN());
+		prep.setString(2, p.getName());
+		prep.setDate(3, p.getDOB());
+		prep.setString(4, p.getGender());
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+		
+public void Insert_sideeffects(SideEffects s) {
+	try {
+		
+		String sql="INSERT INTO side_effects( id, name, duration, area) "+ "VALUES (?,?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, s.getName());
-		prep.setString(2, s.getDiagnosis());
-		prep.setString(3, s.getAreas());
-		prep.setInt(4, s.getDuration());
+		prep.setInt(2,s.getDuration());
+		prep.setString(3, s.getArea());
+		
 	
 		prep.executeUpdate();
 		prep.close();}
