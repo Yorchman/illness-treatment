@@ -217,6 +217,21 @@ public void Insert_symptoms(Symptoms s) {
 		e.printStackTrace();
 	}
 }
-
+public void Insert_Medicines(Medicines j) {
+	try {
+		
+		String sql="INSERT INTO medicines( id, name, activePrinciple, restrictions, price, seguridadSocial) "+ "VALUES (?,?,?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, j.getName());
+		prep.setString(2, j.getActivePrinciple());
+		prep.setString(3, j.getRestrictions());
+		prep.setDouble(4, j.getPrice());
+		prep.setBoolean(5, j.isSeguridadSocial());
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}	
 }
 		
