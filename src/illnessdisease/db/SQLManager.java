@@ -201,7 +201,22 @@ public void Insert_sideeffects(SideEffects s) {
 	}
 }
 		
-
+public void Insert_symptoms(Symptoms s) {
+	try {
+		
+		String sql="INSERT INTO patients( id, name, diagnosis, area, duration) "+ "VALUES (?,?,?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, s.getName());
+		prep.setString(2, s.getDiagnosis());
+		prep.setString(3, s.getAreas());
+		prep.setInt(4, s.getDuration());
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
 
 }
 		
