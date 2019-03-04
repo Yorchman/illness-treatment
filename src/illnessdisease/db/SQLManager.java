@@ -3,6 +3,7 @@ import java.sql.*;
 
 import illnessdisease.pojo.Illnesses;
 import illnessdisease.pojo.Patients;
+import illnessdisease.pojo.SideEffects;
 
 import java.io.*;
 
@@ -173,6 +174,23 @@ public void Insert_patients(Patients p) {
 		prep.setString(2, p.getName());
 		prep.setDate(3, p.getDOB());
 		prep.setString(4, p.getGender());
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+		
+public void Insert_sideeffects(SideEffects s) {
+	try {
+		
+		String sql="INSERT INTO side_effects( id, name, duration, area) "+ "VALUES (?,?,?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, s.getName());
+		prep.setInt(2,s.getDuration());
+		prep.setString(3, s.getArea());
+		
 	
 		prep.executeUpdate();
 		prep.close();}
