@@ -3,6 +3,8 @@ import java.sql.*;
 
 import illnessdisease.pojo.Illnesses;
 import illnessdisease.pojo.Patients;
+import illnessdisease.pojo.SideEffects;
+import illnessdisease.pojo.Medicines;
 import illnessdisease.pojo.Symptoms;
 
 import java.io.*;
