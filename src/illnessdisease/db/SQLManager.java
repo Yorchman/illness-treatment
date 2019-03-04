@@ -2,6 +2,7 @@ package illnessdisease.db;
 import java.sql.*;
 
 import illnessdisease.pojo.Illnesses;
+import illnessdisease.pojo.Patients;
 
 import java.io.*;
 
@@ -155,6 +156,23 @@ public void Insert_illness(Illnesses i) {
 		prep.setString(2, i.getType());
 		prep.setString(3, i.getCauses());
 		prep.setBoolean(4, i.isContagious());
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+
+public void Insert_patients(Patients p) {
+	try {
+		
+		String sql="INSERT INTO ilnesses( id, name, type, causes, contagious) "+ "VALUES (?,?,?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setInt(1, p.getSSN());
+		prep.setString(2, p.getName());
+		prep.setDate(3, p.getDOB());
+		prep.setString(4, p.getGender());
 	
 		prep.executeUpdate();
 		prep.close();}
