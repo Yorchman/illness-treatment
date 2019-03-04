@@ -6,7 +6,7 @@ import illnessdisease.pojo.Patients;
 import illnessdisease.pojo.SideEffects;
 import illnessdisease.pojo.Medicines;
 import illnessdisease.pojo.Symptoms;
-
+import illnessdisease.pojo.Intolerance;
 import java.io.*;
 
 public class SQLManager {
@@ -153,7 +153,7 @@ String medicines_sidEffects= "CREATE TABLE medicines_sidEffects"
 public void Insert_illness(Illnesses i) {
 	try {
 		
-		String sql="INSERT INTO illnesses( id, name, type, causes, contagious) "+ "VALUES (?,?,?,?,?);";
+		String sql="INSERT INTO illnesses(  name, type, causes, contagious) "+ "VALUES (?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, i.getName());
 		prep.setString(2, i.getType());
@@ -170,7 +170,7 @@ public void Insert_illness(Illnesses i) {
 public void Insert_patients(Patients p) {
 	try {
 		
-		String sql="INSERT INTO patients( id, SSn, name, DOB, gender) "+ "VALUES (?,?,?,?,?);";
+		String sql="INSERT INTO patients( SSn, name, DOB, gender) "+ "VALUES (?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, p.getSSN());
 		prep.setString(2, p.getName());
@@ -187,7 +187,7 @@ public void Insert_patients(Patients p) {
 public void Insert_sideeffects(SideEffects s) {
 	try {
 		
-		String sql="INSERT INTO side_effects( id, name, duration, area) "+ "VALUES (?,?,?,?,?);";
+		String sql="INSERT INTO side_effects(name, duration, area) "+ "VALUES (?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, s.getName());
 		prep.setInt(2,s.getDuration());
@@ -201,7 +201,20 @@ public void Insert_sideeffects(SideEffects s) {
 	}
 }
 		
-
+public void Insert_intolerance(Intolerance in) {
+	try {
+		
+		String sql ="INSERT INTO intolerance( name) "+ "VALUES (?)";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, in.getName());
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+	
+}
 
 }
 		
