@@ -167,7 +167,11 @@ public void Insert_illness(Illnesses i) {
 public void Insert_Medicines(Medicines i) {
 	try {
 		
+<<<<<<< HEAD
 		String sql="INSERT INTO medicines( id, name, activePrinciple, restrictions, price, seguridadSocial) "+ "VALUES (?,?,?,?,?);";
+=======
+		String sql="INSERT INTO patients( id, SSn, name, DOB, gender) "+ "VALUES (?,?,?,?,?);";
+>>>>>>> branch 'master' of https://github.com/Yorchman/illness-treatment
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, i.getName());
 		prep.setString(2, i.getActivePrinciple());
@@ -180,6 +184,7 @@ public void Insert_Medicines(Medicines i) {
 		e.printStackTrace();
 	}
 }
+
 
 }
 		
