@@ -49,7 +49,6 @@ String illness ="CREATE TABLE illness "
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ " name TEXT NOT NULL,"
 		+ " type TEXT,"
-		+ " causes TEXT,"
 		+ "contagious BOOLEAN, "
 		+ "  )";
 		statement.execute(illness);
@@ -64,7 +63,6 @@ String medicines ="CREATE TABLE medicines "
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ " name TEXT NOT NULL,"
 		+ " activeprinciple TEXT, "
-		+ " restrictions TEXT, "
 		+ " price TEXT, "
 		+ " SSCover BOOLEAN "
 		+ "  )";
@@ -153,12 +151,11 @@ String medicines_sidEffects= "CREATE TABLE medicines_sidEffects"
 public void Insert_illness(Illnesses i) {
 	try {
 		
-		String sql="INSERT INTO illnesses( name, type, causes, contagious) "+ "VALUES (?,?,?,?);";
+		String sql="INSERT INTO illnesses( name, type, contagious) "+ "VALUES (?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, i.getName());
 		prep.setString(2, i.getType());
-		prep.setString(3, i.getCauses());
-		prep.setBoolean(4, i.isContagious());
+		prep.setBoolean(3, i.isContagious());
 	
 		prep.executeUpdate();
 		prep.close();}
@@ -218,13 +215,12 @@ public void Insert_intolerance(Intolerance in) {
 public void Insert_Medicines(Medicines j) {
 	try {
 		
-		String sql="INSERT INTO medicines( name, activePrinciple, restrictions, price, seguridadSocial) "+ "VALUES (?,?,?,?,?);";
+		String sql="INSERT INTO medicines( name, activePrinciple, price, seguridadSocial) "+ "VALUES (?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, j.getName());
 		prep.setString(2, j.getActivePrinciple());
-		prep.setString(3, j.getRestrictions());
-		prep.setDouble(4, j.getPrice());
-		prep.setBoolean(5, j.isSeguridadSocial());
+		prep.setDouble(3, j.getPrice());
+		prep.setBoolean(4, j.isSeguridadSocial());
 		prep.executeUpdate();
 		prep.close();}
 	catch(Exception e) {

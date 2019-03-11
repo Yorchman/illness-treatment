@@ -9,7 +9,6 @@ public class Medicines implements Serializable {
 	private Integer id;
 	private String name;
 	private String activePrinciple;
-	private String restrictions;
 	private Double price;
 	private Boolean seguridadSocial;
 	public Medicines() {
@@ -21,7 +20,6 @@ public class Medicines implements Serializable {
 		this.id = id;
 		this.name = name;
 		this.activePrinciple = activePrinciple;
-		this.restrictions = restrictions;
 		this.price = price;
 		this.seguridadSocial = seguridadSocial;
 	}
@@ -43,12 +41,7 @@ public class Medicines implements Serializable {
 	public void setActivePrinciple(String activePrinciple) {
 		this.activePrinciple = activePrinciple;
 	}
-	public String getRestrictions() {
-		return restrictions;
-	}
-	public void setRestrictions(String restrictions) {
-		this.restrictions = restrictions;
-	}
+	
 	public Double getPrice() {
 		return price;
 	}

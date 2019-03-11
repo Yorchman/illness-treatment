@@ -24,7 +24,6 @@ public Illnesses(Integer id, String name, String type, String causes, boolean co
 	this.id = id;
 	this.name = name;
 	this.type = type;
-	this.causes = causes;
 	this.contagious = contagious;
 }
 @Override
@@ -71,12 +70,7 @@ public String getType() {
 public void setType(String type) {
 	this.type = type;
 }
-public String getCauses() {
-	return causes;
-}
-public void setCauses(String causes) {
-	this.causes = causes;
-}
+
 public boolean isContagious() {
 	return contagious;
 }
