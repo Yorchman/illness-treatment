@@ -12,7 +12,7 @@ import java.io.*;
 public class SQLManager {
 	private Connection connection;
 //	private Statement statement;
-	
+	private static Connection c;
 
 public void connect(String path, String classname) {
 	try {
@@ -226,6 +226,106 @@ public void Insert_Medicines(Medicines j) {
 	catch(Exception e) {
 		e.printStackTrace();
 	}
-}	
+}
+
+public static void printPatient() throws SQLException {
+	Statement stmt = c.createStatement();
+	String sql = "SELECT * FROM patient";
+	ResultSet rs = stmt.executeQuery(sql);
+	while (rs.next()) {
+		int id = rs.getInt("id");
+		int SSN = rs.getInt("SSN");
+		String name = rs.getString("name");
+		Date dob = rs.getDate("dob");
+		String gender = rs.getString("gender");
+	     Patients patient = new Patients(id, SSN, name, dob, gender);
+		System.out.println(patient);
+	}
+	rs.close();
+	stmt.close();
+}
+
+public void Delete_illness(Illnesses i) {
+	try {
+		
+		String sql="DELETE INTO illnesses( name, type, contagious) "+ "VALUES (?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, i.getName());
+		prep.setString(2, i.getType());
+		prep.setBoolean(3, i.isContagious());
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+
+public void Delete_patients(Patients p) {
+	try {
+		
+		String sql="DELETE INTO patients( SSn, name, DOB, gender) "+ "VALUES (?,?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setInt(1, p.getSSN());
+		prep.setString(2, p.getName());
+		prep.setDate(3, p.getDOB());
+		prep.setString(4, p.getGender());
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+		
+public void Delete_sideeffects(SideEffects s) {
+	try {
+		
+		String sql="DELETE INTO side_effects(name, duration, area) "+ "VALUES (?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, s.getName());
+		prep.setInt(2,s.getDuration());
+		prep.setString(3, s.getArea());
+		
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+		
+public void Delete_intolerance(Intolerance in) {
+	try {
+		
+		String sql ="DELETE INTO intolerance( name) "+ "VALUES (?)";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, in.getName());
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+	
+}
+public void Delete_Medicines(Medicines j) {
+	try {
+		
+		String sql="DELETE INTO medicines( name, activePrinciple, price, seguridadSocial) "+ "VALUES (?,?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, j.getName());
+		prep.setString(2, j.getActivePrinciple());
+		prep.setDouble(3, j.getPrice());
+		prep.setBoolean(4, j.isSeguridadSocial());
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+
+
+
 }
 		
