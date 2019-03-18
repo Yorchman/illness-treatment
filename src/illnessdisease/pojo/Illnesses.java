@@ -3,23 +3,42 @@ package illnessdisease.pojo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 
 
+@Entity
+@Table(name="illnesses")
 public class Illnesses implements Serializable{
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -4120176035031838818L;
 
+     @Id
+     @GeneratedValue(generator="departments")
+     @TableGenerator(name="departments", table="sqlite_sequence",
+        pkColumnName="name", valueColumnName="seq", pkColumnValue="departments")
 private Integer id;
 private String name;
 private String type;
 private String causes;
 private boolean contagious;
+@ManyToMany(mappedBy = "patients-illness")
 private List<Patients> patients;
+@ManyToMany
+@JoinTable(name="illness-disease",
+	joinColumns={@JoinColumn(name="illness_id", referencedColumnName="id")},
+    inverseJoinColumns={@JoinColumn(name="symptoms_id", referencedColumnName="id")})
 private List<Symptoms> symptoms;
+@ManyToMany(mappedBy = "medicines-illness")
 private List<Medicines> medicines;
 
 
