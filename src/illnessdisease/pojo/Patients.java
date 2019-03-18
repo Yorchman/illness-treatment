@@ -2,6 +2,7 @@ package illnessdisease.pojo;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 public class Patients implements Serializable { /**
 	 * 
@@ -14,8 +15,13 @@ public class Patients implements Serializable { /**
 	private String name;
 	private Date DOB;
 	private String gender;
+	private List<Illnesses> illnesses;
+	private List<Symptoms> symptoms;
+	private List<Medicines> medicines;
+	private List<Intolerance> intelorance;
 	public Patients() {
 		super();
+		
 	}
 	public Patients(Integer id, Integer sSN, String name, Date dOB, String gender) {
 		super();

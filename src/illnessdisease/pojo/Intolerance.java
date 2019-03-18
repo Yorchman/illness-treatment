@@ -1,5 +1,9 @@
 package illnessdisease.pojo;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Intolerance  implements Serializable {
 
 	/**
@@ -9,13 +13,17 @@ public class Intolerance  implements Serializable {
 
 	private Integer id;
 	private String name;
+	private List<Patients> patients;
 	public Intolerance() {
 		super();
+		this.patients = new ArrayList<Patients>();
 	}
 	public Intolerance(Integer id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.patients = new ArrayList<Patients>();
+		
 	}
 	public Integer getId() {
 		return id;

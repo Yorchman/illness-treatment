@@ -1,5 +1,7 @@
 package illnessdisease.pojo;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 public class Medicines implements Serializable {
 
 	/**
@@ -11,8 +13,14 @@ public class Medicines implements Serializable {
 	private String activePrinciple;
 	private Double price;
 	private Boolean seguridadSocial;
+	private List<Patients> patients;
+	private List<SideEffects> sideEffects;
+	private List<Illnesses> illnesses ;
 	public Medicines() {
 		super();
+		this.patients = new ArrayList<Patients>();
+		this.sideEffects = new ArrayList<SideEffects>();
+		this.illnesses = new ArrayList<Illnesses>();
 	}
 	public Medicines(Integer id, String name, String activePrinciple, String restrictions, Double price,
 			boolean seguridadSocial) {
@@ -22,6 +30,10 @@ public class Medicines implements Serializable {
 		this.activePrinciple = activePrinciple;
 		this.price = price;
 		this.seguridadSocial = seguridadSocial;
+		this.patients = new ArrayList<Patients>();
+		this.sideEffects = new ArrayList<SideEffects>();
+		this.illnesses = new ArrayList<Illnesses>();
+	
 	}
 	public Integer getId() {
 		return id;
