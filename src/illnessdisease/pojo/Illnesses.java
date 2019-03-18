@@ -1,6 +1,10 @@
 package illnessdisease.pojo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 public class Illnesses implements Serializable{
 
@@ -14,10 +18,18 @@ private String name;
 private String type;
 private String causes;
 private boolean contagious;
+private List<Patients> patients;
+private List<Symptoms> symptoms;
+private List<Medicines> medicines;
+
+
+
 
 public Illnesses() {
 	super();
-	
+	this.patients = new ArrayList<Patients>();
+	this.symptoms = new ArrayList<Symptoms>();
+	this.medicines = new ArrayList<Medicines>();
 }
 public Illnesses(Integer id, String name, String type, String causes, boolean contagious) {
 	super();
@@ -25,7 +37,12 @@ public Illnesses(Integer id, String name, String type, String causes, boolean co
 	this.name = name;
 	this.type = type;
 	this.contagious = contagious;
+	this.patients = new ArrayList<Patients>();
+	this.symptoms = new ArrayList<Symptoms>();
+	this.medicines = new ArrayList<Medicines>();
 }
+	
+
 @Override
 public int hashCode() {
 	final int prime = 31;
