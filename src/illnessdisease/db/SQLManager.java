@@ -9,7 +9,7 @@ import illnessdisease.pojo.Symptoms;
 import illnessdisease.pojo.Intolerance;
 import java.io.*;
 
-public class SQLManager {
+public class SQLManager implements DBManager {
 	private Connection connection;
 //	private Statement statement;
 	private static Connection c;
@@ -264,11 +264,10 @@ public static void printPatient() throws SQLException {
 public void Delete_illness(Illnesses i) {
 	try {
 		
-		String sql="DELETE INTO illnesses( name, type, contagious) "+ "VALUES (?,?,?);";
+		String sql="DELETE 	FROM illnesses WHERE id= ?;";
 		PreparedStatement prep = connection.prepareStatement(sql);
-		prep.setString(1, i.getName());
-		prep.setString(2, i.getType());
-		prep.setBoolean(3, i.isContagious());
+		prep.setInt(1, i.getId());
+		
 	
 		prep.executeUpdate();
 		prep.close();}
@@ -280,12 +279,10 @@ public void Delete_illness(Illnesses i) {
 public void Delete_symptoms(Symptoms i) {
 	try {
 		
-		String sql="DELETE INTO illnesses( name, Diagnosis, Areas, Duration) "+ "VALUES (?,?,?,?);";
+		String sql="DELETE 	FROM symptoms WHERE id= ?;";
 		PreparedStatement prep = connection.prepareStatement(sql);
-		prep.setString(1, i.getName());
-		prep.setString(2, i.getDiagnosis());
-		prep.setString(3, i.getAreas());
-		prep.setInt(4, i.getDuration());
+		prep.setInt(1, i.getId());
+		
 	
 		prep.executeUpdate();
 		prep.close();}
@@ -296,12 +293,10 @@ public void Delete_symptoms(Symptoms i) {
 public void Delete_patients(Patients p) {
 	try {
 		
-		String sql="DELETE INTO patients( SSn, name, DOB, gender) "+ "VALUES (?,?,?,?);";
+		String sql="DELETE 	FROM patients WHERE id= ?;";
 		PreparedStatement prep = connection.prepareStatement(sql);
-		prep.setInt(1, p.getSSN());
-		prep.setString(2, p.getName());
-		prep.setDate(3, p.getDOB());
-		prep.setString(4, p.getGender());
+		prep.setInt(1, p.getId());
+		
 	
 		prep.executeUpdate();
 		prep.close();}
@@ -313,11 +308,9 @@ public void Delete_patients(Patients p) {
 public void Delete_sideeffects(SideEffects s) {
 	try {
 		
-		String sql="DELETE INTO side_effects(name, duration, area) "+ "VALUES (?,?,?);";
+		String sql="DELETE 	FROM SideEffects WHERE id= ?;";
 		PreparedStatement prep = connection.prepareStatement(sql);
-		prep.setString(1, s.getName());
-		prep.setInt(2,s.getDuration());
-		prep.setString(3, s.getArea());
+		prep.setInt(1, s.getId());
 		
 	
 		prep.executeUpdate();
@@ -330,9 +323,10 @@ public void Delete_sideeffects(SideEffects s) {
 public void Delete_intolerance(Intolerance in) {
 	try {
 		
-		String sql ="DELETE INTO intolerance( name) "+ "VALUES (?)";
+		String sql="DELETE 	FROM intolerance WHERE id= ?;";
 		PreparedStatement prep = connection.prepareStatement(sql);
-		prep.setString(1, in.getName());
+		prep.setInt(1, in.getId());
+		
 	
 		prep.executeUpdate();
 		prep.close();}
@@ -344,12 +338,11 @@ public void Delete_intolerance(Intolerance in) {
 public void Delete_Medicines(Medicines j) {
 	try {
 		
-		String sql="DELETE INTO medicines( name, activePrinciple, price, seguridadSocial) "+ "VALUES (?,?,?,?);";
+		String sql="DELETE 	FROM medicines WHERE id= ?;";
 		PreparedStatement prep = connection.prepareStatement(sql);
-		prep.setString(1, j.getName());
-		prep.setString(2, j.getActivePrinciple());
-		prep.setDouble(3, j.getPrice());
-		prep.setBoolean(4, j.isSeguridadSocial());
+		prep.setInt(1, j.getId());
+		
+	
 		prep.executeUpdate();
 		prep.close();}
 	catch(Exception e) {
@@ -449,6 +442,12 @@ public void Update_Medicines(Medicines j) {
 	catch(Exception e) {
 		e.printStackTrace();
 	}
+}
+
+@Override
+public void Insert_intolerance(Medicines c) {
+	// TODO Auto-generated method stub
+	
 }
 
 
