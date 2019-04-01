@@ -15,4 +15,14 @@ public interface DBManager {
 	public void Insert_sideeffects(SideEffects c);
 	public void Insert_symptoms(Symptoms c);
 	public void Delete_illness(Illnesses i);
+	public void Delete_symptoms(Symptoms i);
+	public void Delete_patients(Patients p);
+	public void Delete_intolerance(Intolerance in);
+	public void Delete_Medicines(Medicines j);
+	public void Update_illness(Illnesses i);
+	public void Update_patients(Patients p);
+	public void Update_symptoms(Symptoms i);
+	public void Update_sideeffects(SideEffects s);
+	public void Update_intolerance(Intolerance in);
+	public void Update_Medicines(Medicines j);
 }
