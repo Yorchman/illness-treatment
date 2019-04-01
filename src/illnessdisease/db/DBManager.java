@@ -9,7 +9,6 @@ import illnessdisease.pojo.Symptoms;
 
 public interface DBManager {
 	public void Insert_illness(Illnesses c);
-	public void Insert_intolerance(Medicines c);
 	public void Insert_intolerance(Intolerance c);
 	public void Insert_patients(Patients c);
 	public void Insert_sideeffects(SideEffects c);
