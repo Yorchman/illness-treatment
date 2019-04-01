@@ -164,6 +164,22 @@ public void Insert_illness(Illnesses i) {
 	}
 }
 
+public void Insert_symptoms(Symptoms i) {
+	try {
+		
+		String sql="INSERT INTO illnesses( name, Diagnosis, Areas, Duration) "+ "VALUES (?,?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, i.getName());
+		prep.setString(2, i.getDiagnosis());
+		prep.setString(3, i.getAreas());
+		prep.setInt(4, i.getDuration());
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
 public void Insert_patients(Patients p) {
 	try {
 		
@@ -261,6 +277,22 @@ public void Delete_illness(Illnesses i) {
 	}
 }
 
+public void Delete_symptoms(Symptoms i) {
+	try {
+		
+		String sql="DELETE INTO illnesses( name, Diagnosis, Areas, Duration) "+ "VALUES (?,?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, i.getName());
+		prep.setString(2, i.getDiagnosis());
+		prep.setString(3, i.getAreas());
+		prep.setInt(4, i.getDuration());
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
 public void Delete_patients(Patients p) {
 	try {
 		
@@ -356,7 +388,22 @@ public void Update_patients(Patients p) {
 		e.printStackTrace();
 	}
 }
+public void Update_symptoms(Symptoms i) {
+	try {
 		
+		String sql="UPDATE INTO illnesses( name, Diagnosis, Areas, Duration) "+ "VALUES (?,?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, i.getName());
+		prep.setString(2, i.getDiagnosis());
+		prep.setString(3, i.getAreas());
+		prep.setInt(4, i.getDuration());
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
 public void Update_sideeffects(SideEffects s) {
 	try {
 		
