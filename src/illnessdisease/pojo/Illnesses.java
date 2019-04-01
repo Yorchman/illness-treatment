@@ -23,9 +23,9 @@ public class Illnesses implements Serializable{
 	private static final long serialVersionUID = -4120176035031838818L;
 
      @Id
-     @GeneratedValue(generator="departments")
-     @TableGenerator(name="departments", table="sqlite_sequence",
-        pkColumnName="name", valueColumnName="seq", pkColumnValue="departments")
+     @GeneratedValue(generator="illnesses")
+     @TableGenerator(name="illnesses", table="sqlite_sequence",
+        pkColumnName="name", valueColumnName="seq", pkColumnValue="illnesses")
 private Integer id;
 private String name;
 private String type;

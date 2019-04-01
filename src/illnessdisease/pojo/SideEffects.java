@@ -3,17 +3,29 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+@Entity
+@Table(name="sideEffects")
 public class SideEffects implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7586405773185099824L;
-
+	@Id
+    @GeneratedValue(generator="sideEffects")
+    @TableGenerator(name="sideEffects", table="sqlite_sequence",
+       pkColumnName="name", valueColumnName="seq", pkColumnValue="sideEffects")
 	private Integer id;
 	private String name;
 	private Integer duration;
 	private String area;
+	@ManyToMany(mappedBy = "medicines-sideEffects")
 	private List<Medicines> medicines;
 	
 	public SideEffects() {

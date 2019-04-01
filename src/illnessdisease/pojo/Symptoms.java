@@ -4,19 +4,33 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
+@Entity
+@Table(name="symptoms")
 public class Symptoms  implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1958374975214628570L;
+	 @Id
+     @GeneratedValue(generator="symptoms")
+     @TableGenerator(name="symptoms", table="sqlite_sequence",
+        pkColumnName="name", valueColumnName="seq", pkColumnValue="symptoms")
 	private Integer id;
 	private String name;
 	private String Diagnosis;
 	private String Areas;
 	private Integer Duration;
+	@ManyToMany(mappedBy = "patients-symptoms")
 	private List<Patients> patients;
+	@ManyToMany(mappedBy = "illness-disease")
 	private List<Illnesses> illnesses;
 	public Symptoms() {
 		super();

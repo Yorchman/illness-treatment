@@ -3,16 +3,28 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
+@Entity
+@Table(name="intolerance")
 public class Intolerance  implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2144251766134435470L;
-
+	@Id
+    @GeneratedValue(generator="intolerance")
+    @TableGenerator(name="intolerance", table="sqlite_sequence",
+       pkColumnName="name", valueColumnName="seq", pkColumnValue="intolerance")
 	private Integer id;
 	private String name;
+	@ManyToMany(mappedBy = "patients-intolerance")
 	private List<Patients> patients;
 	public Intolerance() {
 		super();

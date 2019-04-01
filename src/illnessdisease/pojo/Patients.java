@@ -5,20 +5,49 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+@Entity
+@Table(name="patients")
 public class Patients implements Serializable { /**
 	 * 
 	 */
 	private static final long serialVersionUID = 684614080729457774L;
 //Implement serializable, import, rishtclick
-
+	 @Id
+     @GeneratedValue(generator="patients")
+     @TableGenerator(name="patients", table="sqlite_sequence",
+        pkColumnName="name", valueColumnName="seq", pkColumnValue="patients")
 	private Integer id;
 	private Integer SSN;
 	private String name;
 	private Date DOB;
 	private String gender;
+	@ManyToMany
+	@JoinTable(name="patients-illness",
+		joinColumns={@JoinColumn(name="patients_id", referencedColumnName="id")},
+	    inverseJoinColumns={@JoinColumn(name="illnesses_id", referencedColumnName="id")})
 	private List<Illnesses> illnesses;
+	@ManyToMany
+	@JoinTable(name="patients-symptoms",
+		joinColumns={@JoinColumn(name="patients_id", referencedColumnName="id")},
+	    inverseJoinColumns={@JoinColumn(name="symptoms_id", referencedColumnName="id")})
 	private List<Symptoms> symptoms;
+	@ManyToMany
+	@JoinTable(name="patients-medicines",
+		joinColumns={@JoinColumn(name="patients_id", referencedColumnName="id")},
+	    inverseJoinColumns={@JoinColumn(name="medicines_id", referencedColumnName="id")})
 	private List<Medicines> medicines;
+	@ManyToMany
+	@JoinTable(name="patients-intolerance",
+		joinColumns={@JoinColumn(name="patients_id", referencedColumnName="id")},
+	    inverseJoinColumns={@JoinColumn(name="intolerance_id", referencedColumnName="id")})
 	private List<Intolerance> intelorance;
 	public Patients() {
 		super();
