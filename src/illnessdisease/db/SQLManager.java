@@ -417,7 +417,7 @@ public void Update_sideeffects(SideEffects s) {
 public void Update_intolerance(Intolerance in) {
 	try {
 		
-		String sql ="UPDATE INTO intolerance( name) "+ "VALUES (?)";
+		String sql ="UPDATE SET   name=?";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, in.getName());
 	
@@ -431,7 +431,7 @@ public void Update_intolerance(Intolerance in) {
 public void Update_Medicines(Medicines j) {
 	try {
 		
-		String sql="UPDATE INTO medicines( name, activePrinciple, price, seguridadSocial) "+ "VALUES (?,?,?,?);";
+		String sql="UPDATE SET name=?, activePrinciple=?, price=?, seguridadSocial=?;";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, j.getName());
 		prep.setString(2, j.getActivePrinciple());
