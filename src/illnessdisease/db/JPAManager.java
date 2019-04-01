@@ -15,11 +15,6 @@ public class JPAManager implements DBManager {
 		
 	}
 
-	@Override
-	public void Insert_intolerance(Medicines c) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void Insert_intolerance(Intolerance c) {
