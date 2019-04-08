@@ -37,6 +37,18 @@ public class Symptoms  implements Serializable{
 		this.illnesses = new ArrayList<Illnesses>();
 		this.patients= new ArrayList<Patients>();
 	}
+	public List<Patients> getPatients() {
+		return patients;
+	}
+	public void setPatients(List<Patients> patients) {
+		this.patients = patients;
+	}
+	public List<Illnesses> getIllnesses() {
+		return illnesses;
+	}
+	public void setIllnesses(List<Illnesses> illnesses) {
+		this.illnesses = illnesses;
+	}
 	public Symptoms(Integer id, String name, String diagnosis, String areas, Integer duration) {
 		super();
 		this.id = id;
