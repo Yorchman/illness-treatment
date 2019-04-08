@@ -256,7 +256,7 @@ public void Insert_Medicines(Medicines j) {
 
 public static void printPatient() throws SQLException {
 	Statement stmt = c.createStatement();
-	String sql = "SELECT * FROM patient";
+	String sql = "SELECT * FROM patients";
 	ResultSet rs = stmt.executeQuery(sql);
 	while (rs.next()) {
 		int id = rs.getInt("id");
@@ -454,6 +454,22 @@ public void Update_Medicines(Medicines j) {
 	}
 }
 
+public static void printIllnes() throws SQLException {
+	Statement stmt = c.createStatement();
+	String sql = "SELECT * FROM illnesses";
+	ResultSet rs = stmt.executeQuery(sql);
+	while (rs.next()) {
+		int id = rs.getInt("id");
+		String name = rs.getString("name");
+		String type= rs.getString("type");
+		String causes = rs.getString("causes");
+		boolean contagious=rs.getBoolean("contagious");
+	     Illnesses illnes  = new Illnesses(id, name, type, causes, contagious);
+		System.out.println(illnes);
+	}
+	rs.close();
+	stmt.close();
+}
 
 
 }
