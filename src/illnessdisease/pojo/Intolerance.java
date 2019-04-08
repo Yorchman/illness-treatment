@@ -26,6 +26,12 @@ public class Intolerance  implements Serializable {
 	private String name;
 	@ManyToMany(mappedBy = "patients-intolerance")
 	private List<Patients> patients;
+	public List<Patients> getPatients() {
+		return patients;
+	}
+	public void setPatients(List<Patients> patients) {
+		this.patients = patients;
+	}
 	public Intolerance() {
 		super();
 		this.patients = new ArrayList<Patients>();

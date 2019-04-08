@@ -28,6 +28,12 @@ public class SideEffects implements Serializable{
 	@ManyToMany(mappedBy = "medicines-sideEffects")
 	private List<Medicines> medicines;
 	
+	public List<Medicines> getMedicines() {
+		return medicines;
+	}
+	public void setMedicines(List<Medicines> medicines) {
+		this.medicines = medicines;
+	}
 	public SideEffects() {
 		super();
 		this.medicines = new ArrayList<Medicines>();

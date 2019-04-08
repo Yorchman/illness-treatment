@@ -40,6 +40,27 @@ public class Medicines implements Serializable {
 		joinColumns={@JoinColumn(name="medicines_id", referencedColumnName="id")},
 	    inverseJoinColumns={@JoinColumn(name="illnesses_id", referencedColumnName="id")})
 	private List<Illnesses> illnesses ;
+	public List<Patients> getPatients() {
+		return patients;
+	}
+	public void setPatients(List<Patients> patients) {
+		this.patients = patients;
+	}
+	public List<SideEffects> getSideEffects() {
+		return sideEffects;
+	}
+	public void setSideEffects(List<SideEffects> sideEffects) {
+		this.sideEffects = sideEffects;
+	}
+	public List<Illnesses> getIllnesses() {
+		return illnesses;
+	}
+	public void setIllnesses(List<Illnesses> illnesses) {
+		this.illnesses = illnesses;
+	}
+	public Boolean getSeguridadSocial() {
+		return seguridadSocial;
+	}
 	public Medicines() {
 		super();
 		this.patients = new ArrayList<Patients>();
