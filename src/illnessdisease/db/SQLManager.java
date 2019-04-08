@@ -151,11 +151,12 @@ String medicines_sidEffects= "CREATE TABLE medicines_sidEffects"
 public void Insert_illness(Illnesses i) {
 	try {
 		
-		String sql="INSERT INTO illnesses( name, type, contagious) "+ "VALUES (?,?,?);";
+		String sql="INSERT INTO illnesses( name, type, contagious,patients) "+ "VALUES (?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, i.getName());
 		prep.setString(2, i.getType());
 		prep.setBoolean(3, i.isContagious());
+		
 	
 		prep.executeUpdate();
 		prep.close();}
