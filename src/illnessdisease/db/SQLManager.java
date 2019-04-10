@@ -13,8 +13,7 @@ import java.io.*;
 
 public class SQLManager implements DBManager {
 	private Connection connection;
-//	private Statement statement;
-	private static Connection c;
+
 
 public void connect(String path, String classname) {
 	try {
@@ -554,6 +553,11 @@ public static List<Illnesses> printIllnes() throws SQLException {
 	return list_illness;
 }
 
-
+public void close() {
+	try {
+	connection.close();
+	}
+ catch(Exception e) { e.printStackTrace();}
 }
 		
+}
