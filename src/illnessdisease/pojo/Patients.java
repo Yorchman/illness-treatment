@@ -29,6 +29,7 @@ public class Patients implements Serializable { /**
 	private String name;
 	private Date DOB;
 	private String gender;
+	private byte[] photo;
 	@ManyToMany
 	@JoinTable(name="patients-illness",
 		joinColumns={@JoinColumn(name="patients_id", referencedColumnName="id")},
@@ -58,13 +59,14 @@ public class Patients implements Serializable { /**
 	}
 		
 	
-	public Patients(Integer id, Integer sSN, String name, Date dOB, String gender) {
+	public Patients(Integer id, Integer sSN, String name, Date dOB, String gender, byte[] photo) {
 		super();
 		this.id = id;
 		SSN = sSN;
 		this.name = name;
 		DOB = dOB;
 		this.gender = gender;
+		this.photo= photo;
 		this.illnesses = new ArrayList<Illnesses>();
 		this.symptoms = new ArrayList<Symptoms>();
 		this.medicines = new ArrayList<Medicines>();
@@ -100,6 +102,17 @@ public class Patients implements Serializable { /**
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+	
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
