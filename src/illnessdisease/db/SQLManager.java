@@ -252,7 +252,7 @@ public void Insert_Medicines(Medicines j) {
 	}
 }
 
-public static void printPatients() throws SQLException {
+public static void printPatients() throws SQLException{
 	Statement stmt = c.createStatement();
 	String sql = "SELECT * FROM patient";
 	ResultSet rs = stmt.executeQuery(sql);
