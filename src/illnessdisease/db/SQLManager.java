@@ -171,47 +171,28 @@ public void Insert_illness(Illnesses i) {
 public void Insert_symptoms(Symptoms i) {
 	try {
 		
-		String sql="INSERT INTO symptoms( name, Diagnosis, Areas, Duration, patients) "+ "VALUES (?,?,?,?,?);";
+		String sql="INSERT INTO symptoms( name, Diagnosis, Areas, Duration) "+ "VALUES (?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, i.getName());
 		prep.setString(2, i.getDiagnosis());
 		prep.setString(3, i.getAreas());
 		prep.setInt(4, i.getDuration());
-		List<Patients> p=i.getPatients();
-		
-		for(Patients pa:p) {
-		int IDp=pa.getId();
-		String query="SELECT last_insert_rowid() AS lastId";
-		PreparedStatement prep2=connection.prepareStatement(query);
-		ResultSet rs=prep2.executeQuery();
-		Integer lastId=rs.getInt("lastId");
-		PreparedStatement prep3=connection.prepareStatement("INSERT INTO patients_symptoms(patient.id,symptom.id)"+" VALUES(?,?) ");
-		prep3.setInt(1, IDp);
-		prep3.setInt(2, lastId);
-		prep3.executeUpdate();
-		prep3.close();
-		rs.close();
-		}
-	for(Illnesses il:i.getIllnesses()) {
-		int IDil=il.getId();
-	
-		String query="SELECT last_insert_rowid() AS lastId";
-		PreparedStatement prep2=connection.prepareStatement(query);
-		ResultSet rs=prep2.executeQuery();
-		Integer lastId=rs.getInt("lastId");
-	PreparedStatement prep4=connection.prepareStatement("INSERT INTO illness_symptoms(illness.id,symptom.id)"+" VALUES(?,?) ");
-	prep4.setInt(1, IDil);
-	prep4.setInt(2, lastId);
-	prep4.executeUpdate();
-	prep4.close();
-	rs.close();}
+	String query="SELECT last_insert_rowid() AS lastId";
+	PreparedStatement prep2=connection.prepareStatement(query);
+	ResultSet rs=prep2.executeQuery();
+	Integer lastId=rs.getInt("lastId");
+	PreparedStatement prep3=connection.prepareStatement("INSERT INTO patients_symptoms(patient.id,symptom.id)"+" VALUES(?,?) ");
+	prep3.setInt(1, lastId);
+	prep3.setInt(2, i.getId());
+	prep3.executeUpdate();
+	prep3.close();
+	rs.close();
 		prep.executeUpdate();
 		prep.close();}
 	catch(Exception e) {
 		e.printStackTrace();
 	}
 }
-
 public void Insert_patients(Patients p) {
 	try {
 		
@@ -279,7 +260,6 @@ public void Insert_Medicines(Medicines j) {
 public List<Patients> printPatient() throws SQLException {
 	List<Patients> list_patients =new ArrayList<Patients>();
 	Statement stmt = c.createStatement();
-	
 	String sql = "SELECT * FROM patients";
 	ResultSet rs = stmt.executeQuery(sql);
 	while (rs.next()) {
@@ -480,7 +460,8 @@ public void Update_Medicines(Medicines j) {
 	}
 }
 
-public static void printIllnes() throws SQLException {
+public static List<Illnesses> printIllnes() throws SQLException {
+	List<Illnesses> list_illness=new ArrayList<Illnesses>();
 	Statement stmt = c.createStatement();
 	String sql = "SELECT * FROM illnesses";
 	ResultSet rs = stmt.executeQuery(sql);
@@ -490,11 +471,12 @@ public static void printIllnes() throws SQLException {
 		String type= rs.getString("type");
 		String causes = rs.getString("causes");
 		boolean contagious=rs.getBoolean("contagious");
-	     Illnesses illnes  = new Illnesses(id, name, type, causes, contagious);
+	    Illnesses illnes  = new Illnesses(id, name, type, causes, contagious);
 		System.out.println(illnes);
 	}
 	rs.close();
 	stmt.close();
+	return list_illness;
 }
 
 
