@@ -171,7 +171,7 @@ public void Insert_illness(Illnesses i) {
 public void Insert_symptoms(Symptoms i) {
 	try {
 		
-		String sql="INSERT INTO symptoms( name, Diagnosis, Areas, Duration, patients) "+ "VALUES (?,?,?,?,?);";
+		String sql="INSERT INTO symptoms( name, Diagnosis, Areas, Duration) "+ "VALUES (?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, i.getName());
 		prep.setString(2, i.getDiagnosis());
@@ -222,6 +222,32 @@ public void Insert_patients(Patients p) {
 		prep.setDate(3, p.getDOB());
 		prep.setString(4, p.getGender());
 		prep.setBytes(5, p.getPhoto());
+		for(Symptoms s:p.getSymptoms()) {
+			int IDs=s.getId();
+			String query="SELECT last_insert_rowid() AS lastId";
+			PreparedStatement prep2=connection.prepareStatement(query);
+			ResultSet rs=prep2.executeQuery();
+			Integer lastId=rs.getInt("lastId");
+			PreparedStatement prep3=connection.prepareStatement("INSERT INTO patients_symptoms(patient.id,symptom.id)"+" VALUES(?,?) ");
+			prep3.setInt(1, IDs);
+			prep3.setInt(2, lastId);
+			prep3.executeUpdate();
+			prep3.close();
+			rs.close();
+			}
+		for(Illnesses il:p.getIllnesses()) {
+			int IDil=il.getId();
+		
+			String query="SELECT last_insert_rowid() AS lastId";
+			PreparedStatement prep2=connection.prepareStatement(query);
+			ResultSet rs=prep2.executeQuery();
+			Integer lastId=rs.getInt("lastId");
+		PreparedStatement prep4=connection.prepareStatement("INSERT INTO illness_symptoms(illness.id,symptom.id)"+" VALUES(?,?) ");
+		prep4.setInt(1, IDil);
+		prep4.setInt(2, lastId);
+		prep4.executeUpdate();
+		prep4.close();
+		rs.close();}
 		prep.executeUpdate();
 		prep.close();}
 	catch(Exception e) {
