@@ -229,8 +229,8 @@ public void Insert_patients(Patients p) {
 			ResultSet rs=prep2.executeQuery();
 			Integer lastId=rs.getInt("lastId");
 			PreparedStatement prep3=connection.prepareStatement("INSERT INTO patients_symptoms(patient.id,symptom.id)"+" VALUES(?,?) ");
-			prep3.setInt(1, IDs);
-			prep3.setInt(2, lastId);
+			prep3.setInt(2, IDs);
+			prep3.setInt(1, lastId);
 			prep3.executeUpdate();
 			prep3.close();
 			rs.close();
@@ -242,9 +242,35 @@ public void Insert_patients(Patients p) {
 			PreparedStatement prep2=connection.prepareStatement(query);
 			ResultSet rs=prep2.executeQuery();
 			Integer lastId=rs.getInt("lastId");
-		PreparedStatement prep4=connection.prepareStatement("INSERT INTO illness_symptoms(illness.id,symptom.id)"+" VALUES(?,?) ");
-		prep4.setInt(1, IDil);
-		prep4.setInt(2, lastId);
+		PreparedStatement prep4=connection.prepareStatement("INSERT INTO patient_illness(patients.id,illness.id)"+" VALUES(?,?) ");
+		prep4.setInt(2, IDil);
+		prep4.setInt(1, lastId);
+		prep4.executeUpdate();
+		prep4.close();
+		rs.close();}
+		for(Intolerance in:p.getIntelorance()) {
+			int IDin=in.getId();
+			String query="SELECT last_insert_rowid() AS lastId";
+			PreparedStatement prep2=connection.prepareStatement(query);
+			ResultSet rs=prep2.executeQuery();
+			Integer lastId=rs.getInt("lastId");
+			PreparedStatement prep3=connection.prepareStatement("INSERT INTO patient_intolerance(patient.id,intolerance.id)"+" VALUES(?,?) ");
+			prep3.setInt(2, IDin);
+			prep3.setInt(1, lastId);
+			prep3.executeUpdate();
+			prep3.close();
+			rs.close();
+			}
+		for(Medicines me:p.getMedicines()) {
+			int IDme=me.getId();
+		
+			String query="SELECT last_insert_rowid() AS lastId";
+			PreparedStatement prep2=connection.prepareStatement(query);
+			ResultSet rs=prep2.executeQuery();
+			Integer lastId=rs.getInt("lastId");
+		PreparedStatement prep4=connection.prepareStatement("INSERT INTO patient_medicines(patient.id,medicines.id)"+" VALUES(?,?) ");
+		prep4.setInt(2, IDme);
+		prep4.setInt(1, lastId);
 		prep4.executeUpdate();
 		prep4.close();
 		rs.close();}
