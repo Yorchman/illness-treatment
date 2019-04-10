@@ -1,6 +1,5 @@
 package illnessdisease.db;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import illnessdisease.pojo.Illnesses;
@@ -36,8 +35,7 @@ Statement statement= this.connection.createStatement();
 String patient= "CREATE TABLE patients"
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ " name TEXT NOT NULL,"
-		+ " gender TEXT NULL,"
-		+ " photo BLOB )";
+		+ " gender TEXT NULL )";
 		//+ " dob "
 		statement.execute(patient);
 
@@ -171,22 +169,40 @@ public void Insert_illness(Illnesses i) {
 public void Insert_symptoms(Symptoms i) {
 	try {
 		
-		String sql="INSERT INTO symptoms( name, Diagnosis, Areas, Duration) "+ "VALUES (?,?,?,?);";
+		String sql="INSERT INTO symptoms( name, Diagnosis, Areas, Duration, patients) "+ "VALUES (?,?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, i.getName());
 		prep.setString(2, i.getDiagnosis());
 		prep.setString(3, i.getAreas());
 		prep.setInt(4, i.getDuration());
-	String query="SELECT last_insert_rowid() AS lastId";
-	PreparedStatement prep2=connection.prepareStatement(query);
-	ResultSet rs=prep2.executeQuery();
-	Integer lastId=rs.getInt("lastId");
-	PreparedStatement prep3=connection.prepareStatement("INSERT INTO patients_symptoms(patient.id,symptom.id)"+" VALUES(?,?) ");
-	prep3.setInt(1, lastId);
-	prep3.setInt(2, i.getId());
-	prep3.executeUpdate();
-	prep3.close();
-	rs.close();
+		List<Patients> p=i.getPatients();
+		
+		for(Patients pa:p) {
+		int IDp=pa.getId();
+		String query="SELECT last_insert_rowid() AS lastId";
+		PreparedStatement prep2=connection.prepareStatement(query);
+		ResultSet rs=prep2.executeQuery();
+		Integer lastId=rs.getInt("lastId");
+		PreparedStatement prep3=connection.prepareStatement("INSERT INTO patients_symptoms(patient.id,symptom.id)"+" VALUES(?,?) ");
+		prep3.setInt(1, IDp);
+		prep3.setInt(2, lastId);
+		prep3.executeUpdate();
+		prep3.close();
+		rs.close();
+		}
+	for(Illnesses il:i.getIllnesses()) {
+		int IDil=il.getId();
+	
+		String query="SELECT last_insert_rowid() AS lastId";
+		PreparedStatement prep2=connection.prepareStatement(query);
+		ResultSet rs=prep2.executeQuery();
+		Integer lastId=rs.getInt("lastId");
+	PreparedStatement prep4=connection.prepareStatement("INSERT INTO illness_symptoms(illness.id,symptom.id)"+" VALUES(?,?) ");
+	prep4.setInt(1, IDil);
+	prep4.setInt(2, lastId);
+	prep4.executeUpdate();
+	prep4.close();
+	rs.close();}
 		prep.executeUpdate();
 		prep.close();}
 	catch(Exception e) {
@@ -196,13 +212,13 @@ public void Insert_symptoms(Symptoms i) {
 public void Insert_patients(Patients p) {
 	try {
 		
-		String sql="INSERT INTO patients( SSn, name, DOB, gender , photo) "+ "VALUES (?,?,?,?,?);";
+		String sql="INSERT INTO patients( SSn, name, DOB, gender) "+ "VALUES (?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, p.getSSN());
 		prep.setString(2, p.getName());
 		prep.setDate(3, p.getDOB());
 		prep.setString(4, p.getGender());
-		prep.setBytes(5, p.getPhoto());
+	
 		prep.executeUpdate();
 		prep.close();}
 	catch(Exception e) {
@@ -257,8 +273,7 @@ public void Insert_Medicines(Medicines j) {
 	}
 }
 
-public List<Patients> printPatient() throws SQLException {
-	List<Patients> list_patients =new ArrayList<Patients>();
+public static void printPatient() throws SQLException {
 	Statement stmt = c.createStatement();
 	String sql = "SELECT * FROM patients";
 	ResultSet rs = stmt.executeQuery(sql);
@@ -268,13 +283,11 @@ public List<Patients> printPatient() throws SQLException {
 		String name = rs.getString("name");
 		Date dob = rs.getDate("dob");
 		String gender = rs.getString("gender");
-		byte[] photo = rs.getBytes("photo");
-	    Patients patient = new Patients( id, SSN, name, dob, gender, photo);
-        list_patients.add(patient);
+	     Patients patient = new Patients(id, SSN, name, dob, gender);
+		System.out.println(patient);
 	}
 	rs.close();
 	stmt.close();
-	return list_patients;
 }
 
 public void Delete_illness(Illnesses i) {
@@ -384,13 +397,13 @@ public void Update_illness(Illnesses i) {
 public void Update_patients(Patients p) {
 	try {
 		
-		String sql="INSERT INTO patients( SSn, name, DOB, gender, photo) "+ "VALUES (?,?,?,?);";
+		String sql="INSERT INTO patients( SSn, name, DOB, gender) "+ "VALUES (?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, p.getSSN());
 		prep.setString(2, p.getName());
 		prep.setDate(3, p.getDOB());
 		prep.setString(4, p.getGender());
-	    prep.setBytes(5, p.getPhoto());
+	
 		prep.executeUpdate();
 		prep.close();}
 	catch(Exception e) {
