@@ -1,5 +1,6 @@
 package illnessdisease.db;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import illnessdisease.pojo.Illnesses;
@@ -35,7 +36,8 @@ Statement statement= this.connection.createStatement();
 String patient= "CREATE TABLE patients"
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ " name TEXT NOT NULL,"
-		+ " gender TEXT NULL )";
+		+ " gender TEXT NULL,"
+		+ " photo BLOB )";
 		//+ " dob "
 		statement.execute(patient);
 
@@ -209,16 +211,17 @@ public void Insert_symptoms(Symptoms i) {
 		e.printStackTrace();
 	}
 }
+
 public void Insert_patients(Patients p) {
 	try {
 		
-		String sql="INSERT INTO patients( SSn, name, DOB, gender) "+ "VALUES (?,?,?,?);";
+		String sql="INSERT INTO patients( SSn, name, DOB, gender , photo) "+ "VALUES (?,?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, p.getSSN());
 		prep.setString(2, p.getName());
 		prep.setDate(3, p.getDOB());
 		prep.setString(4, p.getGender());
-	
+		prep.setBytes(5, p.getPhoto());
 		prep.executeUpdate();
 		prep.close();}
 	catch(Exception e) {
@@ -273,8 +276,10 @@ public void Insert_Medicines(Medicines j) {
 	}
 }
 
-public static void printPatient() throws SQLException {
+public List<Patients> printPatient() throws SQLException {
+	List<Patients> list_patients =new ArrayList<Patients>();
 	Statement stmt = c.createStatement();
+	
 	String sql = "SELECT * FROM patients";
 	ResultSet rs = stmt.executeQuery(sql);
 	while (rs.next()) {
@@ -283,11 +288,13 @@ public static void printPatient() throws SQLException {
 		String name = rs.getString("name");
 		Date dob = rs.getDate("dob");
 		String gender = rs.getString("gender");
-	     Patients patient = new Patients(id, SSN, name, dob, gender);
-		System.out.println(patient);
+		byte[] photo = rs.getBytes("photo");
+	    Patients patient = new Patients( id, SSN, name, dob, gender, photo);
+        list_patients.add(patient);
 	}
 	rs.close();
 	stmt.close();
+	return list_patients;
 }
 
 public void Delete_illness(Illnesses i) {
@@ -397,13 +404,13 @@ public void Update_illness(Illnesses i) {
 public void Update_patients(Patients p) {
 	try {
 		
-		String sql="INSERT INTO patients( SSn, name, DOB, gender) "+ "VALUES (?,?,?,?);";
+		String sql="INSERT INTO patients( SSn, name, DOB, gender, photo) "+ "VALUES (?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, p.getSSN());
 		prep.setString(2, p.getName());
 		prep.setDate(3, p.getDOB());
 		prep.setString(4, p.getGender());
-	
+	    prep.setBytes(5, p.getPhoto());
 		prep.executeUpdate();
 		prep.close();}
 	catch(Exception e) {
