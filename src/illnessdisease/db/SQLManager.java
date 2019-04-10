@@ -1,5 +1,7 @@
 package illnessdisease.db;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import illnessdisease.pojo.Illnesses;
 import illnessdisease.pojo.Patients;
@@ -255,7 +257,8 @@ public void Insert_Medicines(Medicines j) {
 	}
 }
 
-public static void printPatient() throws SQLException {
+public List<Patients> printPatient() throws SQLException {
+	List<Patients> list_patients =new ArrayList<Patients>();
 	Statement stmt = c.createStatement();
 	String sql = "SELECT * FROM patients";
 	ResultSet rs = stmt.executeQuery(sql);
@@ -266,11 +269,12 @@ public static void printPatient() throws SQLException {
 		Date dob = rs.getDate("dob");
 		String gender = rs.getString("gender");
 		byte[] photo = rs.getBytes("photo");
-	     Patients patient = new Patients( id, SSN, name, dob, gender, photo);
-		System.out.println(patient);
+	    Patients patient = new Patients( id, SSN, name, dob, gender, photo);
+        list_patients.add(patient);
 	}
 	rs.close();
 	stmt.close();
+	return list_patients;
 }
 
 public void Delete_illness(Illnesses i) {
