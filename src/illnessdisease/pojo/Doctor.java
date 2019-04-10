@@ -1,5 +1,4 @@
 package illnessdisease.pojo;
-package illnessdisease.pojo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
