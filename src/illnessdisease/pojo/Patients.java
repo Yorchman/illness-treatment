@@ -30,6 +30,7 @@ public class Patients implements Serializable { /**
 	private Date DOB;
 	private String gender;
 	private byte[] photo;
+	private String password;
 	@ManyToMany
 	@JoinTable(name="patients-illness",
 		joinColumns={@JoinColumn(name="patients_id", referencedColumnName="id")},
@@ -102,14 +103,15 @@ public class Patients implements Serializable { /**
 	}
 		
 	
-	public Patients(Integer id, Integer sSN, String name, Date dOB, String gender, byte[] photo) {
+	public Patients(Integer id, Integer sSN, String name, Date dOB, String gender, byte[] photo , String password) {
 		super();
 		this.id = id;
-		SSN = sSN;
+		this.SSN = SSN;
 		this.name = name;
-		DOB = dOB;
+		this.DOB = DOB;
 		this.gender = gender;
 		this.photo= photo;
+		this.password=password;
 		this.illnesses = new ArrayList<Illnesses>();
 		this.symptoms = new ArrayList<Symptoms>();
 		this.medicines = new ArrayList<Medicines>();
@@ -153,6 +155,16 @@ public class Patients implements Serializable { /**
 
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 
