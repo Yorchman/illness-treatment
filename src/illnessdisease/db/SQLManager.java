@@ -460,7 +460,8 @@ public void Update_Medicines(Medicines j) {
 	}
 }
 
-public static void printIllnes() throws SQLException {
+public static List<Illnesses> printIllnes() throws SQLException {
+	List<Illnesses> list_illness=new ArrayList<Illnesses>();
 	Statement stmt = c.createStatement();
 	String sql = "SELECT * FROM illnesses";
 	ResultSet rs = stmt.executeQuery(sql);
@@ -470,11 +471,12 @@ public static void printIllnes() throws SQLException {
 		String type= rs.getString("type");
 		String causes = rs.getString("causes");
 		boolean contagious=rs.getBoolean("contagious");
-	     Illnesses illnes  = new Illnesses(id, name, type, causes, contagious);
+	    Illnesses illnes  = new Illnesses(id, name, type, causes, contagious);
 		System.out.println(illnes);
 	}
 	rs.close();
 	stmt.close();
+	return list_illness;
 }
 
 
