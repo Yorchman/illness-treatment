@@ -146,8 +146,6 @@ String medicines_sidEffects= "CREATE TABLE medicines_sidEffects"
 
 
 
-
-
 public void Insert_illness(Illnesses i) {
 	try {
 		
@@ -237,32 +235,27 @@ public void Insert_Medicines(Medicines j) {
 		prep.setDouble(3, j.getPrice());
 		prep.setBoolean(4, j.isSeguridadSocial());
 		prep.executeUpdate();
-
-		// Get the ID of student
 		String query = "SELECT last_insert_rowid() AS lastId";
 		PreparedStatement p1 = connection.prepareStatement(query);
 		ResultSet rs = p1.executeQuery();
 		Integer lastId = rs.getInt("lastId");
-		// Insert into enrollment the ID of the student
-		//      and the ID of the course
 		PreparedStatement p2 = connection.prepareStatement("INSERT INTO patient_medicines"
 				+ " (, //INsert values of the patient_medicines table)"
 				+ " VALUES (?,?)");
 		p2.setInt(1, lastId);
-		p2.setInt(2, c.getId());
+		p2.setInt(2, j.getId());
 		p2.executeUpdate();
-		
-		
 		prep.close();}
 	catch(Exception e) {
 		e.printStackTrace();
 	}
 }
 
-public static void printPatient() throws SQLException {
+public static void printPatients() throws SQLException {
 	Statement stmt = c.createStatement();
 	String sql = "SELECT * FROM patient";
 	ResultSet rs = stmt.executeQuery(sql);
+	//In the user interface we need to add this loop because its a sout and we cannot print from de SQL
 	while (rs.next()) {
 		int id = rs.getInt("id");
 		int SSN = rs.getInt("SSN");
@@ -282,7 +275,6 @@ public void Delete_illness(Illnesses i) {
 		String sql="DELETE 	FROM illnesses WHERE id= ?;";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, i.getId());
-		
 	
 		prep.executeUpdate();
 		prep.close();}

@@ -70,6 +70,7 @@ public class SideEffects implements Serializable{
 	public void setArea(String area) {
 		this.area = area;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
