@@ -6,13 +6,13 @@ import illnessdisease.pojo.Patients;
 import illnessdisease.pojo.SideEffects;
 import illnessdisease.pojo.Medicines;
 import illnessdisease.pojo.Symptoms;
-
+import illnessdisease.pojo.Intolerance;
 import java.io.*;
 
-public class SQLManager {
+public class SQLManager implements DBManager {
 	private Connection connection;
 //	private Statement statement;
-	
+	private static Connection c;
 
 public void connect(String path, String classname) {
 	try {
@@ -34,7 +34,8 @@ Statement statement= this.connection.createStatement();
 String patient= "CREATE TABLE patients"
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ " name TEXT NOT NULL,"
-		+ " gender TEXT NULL )";
+		+ " gender TEXT NULL,"
+		+ " photo BLOB )";
 		//+ " dob "
 		statement.execute(patient);
 
@@ -49,7 +50,6 @@ String illness ="CREATE TABLE illness "
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ " name TEXT NOT NULL,"
 		+ " type TEXT,"
-		+ " causes TEXT,"
 		+ "contagious BOOLEAN, "
 		+ "  )";
 		statement.execute(illness);
@@ -64,7 +64,6 @@ String medicines ="CREATE TABLE medicines "
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ " name TEXT NOT NULL,"
 		+ " activeprinciple TEXT, "
-		+ " restrictions TEXT, "
 		+ " price TEXT, "
 		+ " SSCover BOOLEAN "
 		+ "  )";
@@ -153,12 +152,12 @@ String medicines_sidEffects= "CREATE TABLE medicines_sidEffects"
 public void Insert_illness(Illnesses i) {
 	try {
 		
-		String sql="INSERT INTO illnesses( id, name, type, causes, contagious) "+ "VALUES (?,?,?,?,?);";
+		String sql="INSERT INTO illnesses( name, type, contagious,patients) "+ "VALUES (?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, i.getName());
 		prep.setString(2, i.getType());
-		prep.setString(3, i.getCauses());
-		prep.setBoolean(4, i.isContagious());
+		prep.setBoolean(3, i.isContagious());
+		
 	
 		prep.executeUpdate();
 		prep.close();}
@@ -167,16 +166,41 @@ public void Insert_illness(Illnesses i) {
 	}
 }
 
+public void Insert_symptoms(Symptoms i) {
+	try {
+		
+		String sql="INSERT INTO symptoms( name, Diagnosis, Areas, Duration) "+ "VALUES (?,?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, i.getName());
+		prep.setString(2, i.getDiagnosis());
+		prep.setString(3, i.getAreas());
+		prep.setInt(4, i.getDuration());
+	String query="SELECT last_insert_rowid() AS lastId";
+	PreparedStatement prep2=connection.prepareStatement(query);
+	ResultSet rs=prep2.executeQuery();
+	Integer lastId=rs.getInt("lastId");
+	PreparedStatement prep3=connection.prepareStatement("INSERT INTO patients_symptoms(patient.id,symptom.id)"+" VALUES(?,?) ");
+	prep3.setInt(1, lastId);
+	prep3.setInt(2, i.getId());
+	prep3.executeUpdate();
+	prep3.close();
+	rs.close();
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
 public void Insert_patients(Patients p) {
 	try {
 		
-		String sql="INSERT INTO patients( id, SSn, name, DOB, gender) "+ "VALUES (?,?,?,?,?);";
+		String sql="INSERT INTO patients( SSn, name, DOB, gender , photo) "+ "VALUES (?,?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, p.getSSN());
 		prep.setString(2, p.getName());
 		prep.setDate(3, p.getDOB());
 		prep.setString(4, p.getGender());
-	
+		prep.setBytes(5, p.getPhoto());
 		prep.executeUpdate();
 		prep.close();}
 	catch(Exception e) {
@@ -187,7 +211,7 @@ public void Insert_patients(Patients p) {
 public void Insert_sideeffects(SideEffects s) {
 	try {
 		
-		String sql="INSERT INTO side_effects( id, name, duration, area) "+ "VALUES (?,?,?,?,?);";
+		String sql="INSERT INTO side_effects(name, duration, area) "+ "VALUES (?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, s.getName());
 		prep.setInt(2,s.getDuration());
@@ -201,15 +225,61 @@ public void Insert_sideeffects(SideEffects s) {
 	}
 }
 		
-public void Insert_symptoms(Symptoms s) {
+public void Insert_intolerance(Intolerance in) {
 	try {
 		
-		String sql="INSERT INTO patients( id, name, diagnosis, area, duration) "+ "VALUES (?,?,?,?,?);";
+		String sql ="INSERT INTO intolerance( name) "+ "VALUES (?)";
 		PreparedStatement prep = connection.prepareStatement(sql);
-		prep.setString(1, s.getName());
-		prep.setString(2, s.getDiagnosis());
-		prep.setString(3, s.getAreas());
-		prep.setInt(4, s.getDuration());
+		prep.setString(1, in.getName());
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+	
+}
+public void Insert_Medicines(Medicines j) {
+	try {
+		
+		String sql="INSERT INTO medicines( name, activePrinciple, price, seguridadSocial) "+ "VALUES (?,?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, j.getName());
+		prep.setString(2, j.getActivePrinciple());
+		prep.setDouble(3, j.getPrice());
+		prep.setBoolean(4, j.isSeguridadSocial());
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+
+public static void printPatient() throws SQLException {
+	Statement stmt = c.createStatement();
+	String sql = "SELECT * FROM patients";
+	ResultSet rs = stmt.executeQuery(sql);
+	while (rs.next()) {
+		int id = rs.getInt("id");
+		int SSN = rs.getInt("SSN");
+		String name = rs.getString("name");
+		Date dob = rs.getDate("dob");
+		String gender = rs.getString("gender");
+		byte[] photo = rs.getBytes("photo");
+	     Patients patient = new Patients( id, SSN, name, dob, gender, photo);
+		System.out.println(patient);
+	}
+	rs.close();
+	stmt.close();
+}
+
+public void Delete_illness(Illnesses i) {
+	try {
+		
+		String sql="DELETE 	FROM illnesses WHERE id= ?;";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setInt(1, i.getId());
+		
 	
 		prep.executeUpdate();
 		prep.close();}
@@ -217,6 +287,192 @@ public void Insert_symptoms(Symptoms s) {
 		e.printStackTrace();
 	}
 }
+
+public void Delete_symptoms(Symptoms i) {
+	try {
+		
+		String sql="DELETE 	FROM symptoms WHERE id= ?;";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setInt(1, i.getId());
+		
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+public void Delete_patients(Patients p) {
+	try {
+		
+		String sql="DELETE 	FROM patients WHERE id= ?;";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setInt(1, p.getId());
+		
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+		
+public void Delete_sideeffects(SideEffects s) {
+	try {
+		
+		String sql="DELETE 	FROM SideEffects WHERE id= ?;";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setInt(1, s.getId());
+		
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+		
+public void Delete_intolerance(Intolerance in) {
+	try {
+		
+		String sql="DELETE 	FROM intolerance WHERE id= ?;";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setInt(1, in.getId());
+		
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+	
+}
+public void Delete_Medicines(Medicines j) {
+	try {
+		
+		String sql="DELETE 	FROM medicines WHERE id= ?;";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setInt(1, j.getId());
+		
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+public void Update_illness(Illnesses i) {
+	try {
+		
+		String sql="UPDATE INTO illnesses( name, type, contagious) "+ "VALUES (?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, i.getName());
+		prep.setString(2, i.getType());
+		prep.setBoolean(3, i.isContagious());
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+
+public void Update_patients(Patients p) {
+	try {
+		
+		String sql="INSERT INTO patients( SSn, name, DOB, gender, photo) "+ "VALUES (?,?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setInt(1, p.getSSN());
+		prep.setString(2, p.getName());
+		prep.setDate(3, p.getDOB());
+		prep.setString(4, p.getGender());
+	    prep.setBytes(5, p.getPhoto());
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+public void Update_symptoms(Symptoms i) {
+	try {
+		
+		String sql="UPDATE INTO illnesses( name, Diagnosis, Areas, Duration) "+ "VALUES (?,?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, i.getName());
+		prep.setString(2, i.getDiagnosis());
+		prep.setString(3, i.getAreas());
+		prep.setInt(4, i.getDuration());
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+public void Update_sideeffects(SideEffects s) {
+	try {
+		
+		String sql="UPDATE INTO side_effects(name, duration, area) "+ "VALUES (?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, s.getName());
+		prep.setInt(2,s.getDuration());
+		prep.setString(3, s.getArea());
+		
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+		
+public void Update_intolerance(Intolerance in) {
+	try {
+		
+		String sql ="UPDATE INTO intolerance( name) "+ "VALUES (?)";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, in.getName());
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+	
+}
+public void Update_Medicines(Medicines j) {
+	try {
+		
+		String sql="UPDATE INTO medicines( name, activePrinciple, price, seguridadSocial) "+ "VALUES (?,?,?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, j.getName());
+		prep.setString(2, j.getActivePrinciple());
+		prep.setDouble(3, j.getPrice());
+		prep.setBoolean(4, j.isSeguridadSocial());
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+
+public static void printIllnes() throws SQLException {
+	Statement stmt = c.createStatement();
+	String sql = "SELECT * FROM illnesses";
+	ResultSet rs = stmt.executeQuery(sql);
+	while (rs.next()) {
+		int id = rs.getInt("id");
+		String name = rs.getString("name");
+		String type= rs.getString("type");
+		String causes = rs.getString("causes");
+		boolean contagious=rs.getBoolean("contagious");
+	     Illnesses illnes  = new Illnesses(id, name, type, causes, contagious);
+		System.out.println(illnes);
+	}
+	rs.close();
+	stmt.close();
+}
+
 
 }
 		

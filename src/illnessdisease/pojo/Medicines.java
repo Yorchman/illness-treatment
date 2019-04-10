@@ -1,19 +1,71 @@
 package illnessdisease.pojo;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+@Entity
+@Table(name="medicines")
 public class Medicines implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5110084765037796663L;
+	 @Id
+     @GeneratedValue(generator="medicines")
+     @TableGenerator(name="medicines", table="sqlite_sequence",
+        pkColumnName="name", valueColumnName="seq", pkColumnValue="medicines")
 	private Integer id;
 	private String name;
 	private String activePrinciple;
-	private String restrictions;
 	private Double price;
 	private Boolean seguridadSocial;
+	@ManyToMany(mappedBy = "patients-medicines")
+	private List<Patients> patients;
+	@ManyToMany
+	@JoinTable(name="medicines-sideEffects",
+		joinColumns={@JoinColumn(name="medicines_id", referencedColumnName="id")},
+	    inverseJoinColumns={@JoinColumn(name="sideEffects_id", referencedColumnName="id")})
+	private List<SideEffects> sideEffects;
+	@ManyToMany
+	@JoinTable(name="medicines-illness",
+		joinColumns={@JoinColumn(name="medicines_id", referencedColumnName="id")},
+	    inverseJoinColumns={@JoinColumn(name="illnesses_id", referencedColumnName="id")})
+	private List<Illnesses> illnesses ;
+	public List<Patients> getPatients() {
+		return patients;
+	}
+	public void setPatients(List<Patients> patients) {
+		this.patients = patients;
+	}
+	public List<SideEffects> getSideEffects() {
+		return sideEffects;
+	}
+	public void setSideEffects(List<SideEffects> sideEffects) {
+		this.sideEffects = sideEffects;
+	}
+	public List<Illnesses> getIllnesses() {
+		return illnesses;
+	}
+	public void setIllnesses(List<Illnesses> illnesses) {
+		this.illnesses = illnesses;
+	}
+	public Boolean getSeguridadSocial() {
+		return seguridadSocial;
+	}
 	public Medicines() {
 		super();
+		this.patients = new ArrayList<Patients>();
+		this.sideEffects = new ArrayList<SideEffects>();
+		this.illnesses = new ArrayList<Illnesses>();
 	}
 	public Medicines(Integer id, String name, String activePrinciple, String restrictions, Double price,
 			boolean seguridadSocial) {
@@ -21,9 +73,12 @@ public class Medicines implements Serializable {
 		this.id = id;
 		this.name = name;
 		this.activePrinciple = activePrinciple;
-		this.restrictions = restrictions;
 		this.price = price;
 		this.seguridadSocial = seguridadSocial;
+		this.patients = new ArrayList<Patients>();
+		this.sideEffects = new ArrayList<SideEffects>();
+		this.illnesses = new ArrayList<Illnesses>();
+	
 	}
 	public Integer getId() {
 		return id;
@@ -43,12 +98,7 @@ public class Medicines implements Serializable {
 	public void setActivePrinciple(String activePrinciple) {
 		this.activePrinciple = activePrinciple;
 	}
-	public String getRestrictions() {
-		return restrictions;
-	}
-	public void setRestrictions(String restrictions) {
-		this.restrictions = restrictions;
-	}
+	
 	public Double getPrice() {
 		return price;
 	}

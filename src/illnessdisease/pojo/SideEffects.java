@@ -1,19 +1,42 @@
 package illnessdisease.pojo;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+@Entity
+@Table(name="sideEffects")
 public class SideEffects implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7586405773185099824L;
-
+	@Id
+    @GeneratedValue(generator="sideEffects")
+    @TableGenerator(name="sideEffects", table="sqlite_sequence",
+       pkColumnName="name", valueColumnName="seq", pkColumnValue="sideEffects")
 	private Integer id;
 	private String name;
 	private Integer duration;
 	private String area;
+	@ManyToMany(mappedBy = "medicines-sideEffects")
+	private List<Medicines> medicines;
+	
+	public List<Medicines> getMedicines() {
+		return medicines;
+	}
+	public void setMedicines(List<Medicines> medicines) {
+		this.medicines = medicines;
+	}
 	public SideEffects() {
 		super();
+		this.medicines = new ArrayList<Medicines>();
 	}
 	public SideEffects(Integer id, String name, Integer duration, String area) {
 		super();
@@ -21,6 +44,7 @@ public class SideEffects implements Serializable{
 		this.name = name;
 		this.duration = duration;
 		this.area = area;
+		this.medicines = new ArrayList<Medicines>();
 	}
 	public Integer getId() {
 		return id;

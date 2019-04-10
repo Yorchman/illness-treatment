@@ -1,32 +1,91 @@
 package illnessdisease.pojo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
+
+
+@Entity
+@Table(name="illnesses")
 public class Illnesses implements Serializable{
 
-	/**
-	 * 
-	 */
+	
+	public String getCauses() {
+		return causes;
+	}
+	public void setCauses(String causes) {
+		this.causes = causes;
+	}
+	public List<Patients> getPatients() {
+		return patients;
+	}
+	public void setPatients(List<Patients> patients) {
+		this.patients = patients;
+	}
+	public List<Symptoms> getSymptoms() {
+		return symptoms;
+	}
+	public void setSymptoms(List<Symptoms> symptoms) {
+		this.symptoms = symptoms;
+	}
+	public List<Medicines> getMedicines() {
+		return medicines;
+	}
+	public void setMedicines(List<Medicines> medicines) {
+		this.medicines = medicines;
+	}
 	private static final long serialVersionUID = -4120176035031838818L;
 
+     @Id
+     @GeneratedValue(generator="illnesses")
+     @TableGenerator(name="illnesses", table="sqlite_sequence",
+        pkColumnName="name", valueColumnName="seq", pkColumnValue="illnesses")
 private Integer id;
 private String name;
 private String type;
 private String causes;
 private boolean contagious;
+@ManyToMany(mappedBy = "patients-illness")
+private List<Patients> patients;
+@ManyToMany
+@JoinTable(name="illness-disease",
+	joinColumns={@JoinColumn(name="illness_id", referencedColumnName="id")},
+    inverseJoinColumns={@JoinColumn(name="symptoms_id", referencedColumnName="id")})
+private List<Symptoms> symptoms;
+@ManyToMany(mappedBy = "medicines-illness")
+private List<Medicines> medicines;
+
+
+
 
 public Illnesses() {
 	super();
-	
+	this.patients = new ArrayList<Patients>();
+	this.symptoms = new ArrayList<Symptoms>();
+	this.medicines = new ArrayList<Medicines>();
 }
 public Illnesses(Integer id, String name, String type, String causes, boolean contagious) {
 	super();
 	this.id = id;
 	this.name = name;
 	this.type = type;
-	this.causes = causes;
 	this.contagious = contagious;
+	this.patients = new ArrayList<Patients>();
+	this.symptoms = new ArrayList<Symptoms>();
+	this.medicines = new ArrayList<Medicines>();
 }
+	
+
 @Override
 public int hashCode() {
 	final int prime = 31;
@@ -71,12 +130,7 @@ public String getType() {
 public void setType(String type) {
 	this.type = type;
 }
-public String getCauses() {
-	return causes;
-}
-public void setCauses(String causes) {
-	this.causes = causes;
-}
+
 public boolean isContagious() {
 	return contagious;
 }
