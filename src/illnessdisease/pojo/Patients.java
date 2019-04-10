@@ -19,7 +19,7 @@ public class Patients implements Serializable { /**
 	 * 
 	 */
 	private static final long serialVersionUID = 684614080729457774L;
-//Implement serializable, import, rishtclick
+//Implement serializable, import, rightclick
 	 @Id
      @GeneratedValue(generator="patients")
      @TableGenerator(name="patients", table="sqlite_sequence",
@@ -39,49 +39,6 @@ public class Patients implements Serializable { /**
 		joinColumns={@JoinColumn(name="patients_id", referencedColumnName="id")},
 	    inverseJoinColumns={@JoinColumn(name="symptoms_id", referencedColumnName="id")})
 	private List<Symptoms> symptoms;
-	public List<Illnesses> getIllnesses() {
-		return illnesses;
-	}
-
-
-	public void setIllnesses(List<Illnesses> illnesses) {
-		this.illnesses = illnesses;
-	}
-
-
-	public List<Symptoms> getSymptoms() {
-		return symptoms;
-	}
-
-
-	public void setSymptoms(List<Symptoms> symptoms) {
-		this.symptoms = symptoms;
-	}
-
-
-	public List<Medicines> getMedicines() {
-		return medicines;
-	}
-
-
-	public void setMedicines(List<Medicines> medicines) {
-		this.medicines = medicines;
-	}
-
-
-	public List<Intolerance> getIntelorance() {
-		return intelorance;
-	}
-
-
-	public void setIntelorance(List<Intolerance> intelorance) {
-		this.intelorance = intelorance;
-	}
-
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 	@ManyToMany
 	@JoinTable(name="patients-medicines",
 		joinColumns={@JoinColumn(name="patients_id", referencedColumnName="id")},

@@ -151,12 +151,11 @@ String medicines_sidEffects= "CREATE TABLE medicines_sidEffects"
 public void Insert_illness(Illnesses i) {
 	try {
 		
-		String sql="INSERT INTO illnesses( name, type, contagious,patients) "+ "VALUES (?,?,?,?);";
+		String sql="INSERT INTO illnesses( name, type, contagious) "+ "VALUES (?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, i.getName());
 		prep.setString(2, i.getType());
 		prep.setBoolean(3, i.isContagious());
-		
 	
 		prep.executeUpdate();
 		prep.close();}
@@ -168,22 +167,12 @@ public void Insert_illness(Illnesses i) {
 public void Insert_symptoms(Symptoms i) {
 	try {
 		
-		String sql="INSERT INTO symptoms( name, Diagnosis, Areas, Duration) "+ "VALUES (?,?,?,?);";
+		String sql="INSERT INTO illnesses( name, Diagnosis, Areas, Duration) "+ "VALUES (?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, i.getName());
 		prep.setString(2, i.getDiagnosis());
 		prep.setString(3, i.getAreas());
 		prep.setInt(4, i.getDuration());
-	String query="SELECT last_insert_rowid() AS lastId";
-	PreparedStatement prep2=connection.prepareStatement(query);
-	ResultSet rs=prep2.executeQuery();
-	Integer lastId=rs.getInt("lastId");
-	PreparedStatement prep3=connection.prepareStatement("INSERT INTO patients_symptoms(patient.id,symptom.id)"+" VALUES(?,?) ");
-	prep3.setInt(1, lastId);
-	prep3.setInt(2, i.getId());
-	prep3.executeUpdate();
-	prep3.close();
-	rs.close();
 		prep.executeUpdate();
 		prep.close();}
 	catch(Exception e) {
@@ -248,6 +237,22 @@ public void Insert_Medicines(Medicines j) {
 		prep.setDouble(3, j.getPrice());
 		prep.setBoolean(4, j.isSeguridadSocial());
 		prep.executeUpdate();
+
+		// Get the ID of student
+		String query = "SELECT last_insert_rowid() AS lastId";
+		PreparedStatement p1 = connection.prepareStatement(query);
+		ResultSet rs = p1.executeQuery();
+		Integer lastId = rs.getInt("lastId");
+		// Insert into enrollment the ID of the student
+		//      and the ID of the course
+		PreparedStatement p2 = connection.prepareStatement("INSERT INTO patient_medicines"
+				+ " (, //INsert values of the patient_medicines table)"
+				+ " VALUES (?,?)");
+		p2.setInt(1, lastId);
+		p2.setInt(2, c.getId());
+		p2.executeUpdate();
+		
+		
 		prep.close();}
 	catch(Exception e) {
 		e.printStackTrace();
@@ -256,7 +261,7 @@ public void Insert_Medicines(Medicines j) {
 
 public static void printPatient() throws SQLException {
 	Statement stmt = c.createStatement();
-	String sql = "SELECT * FROM patients";
+	String sql = "SELECT * FROM patient";
 	ResultSet rs = stmt.executeQuery(sql);
 	while (rs.next()) {
 		int id = rs.getInt("id");
@@ -400,8 +405,7 @@ public void Update_symptoms(Symptoms i) {
 		prep.setString(2, i.getDiagnosis());
 		prep.setString(3, i.getAreas());
 		prep.setInt(4, i.getDuration());
-	
-		prep.executeUpdate();
+	    prep.executeUpdate();
 		prep.close();}
 	catch(Exception e) {
 		e.printStackTrace();
@@ -454,22 +458,6 @@ public void Update_Medicines(Medicines j) {
 	}
 }
 
-public static void printIllnes() throws SQLException {
-	Statement stmt = c.createStatement();
-	String sql = "SELECT * FROM illnesses";
-	ResultSet rs = stmt.executeQuery(sql);
-	while (rs.next()) {
-		int id = rs.getInt("id");
-		String name = rs.getString("name");
-		String type= rs.getString("type");
-		String causes = rs.getString("causes");
-		boolean contagious=rs.getBoolean("contagious");
-	     Illnesses illnes  = new Illnesses(id, name, type, causes, contagious);
-		System.out.println(illnes);
-	}
-	rs.close();
-	stmt.close();
-}
 
 
 }
