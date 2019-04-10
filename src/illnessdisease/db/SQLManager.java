@@ -223,9 +223,7 @@ public void Insert_patients(Patients p) {
 		prep.setDate(3, p.getDOB());
 		prep.setString(4, p.getGender());
 		prep.setBytes(5, p.getPhoto());
-<<<<<<< HEAD
 		prep.setString(6, p.getPassword());
-=======
 		for(Symptoms s:p.getSymptoms()) {
 			int IDs=s.getId();
 			String query="SELECT last_insert_rowid() AS lastId";
@@ -278,7 +276,6 @@ public void Insert_patients(Patients p) {
 		prep4.executeUpdate();
 		prep4.close();
 		rs.close();}
->>>>>>> branch 'master' of https://github.com/Yorchman/illness-treatment
 		prep.executeUpdate();
 		prep.close();}
 	catch(Exception e) {
