@@ -15,8 +15,17 @@ import javax.persistence.TableGenerator;
 
 
 //This class is only a container for the username and password of doctors
-
-public class Doctor {
+@Entity
+@Table(name="doctors")
+public class Doctor implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7610928571845087844L;
+	@Id
+    @GeneratedValue(generator="doctors")
+    @TableGenerator(name="doctors", table="sqlite_sequence",
+       pkColumnName="name", valueColumnName="seq", pkColumnValue="doctors")
 	Integer id;
 	String userName;
 	String password;

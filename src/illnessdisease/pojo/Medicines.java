@@ -11,35 +11,57 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name="medicines")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Medicine")
+@XmlType(propOrder = { "name", "activePrinciple", "price","seguridadSocial","sideEffects" })
 public class Medicines implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 5110084765037796663L;
 	 @Id
      @GeneratedValue(generator="medicines")
      @TableGenerator(name="medicines", table="sqlite_sequence",
         pkColumnName="name", valueColumnName="seq", pkColumnValue="medicines")
+    @XmlAttribute
 	private Integer id;
+	@XmlAttribute
 	private String name;
+	@XmlElement
 	private String activePrinciple;
+	@XmlElement
 	private Double price;
+	@XmlAttribute
 	private Boolean seguridadSocial;
 	@ManyToMany(mappedBy = "patients-medicines")
+	@XmlTransient
 	private List<Patients> patients;
 	@ManyToMany
 	@JoinTable(name="medicines-sideEffects",
 		joinColumns={@JoinColumn(name="medicines_id", referencedColumnName="id")},
 	    inverseJoinColumns={@JoinColumn(name="sideEffects_id", referencedColumnName="id")})
+	@XmlElement(name = "SideEffect")
+    @XmlElementWrapper(name = "SideEffects")
 	private List<SideEffects> sideEffects;
 	@ManyToMany
 	@JoinTable(name="medicines-illness",
 		joinColumns={@JoinColumn(name="medicines_id", referencedColumnName="id")},
 	    inverseJoinColumns={@JoinColumn(name="illnesses_id", referencedColumnName="id")})
+	@XmlTransient
 	private List<Illnesses> illnesses ;
+	
+	
 	public List<Patients> getPatients() {
 		return patients;
 	}

@@ -20,30 +20,7 @@ import javax.persistence.TableGenerator;
 public class Illnesses implements Serializable{
 
 	
-	public String getCauses() {
-		return causes;
-	}
-	public void setCauses(String causes) {
-		this.causes = causes;
-	}
-	public List<Patients> getPatients() {
-		return patients;
-	}
-	public void setPatients(List<Patients> patients) {
-		this.patients = patients;
-	}
-	public List<Symptoms> getSymptoms() {
-		return symptoms;
-	}
-	public void setSymptoms(List<Symptoms> symptoms) {
-		this.symptoms = symptoms;
-	}
-	public List<Medicines> getMedicines() {
-		return medicines;
-	}
-	public void setMedicines(List<Medicines> medicines) {
-		this.medicines = medicines;
-	}
+	
 	private static final long serialVersionUID = -4120176035031838818L;
 
      @Id
@@ -136,6 +113,30 @@ public boolean isContagious() {
 }
 public void setContagious(boolean contagious) {
 	this.contagious = contagious;
+}
+public String getCauses() {
+	return causes;
+}
+public void setCauses(String causes) {
+	this.causes = causes;
+}
+public List<Patients> getPatients() {
+	return patients;
+}
+public void setPatients(List<Patients> patients) {
+	this.patients = patients;
+}
+public List<Symptoms> getSymptoms() {
+	return symptoms;
+}
+public void setSymptoms(List<Symptoms> symptoms) {
+	this.symptoms = symptoms;
+}
+public List<Medicines> getMedicines() {
+	return medicines;
+}
+public void setMedicines(List<Medicines> medicines) {
+	this.medicines = medicines;
 }
 
 }
