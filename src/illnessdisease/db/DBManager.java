@@ -1,5 +1,6 @@
 package illnessdisease.db;
 
+import illnessdisease.pojo.Doctor;
 import illnessdisease.pojo.Illnesses;
 import illnessdisease.pojo.Intolerance;
 import illnessdisease.pojo.Medicines;
@@ -18,6 +19,7 @@ public interface DBManager {
 	public void Delete_patients(Patients p);
 	public void Delete_intolerance(Intolerance in);
 	public void Delete_Medicines(Medicines j);
+	public void Delete_doctors(Doctor c);
 	public void Update_illness(Illnesses i);
 	public void Update_patients(Patients p);
 	public void Update_symptoms(Symptoms i);

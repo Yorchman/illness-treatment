@@ -3,6 +3,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import illnessdisease.pojo.Doctor;
 import illnessdisease.pojo.Illnesses;
 import illnessdisease.pojo.Patients;
 import illnessdisease.pojo.SideEffects;
@@ -561,17 +562,30 @@ public static List<Illnesses> printIllnes() throws SQLException {
 	return list_illness;
 }
 
-/*public List<Patients> searchByName(){
+public List<Patients> searchByName(String name){
+ List<Patients> list_patients =new ArrayList<Patients>();
 	try {
 		String search ="SELECT FROM patients WHERE name=?;";
 	PreparedStatement ps=connection.prepareStatement(search);
 	ps.setString(1,name);
-	
+	ResultSet rs=ps.executeQuery(search);
+	while(rs.next()){
+	int id = rs.getInt("id");
+		int SSN = rs.getInt("SSN");
+		String name1 = rs.getString("name");
+		Date dob = rs.getDate("dob");
+		String gender = rs.getString("gender");
+		byte[] photo = rs.getBytes("photo");
+		String password =rs.getString("password");
+	    Patients patient = new Patients( id, SSN, name1, dob, gender, photo, password);
+        list_patients.add(patient);}
+     return list_patients ;  
 	}
 	
 	catch(Exception e) {
 		e.printStackTrace();
-	}*/
+	}
+	return list_patients;}
 public void close() {
 	try {
 	connection.close();
@@ -582,5 +596,34 @@ public void close() {
 
 	
 }
-}
+
+
+public void Delete_doctors(Doctor s) {
+	try {
 		
+		String sql="DELETE 	FROM doctors WHERE id= ?;";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setInt(1, s.getId());
+		
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+
+public void Update_Doctors(Doctor j) {
+	try {
+		
+		String sql="UPDATE INTO doctors( userName, password) "+ "VALUES (?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, j.getUserName());
+		prep.setString(2, j.getPassword());
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+}
