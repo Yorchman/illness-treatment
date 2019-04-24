@@ -7,7 +7,7 @@ import illnessdisease.pojo.Medicines;
 import illnessdisease.pojo.Patients;
 import illnessdisease.pojo.SideEffects;
 import illnessdisease.pojo.Symptoms;
-import sample.db.pojos.Department;
+//import sample.db.pojos.Department;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -73,9 +73,19 @@ public class JPAManager implements DBManager {
 		e.getTransaction().commit();
 
 	}
+	
+	public void createDoctor(Doctor d) {
+
+		e.getTransaction().begin();
+		e.persist(d);
+		e.getTransaction().commit();
+
+	}
 
 	public void searchIllnessbyname(Illnesses i) {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	try {
+				
 		System.out.print("Write the illness name: ");
 		String name = reader.readLine();
 		System.out.println("Matching illnesses:");
@@ -85,14 +95,16 @@ public class JPAManager implements DBManager {
 		
 		
 		for (Illnesses illness : listIllnesses) {
-			System.out.println(i);
+			System.out.println(illness);
 		}
-		
 	}
 	
+	catch (Exception e) {
+		
+		}
+	}
 	
-	
-	
+		
 	public void close() {
 		try {
 			e.close();
@@ -196,13 +208,7 @@ public class JPAManager implements DBManager {
 		// TODO Auto-generated method stub
 
 	}
-	public void createDoctor(Doctor i) {
 
-		e.getTransaction().begin();
-		e.persist(i);
-		e.getTransaction().commit();
-
-	}
 	public void Update_Doctor(Doctor j) {
 		// TODO Auto-generated method stub
 
