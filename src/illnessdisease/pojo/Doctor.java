@@ -18,7 +18,6 @@ import javax.persistence.TableGenerator;
 @Entity
 @Table(name="doctors")
 public class Doctor implements Serializable{
-	
 	/**
 	 * 
 	 */
