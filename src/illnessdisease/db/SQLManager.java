@@ -561,17 +561,30 @@ public static List<Illnesses> printIllnes() throws SQLException {
 	return list_illness;
 }
 
-/*public List<Patients> searchByName(){
+public List<Patients> searchByName(String name){
+ List<Patients> list_patients =new ArrayList<Patients>();
 	try {
 		String search ="SELECT FROM patients WHERE name=?;";
 	PreparedStatement ps=connection.prepareStatement(search);
 	ps.setString(1,name);
-	
+	ResultSet rs=ps.executeQuery(search);
+	while(rs.next()){
+	int id = rs.getInt("id");
+		int SSN = rs.getInt("SSN");
+		String name1 = rs.getString("name");
+		Date dob = rs.getDate("dob");
+		String gender = rs.getString("gender");
+		byte[] photo = rs.getBytes("photo");
+		String password =rs.getString("password");
+	    Patients patient = new Patients( id, SSN, name1, dob, gender, photo, password);
+        list_patients.add(patient);}
+     return list_patients ;  
 	}
 	
 	catch(Exception e) {
 		e.printStackTrace();
-	}*/
+	}
+	return list_patients;}
 public void close() {
 	try {
 	connection.close();
