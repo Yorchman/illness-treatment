@@ -612,7 +612,7 @@ public void Delete_doctors(Doctor s) {
 		e.printStackTrace();
 	}
 }
-	
+
 public void Update_Doctors(Doctor j) {
 	try {
 		
