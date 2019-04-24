@@ -543,6 +543,7 @@ public void Update_Medicines(Medicines j) {
 
 public static List<Illnesses> printIllnes() throws SQLException {
 	List<Illnesses> list_illness=new ArrayList<Illnesses>();
+	Connection c;
 	Statement stmt = c.createStatement();
 	String sql = "SELECT * FROM illnesses";
 	ResultSet rs = stmt.executeQuery(sql);
