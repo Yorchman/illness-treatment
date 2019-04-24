@@ -554,6 +554,20 @@ public static List<Illnesses> printIllnes() throws SQLException {
 	return list_illness;
 }
 
+/*public List<Patients> searchByName(){
+	try {
+		String search ="SELECT FROM patients WHERE name=?;";
+	PreparedStatement ps=connection.prepareStatement(search);
+	ps.setString(1,name);
+	
+	}
+	
+	catch(Exception e) {
+		e.printStackTrace();
+	}
 
+
+*/
+
+	
 }
-		
