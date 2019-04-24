@@ -9,8 +9,18 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name="sideEffects")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "SideEffect")
+@XmlType(propOrder = { "name", "duration", "area" })
 public class SideEffects implements Serializable{
 
 	/**
@@ -20,12 +30,17 @@ public class SideEffects implements Serializable{
 	@Id
     @GeneratedValue(generator="sideEffects")
     @TableGenerator(name="sideEffects", table="sqlite_sequence",
+
        pkColumnName="name", valueColumnName="seq", pkColumnValue="sideEffects")
 	private Integer id;
+	@XmlAttribute
 	private String name;
+	@XmlAttribute
 	private Integer duration;
+	@XmlElement
 	private String area;
 	@ManyToMany(mappedBy = "medicines-sideEffects")
+	@XmlTransient
 	private List<Medicines> medicines;
 	
 	public List<Medicines> getMedicines() {
