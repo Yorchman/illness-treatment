@@ -20,7 +20,6 @@ public class Doctor {
 	Integer id;
 	String userName;
 	String password;
-	
 	public Doctor(Integer id, String userName, String password) {
 		super();
 		this.id = id;

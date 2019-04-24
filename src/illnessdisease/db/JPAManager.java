@@ -1,5 +1,6 @@
 package illnessdisease.db;
 
+import illnessdisease.pojo.Doctor;
 import illnessdisease.pojo.Illnesses;
 import illnessdisease.pojo.Intolerance;
 import illnessdisease.pojo.Medicines;
@@ -170,6 +171,27 @@ public class JPAManager implements DBManager {
 	public void Update_Medicines(Medicines j) {
 		// TODO Auto-generated method stub
 
+	}
+	public void createDoctor(Doctor i) {
+
+		e.getTransaction().begin();
+		e.persist(i);
+		e.getTransaction().commit();
+
+	}
+	public void Update_Doctor(Doctor j) {
+		// TODO Auto-generated method stub
+
+	}
+	public void Delete_Doctor(Doctor in) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void Delete_doctors(Doctor c) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

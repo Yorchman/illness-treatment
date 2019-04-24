@@ -3,6 +3,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import illnessdisease.pojo.Doctor;
 import illnessdisease.pojo.Illnesses;
 import illnessdisease.pojo.Patients;
 import illnessdisease.pojo.SideEffects;
@@ -543,7 +544,7 @@ public void Update_Medicines(Medicines j) {
 
 public static List<Illnesses> printIllnes() throws SQLException {
 	List<Illnesses> list_illness=new ArrayList<Illnesses>();
-	Connection c;
+	Connection c ;
 	Statement stmt = c.createStatement();
 	String sql = "SELECT * FROM illnesses";
 	ResultSet rs = stmt.executeQuery(sql);
@@ -566,6 +567,35 @@ public void close() {
 	connection.close();
 	}
  catch(Exception e) { e.printStackTrace();}
+}
+
+public void Delete_doctors(Doctor s) {
+	try {
+		
+		String sql="DELETE 	FROM Doctor WHERE id= ?;";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setInt(1, s.getId());
+		
+	
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+	
+public void Update_Doctors(Doctor j) {
+	try {
+		
+		String sql="UPDATE INTO Doctor( userName, password) "+ "VALUES (?,?);";
+		PreparedStatement prep = connection.prepareStatement(sql);
+		prep.setString(1, j.getUserName());
+		prep.setString(2, j.getPassword());
+		prep.executeUpdate();
+		prep.close();}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
 }
 		
 }
