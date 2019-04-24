@@ -86,7 +86,7 @@ public class JPAManager implements DBManager {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	try {
 				
-		System.out.print("Write the illness name: ");
+		System.out.print("Write the illness' name: ");
 		String name = reader.readLine();
 		System.out.println("Matching illnesses:");
 		Query q1 = e.createNativeQuery("SELECT * FROM Illnesses WHERE name LIKE ?", Illnesses.class);
@@ -104,7 +104,48 @@ public class JPAManager implements DBManager {
 		}
 	}
 	
+	public void searchPatientsbyname(Patients p) {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	try {
+				
+		System.out.print("Write the patient's name: ");
+		String name = reader.readLine();
+		System.out.println("Matching illnesses:");
+		Query q1 = e.createNativeQuery("SELECT * FROM Patients WHERE name LIKE ?", Patients.class);
+		q1.setParameter(1, "%" + name + "%");
+		List<Patients> listPatients = (List<Patients>) q1.getResultList();
 		
+		
+		for (Patients patients : listPatients) {
+			System.out.println(patients);
+		}
+	}
+	
+	catch (Exception e) {
+		
+		}	
+	}
+	public void searchMedicinesbyname(Medicines m) {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	try {
+				
+		System.out.print("Write the patient's name: ");
+		String name = reader.readLine();
+		System.out.println("Matching illnesses:");
+		Query q1 = e.createNativeQuery("SELECT * FROM Medicines WHERE name LIKE ?", Medicines.class);
+		q1.setParameter(1, "%" + name + "%");
+		List<Medicines> listMedicines = (List<Medicines>) q1.getResultList();
+		
+		
+		for (Medicines medicines : listMedicines) {
+			System.out.println(medicines);
+		}
+	}
+	
+	catch (Exception e) {
+		
+		}	
+	}
 	public void close() {
 		try {
 			e.close();
