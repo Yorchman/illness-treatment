@@ -601,7 +601,7 @@ public void close() {
 public void Delete_doctors(Doctor s) {
 	try {
 		
-		String sql="DELETE 	FROM Doctor WHERE id= ?;";
+		String sql="DELETE 	FROM doctors WHERE id= ?;";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, s.getId());
 		
@@ -616,7 +616,7 @@ public void Delete_doctors(Doctor s) {
 public void Update_Doctors(Doctor j) {
 	try {
 		
-		String sql="UPDATE INTO Doctor( userName, password) "+ "VALUES (?,?);";
+		String sql="UPDATE INTO doctors( userName, password) "+ "VALUES (?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, j.getUserName());
 		prep.setString(2, j.getPassword());
