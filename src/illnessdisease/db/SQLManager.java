@@ -41,6 +41,13 @@ String patient= "CREATE TABLE patients"
 		+ "password TEXT NOT NULL)";
 		//+ " dob "
 		statement.execute(patient);
+		
+String doctor= "CREATE TABLE doctors"
+				+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ " username TEXT ,"
+				+ " password TEXT NOT NULL)";
+				//+ " dob "
+				statement.execute(doctor);
 
 String sideEffects="CREATE TABLE sideEffects"//Esto esta incompleto y mal.
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -564,10 +571,16 @@ public static List<Illnesses> printIllnes() throws SQLException {
 	
 	catch(Exception e) {
 		e.printStackTrace();
+	}*/
+public void close() {
+	try {
+	connection.close();
 	}
+ catch(Exception e) { e.printStackTrace();}
 
 
-*/
 
 	
 }
+}
+		
