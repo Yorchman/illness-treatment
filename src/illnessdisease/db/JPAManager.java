@@ -7,6 +7,11 @@ import illnessdisease.pojo.Medicines;
 import illnessdisease.pojo.Patients;
 import illnessdisease.pojo.SideEffects;
 import illnessdisease.pojo.Symptoms;
+import sample.db.pojos.Department;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -69,6 +74,25 @@ public class JPAManager implements DBManager {
 
 	}
 
+	public void searchIllnessbyname(Illnesses i) {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		System.out.print("Write the illness name: ");
+		String name = reader.readLine();
+		System.out.println("Matching illnesses:");
+		Query q1 = e.createNativeQuery("SELECT * FROM Illnesses WHERE name LIKE ?", Illnesses.class);
+		q1.setParameter(1, "%" + name + "%");
+		List<Illnesses> listIllnesses = (List<Illnesses>) q1.getResultList();
+		
+		
+		for (Illnesses illness : listIllnesses) {
+			System.out.println(i);
+		}
+		
+	}
+	
+	
+	
+	
 	public void close() {
 		try {
 			e.close();
