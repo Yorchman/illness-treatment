@@ -4,9 +4,94 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import illnessdisease.db.*;
+import illnessdisease.pojo.*;
+/*import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+
+import javafx.stage.Stage;
+ */
+public class UI //extends Application
+	 {
+	 
+	public static void main(String[] args) {
+		
+	connect();
+	
+	
+	
+	
+	}
+	}
+	 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*{
+	 launch(args);
+	 }
+	
+	 
+	 
+	 Button btn;
+	 @Override public void start (Stage primaryStage)
+	 {
+	 // Create the button
+	 btn = new Button();
+	 btn.setText("Click me please!");
+	 btn.setOnAction(e -> buttonClick());
+	 // Add the button to a layout pane
+	 BorderPane pane = new BorderPane();
+	 pane.setCenter(btn);
+	 // Add the layout pane to a scene
+	 Scene scene = new Scene(pane, 300, 250);
+	 // Finalize and show the stage
+	 primaryStage.setScene(scene);
+	 primaryStage.setTitle("The Click Me App");
+	 primaryStage.show();
+	 }
+	 public void buttonClick()
+	 {
+	 if (btn.getText() == "Click me please!")
+	 {
+	 btn.setText("You clicked me!");
+	 }
+	 else
+	 {
+	 btn.setText("Click me please!");
+	 }
+	 }
+	
+	 }
+	 
+	 
 //YO creo los objetos y llamo al manager para que inserte movidas
- class UI {
-	public static void main(String args[]){
+	/*public static void main(String args[]){
 		SQLManager manager;
 		int option;
 		manager = new SQLManager();
@@ -46,4 +131,5 @@ import illnessdisease.db.*;
 		return 0;
 		}
 	}
-}
+	}*/
+

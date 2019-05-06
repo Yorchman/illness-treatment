@@ -8,7 +8,6 @@ import illnessdisease.pojo.Patients;
 import illnessdisease.pojo.SideEffects;
 import illnessdisease.pojo.Symptoms;
 //import sample.db.pojos.Department;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.List;
