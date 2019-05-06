@@ -50,7 +50,7 @@ String doctor= "CREATE TABLE doctors"
 				//+ " dob "
 				statement.execute(doctor);
 
-String sideEffects="CREATE TABLE sideEffects"//Esto esta incompleto y mal.
+String sideEffects="CREATE TABLE sideEffects"    //Esto esta incompleto y mal.
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ " name TEXT NOT NULL,"
 		+ "  )";
@@ -75,7 +75,7 @@ String medicines ="CREATE TABLE medicines "
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ " name TEXT NOT NULL,"
 		+ " activeprinciple TEXT, "
-		+ " price TEXT, "
+		+ " price REAL, "
 		+ " SSCover BOOLEAN "
 		+ "  )";
 		statement.execute(medicines);
@@ -447,6 +447,22 @@ public void Delete_Medicines(Medicines j) {
 		e.printStackTrace();
 	}
 }
+public void Update_Illnesses_Name(String new_name, Illnesses i) {
+	try {
+		
+		String sql ="UPDATE illness SET name=? where id=?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, new_name);
+		prep.setInt(2, i.getId());
+	  	prep.executeUpdate();
+	  	prep.close();
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+	
+}
+//ESTA MAL ESTE METODO(el de abajo)
 public void Update_illness(Illnesses i) {
 	try {
 		
@@ -462,24 +478,80 @@ public void Update_illness(Illnesses i) {
 		e.printStackTrace();
 	}
 }
+//Before doing this method we must print a list of patients with their ID, so the user can choose the one to update
 
-public void Update_patients(Patients p) {
+public void Update_patients_Name(String new_Name,Patients p) {
 	try {
 		
-		String sql="INSERT INTO patients( SSn, name, DOB, gender, photo) "+ "VALUES (?,?,?,?);";
-		PreparedStatement prep = connection.prepareStatement(sql);
-		prep.setInt(1, p.getSSN());
-		prep.setString(2, p.getName());
-		prep.setDate(3, p.getDOB());
-		prep.setString(4, p.getGender());
-	    prep.setBytes(5, p.getPhoto());
-	    prep.setString(6, p.getPassword());
-		prep.executeUpdate();
-		prep.close();}
+		String sql="Update patients SET name=? where id=?;";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, new_Name);
+		prep.setInt(2, p.getId());
+	  	prep.executeUpdate();
+	  	prep.close();
+	}
 	catch(Exception e) {
 		e.printStackTrace();
 	}
 }
+//Before doing this method we must print a list of patients with their ID, so the user can choose the one to update
+public void Update_patients_Gender(String new_Gender,Patients p) {
+	try {
+		
+		String sql="Update patients SET gender=? where id=?;";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, new_Gender);
+		prep.setInt(2, p.getId());
+	  	prep.executeUpdate();
+	  	prep.close();
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+public void Update_Symptoms_Diagnosis(String new_Diagnosis, Symptoms s) {
+	try {
+		
+		String sql="Update symptoms SET diagnosis=? where id=?;";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, new_Diagnosis);
+		prep.setInt(2, s.getId());
+	  	prep.executeUpdate();
+	  	prep.close();
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+public void Update_Symptoms_Areas(String new_Area, Symptoms s) {
+	try {
+		
+		String sql="Update symptoms SET area=? where id=?;";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, new_Area);
+		prep.setInt(2, s.getId());
+	  	prep.executeUpdate();
+	  	prep.close();
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+public void Update_Symptoms_Durartion(Integer new_Duration, Symptoms s) {
+	try {
+		
+		String sql="Update symptoms SET duration=? where id=?;";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, new_Duration);
+		prep.setInt(2, s.getId());
+	  	prep.executeUpdate();
+	  	prep.close();
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+//ESTA MAL ESTE METODO(el de abajo)
 public void Update_symptoms(Symptoms i) {
 	try {
 		
@@ -496,6 +568,36 @@ public void Update_symptoms(Symptoms i) {
 		e.printStackTrace();
 	}
 }
+//For this method to work we have to finish the CREATE SideEffects table
+public void Update_SideEffects_duration(Integer new_Duration, SideEffects s) {
+	try {
+		
+		String sql="Update sideEffects SET duration=? where id=?;";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, new_Duration);
+		prep.setInt(2, s.getId());
+	  	prep.executeUpdate();
+	  	prep.close();
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+public void Update_SideEffects_Area(Integer new_Area, SideEffects s) {
+	try {
+		
+		String sql="Update sideEffects SET area=? where id=?;";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, new_Area);
+		prep.setInt(2, s.getId());
+	  	prep.executeUpdate();
+	  	prep.close();
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+//ESTA MAL ESTE METODO(el de abajo)
 public void Update_sideeffects(SideEffects s) {
 	try {
 		
@@ -513,20 +615,67 @@ public void Update_sideeffects(SideEffects s) {
 	}
 }
 		
-public void Update_intolerance(Intolerance in) {
+public void Update_intolerance_Name(String new_Name,Intolerance in) {
 	try {
 		
-		String sql ="UPDATE INTO intolerance( name) "+ "VALUES (?)";
-		PreparedStatement prep = connection.prepareStatement(sql);
-		prep.setString(1, in.getName());
-	
-		prep.executeUpdate();
-		prep.close();}
+		String sql ="UPDATE intolerance SET name=? where id=?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, new_Name);
+		prep.setInt(2, in.getId());
+	  	prep.executeUpdate();
+	  	prep.close();
+	}
 	catch(Exception e) {
 		e.printStackTrace();
 	}
 	
 }
+public void Update_Medicines_Name(String new_Name, Medicines m) {
+	try {
+		
+		String sql ="UPDATE medicines SET name=? where id=?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, new_Name);
+		prep.setInt(2, m.getId());
+	  	prep.executeUpdate();
+	  	prep.close();
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+	
+}
+public void Update_Medicines_ActivePrinciple(String new_ActivePrinciple, Medicines m) {
+	try {
+		
+		String sql ="UPDATE medicines SET activePrinciple=? where id=?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, new_ActivePrinciple);
+		prep.setInt(2, m.getId());
+	  	prep.executeUpdate();
+	  	prep.close();
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+	
+}
+public void Update_Medicines_price(double new_price, Medicines m) {
+	try {
+		
+		String sql ="UPDATE medicines SET activePrinciple=? where id=?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setDouble(1, new_price);
+		prep.setInt(2, m.getId());
+	  	prep.executeUpdate();
+	  	prep.close();
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+	
+}
+//ESTA MAL ESTE METODO(el de abajo)
 public void Update_Medicines(Medicines j) {
 	try {
 		
@@ -613,6 +762,37 @@ public void Delete_doctors(Doctor s) {
 	}
 }
 
+public void Update_Doctors_price(String new_UserName, Doctor d) {
+	try {
+		
+		String sql ="UPDATE doctors SET username=? where id=?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, new_UserName);
+		prep.setInt(2, d.getId());
+	  	prep.executeUpdate();
+	  	prep.close();
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+	
+}
+public void Update_Doctors_Password(String new_Password, Doctor d) {
+	try {
+		
+		String sql ="UPDATE doctors SET password=? where id=?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, new_Password);
+		prep.setInt(2, d.getId());
+	  	prep.executeUpdate();
+	  	prep.close();
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+	
+}
+//ESTE METODO DE ABAJO ESTA MAL.
 public void Update_Doctors(Doctor j) {
 	try {
 		
@@ -625,5 +805,17 @@ public void Update_Doctors(Doctor j) {
 	catch(Exception e) {
 		e.printStackTrace();
 	}
+}
+
+@Override
+public void Update_patients(Patients p) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void Update_intolerance(Intolerance in) {
+	// TODO Auto-generated method stub
+	
 }
 }
