@@ -818,4 +818,16 @@ public void Update_intolerance(Intolerance in) {
 	// TODO Auto-generated method stub
 	
 }
+
+@Override
+public void Insert_Doctor(Doctor d) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void Update_Doctor(Doctor j) {
+	// TODO Auto-generated method stub
+	
+}
 }
