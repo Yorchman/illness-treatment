@@ -10,8 +10,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-
-import illnessdisease.pojo.Medicines;
+import illnessdisease.pojo.*;
 
 
 public class XMLManager {
@@ -50,6 +49,20 @@ public void unmarshallingMedicines(File file) {
 		em3.getTransaction().begin();
 		em3.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em3.getTransaction().commit();
+		EntityTransaction tx1 = em3.getTransaction();
+		tx1.begin();
+		for (Patients patient : med.getPatients()) {
+			em3.persist(patient);
+		}
+		for (SideEffects sd : med.getSideEffects()) {
+			em3.persist(sd);
+		}
+		for (Illnesses il : med.getIllnesses()) {
+			em3.persist(il);
+		}
+		em3.persist(med);
+		tx1.commit();
+	
 		
 	} catch (JAXBException e) {
 		e.printStackTrace();
