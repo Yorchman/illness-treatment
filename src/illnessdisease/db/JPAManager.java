@@ -7,8 +7,6 @@ import illnessdisease.pojo.Medicines;
 import illnessdisease.pojo.Patients;
 import illnessdisease.pojo.SideEffects;
 import illnessdisease.pojo.Symptoms;
-//import sample.db.pojos.Department;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.List;
@@ -26,55 +24,55 @@ public class JPAManager implements DBManager {
 		this.e.getTransaction().commit();
 	}
 
-	public void createPatient(Patients p) {
+	public void Insert_patients(Patients c) {
 
 		e.getTransaction().begin();
-		e.persist(p);
+		e.persist(c);
 		e.getTransaction().commit();
 
 	}
 
-	public void createSideEffects(SideEffects s) {
+	public void Insert_sideeffects(SideEffects c) {
 
 		e.getTransaction().begin();
-		e.persist(s);
+		e.persist(c);
 		e.getTransaction().commit();
 
 	}
 
-	public void createIllness(Illnesses i) {
+	public void Insert_illness(Illnesses c) {
 
 		e.getTransaction().begin();
-		e.persist(i);
+		e.persist(c);
 		e.getTransaction().commit();
 
 	}
 
-	public void createSymptoms(Symptoms s) {
+	public void Insert_symptoms(Symptoms c) {
 
 		e.getTransaction().begin();
-		e.persist(s);
+		e.persist(c);
 		e.getTransaction().commit();
 
 	}
 
-	public void createMedicines(Medicines m) {
+	public void Insert_Medicines(Medicines j) {
 
 		e.getTransaction().begin();
-		e.persist(m);
+		e.persist(j);
 		e.getTransaction().commit();
 
 	}
 
-	public void createIntolerance(Intolerance i) {
+	public void Insert_intolerance(Intolerance c) {
 
 		e.getTransaction().begin();
-		e.persist(i);
+		e.persist(c);
 		e.getTransaction().commit();
 
 	}
 	
-	public void createDoctor(Doctor d) {
+	public void Insert_Doctor(Doctor d) {
 
 		e.getTransaction().begin();
 		e.persist(d);
@@ -176,62 +174,93 @@ public class JPAManager implements DBManager {
 	}
 
 	@Override
-	public void Insert_illness(Illnesses c) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void Insert_intolerance(Intolerance c) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void Insert_patients(Patients c) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void Insert_sideeffects(SideEffects c) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void Insert_symptoms(Symptoms c) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void Delete_illness(Illnesses i) {
-		// TODO Auto-generated method stub
+		Query q1 = e.createNativeQuery("SELECT * FROM illness WHERE id = ?", Illnesses.class);
+		q1.setParameter(1, i.getId());
+		Illnesses illness = (Illnesses) q1.getSingleResult();
+
+		e.getTransaction().begin();
+		e.remove(illness);
+		e.getTransaction().commit();
+		e.close();
 
 	}
 
 	@Override
 	public void Delete_symptoms(Symptoms i) {
-		// TODO Auto-generated method stub
+		Query q1 = e.createNativeQuery("SELECT * FROM symptoms WHERE id = ?", Symptoms.class);
+		q1.setParameter(1, i.getId());
+		Symptoms symptom = (Symptoms) q1.getSingleResult();
+
+		e.getTransaction().begin();
+		e.remove(symptom);
+		e.getTransaction().commit();
+		e.close();
 
 	}
 
 	@Override
 	public void Delete_patients(Patients p) {
-		// TODO Auto-generated method stub
+		Query q1 = e.createNativeQuery("SELECT * FROM patients WHERE id = ?", Patients.class);
+		q1.setParameter(1, p.getId());
+		Patients patient = (Patients) q1.getSingleResult();
+
+		e.getTransaction().begin();
+		e.remove(patient);
+		e.getTransaction().commit();
+		e.close();
 
 	}
 
 	@Override
 	public void Delete_intolerance(Intolerance in) {
-		// TODO Auto-generated method stub
+		Query q1 = e.createNativeQuery("SELECT * FROM intolerance WHERE id = ?", Intolerance.class);
+		q1.setParameter(1, in.getId());
+		Intolerance intolerance = (Intolerance) q1.getSingleResult();
+
+		e.getTransaction().begin();
+		e.remove(intolerance);
+		e.getTransaction().commit();
+		e.close();
+
+	}
+	
+	public void Delete_doctors(Doctor in) {
+
+		Query q1 = e.createNativeQuery("SELECT * FROM doctors WHERE id = ?", Doctor.class);
+		q1.setParameter(1, in.getId());
+		Doctor doctor = (Doctor) q1.getSingleResult();
+
+		e.getTransaction().begin();
+		e.remove(doctor);
+		e.getTransaction().commit();
+		e.close();
 
 	}
 
 	@Override
 	public void Delete_Medicines(Medicines j) {
-		// TODO Auto-generated method stub
+		Query q1 = e.createNativeQuery("SELECT * FROM medicines WHERE id = ?", Medicines.class);
+		q1.setParameter(1, j.getId());
+		Medicines medicine = (Medicines) q1.getSingleResult();
+
+		e.getTransaction().begin();
+		e.remove(medicine);
+		e.getTransaction().commit();
+		e.close();
+
+
+	}
+	public void Delete_sideeffects(SideEffects j) {
+		Query q1 = e.createNativeQuery("SELECT * FROM sideEffects WHERE id = ?", SideEffects.class);
+		q1.setParameter(1, j.getId());
+		SideEffects side = (SideEffects) q1.getSingleResult();
+
+		e.getTransaction().begin();
+		e.remove(side);
+		e.getTransaction().commit();
+		e.close();
+
 
 	}
 
@@ -275,15 +304,7 @@ public class JPAManager implements DBManager {
 		// TODO Auto-generated method stub
 
 	}
-	public void Delete_Doctor(Doctor in) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void Delete_doctors(Doctor c) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
+
+
