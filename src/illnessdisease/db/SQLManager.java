@@ -47,13 +47,13 @@ String doctor= "CREATE TABLE doctors"
 				+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ " username TEXT ,"
 				+ " password TEXT NOT NULL)";
-				//+ " dob "
 				statement.execute(doctor);
 
-String sideEffects="CREATE TABLE sideEffects"    //Esto esta incompleto y mal.
+String sideEffects="CREATE TABLE sideEffects" 
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ " name TEXT NOT NULL,"
-		+ "  )";
+		+ " duration INTEGER,"
+		+ " area TEXT)";
 		statement.execute(sideEffects);
 
 
