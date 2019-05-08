@@ -30,7 +30,7 @@ public interface DBManager {
 	public void Update_Symptoms_Areas(String new_Area, Symptoms s);
 	public void Update_Symptoms_Durartion(Integer new_Duration, Symptoms s);
 	public void Update_SideEffects_duration(Integer new_Duration, SideEffects s);
-	public void Update_SideEffects_Area(Integer new_Area, SideEffects s);
+	public void Update_SideEffects_Area(String new_Area, SideEffects s);
 	public void Update_intolerance_Name(String new_Name,Intolerance in);
 	public void Update_Medicines_Name(String new_Name, Medicines m);
 	public void Update_Medicines_ActivePrinciple(String new_ActivePrinciple, Medicines m);
