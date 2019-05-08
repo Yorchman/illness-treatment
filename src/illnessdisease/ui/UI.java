@@ -16,8 +16,8 @@ public class UI //extends Application
 	 {
 	 
 	public static void main(String[] args) {
-		
-	connect();
+		SQLManager sqlm = new SQLManager();
+	sqlm.connect("./db/DATABASENAME", "org.sqlite.JDBC" );
 	
 	
 	
