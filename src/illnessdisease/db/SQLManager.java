@@ -482,6 +482,23 @@ public void Update_illness(Illnesses i) {
 		e.printStackTrace();
 	}
 }
+
+@Override
+public void Update_illness_Name(String new_Name, Illnesses i) {
+try {
+		
+		String sql="Update patients SET name=? where id=?;";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, new_Name);
+		prep.setInt(2, i.getId());
+	  	prep.executeUpdate();
+	  	prep.close();
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
+}
+
 //System.out.println("Update finished.");
 //Before doing this method we must print a list of patients with their ID, so the user can choose the one to update
 
@@ -545,7 +562,7 @@ public void Update_Symptoms_Areas(String new_Area, Symptoms s) {
 		e.printStackTrace();
 	}
 }//System.out.println("Update finished.");
-public void Update_Symptoms_Durartion(Integer new_Duration, Symptoms s) {
+public void Update_Symptoms_Duration(Integer new_Duration, Symptoms s) {
 	try {
 		
 		String sql="Update symptoms SET duration=? where id=?;";
@@ -762,7 +779,11 @@ public void close() {
 	
 }
 
-
+@Override
+public void Insert_Doctor(Doctor d) {
+//Done in JPA
+	
+}
 public void Delete_doctors(Doctor s) {
 	try {
 		
@@ -825,29 +846,8 @@ public void Update_Doctors(Doctor j) {
 	}
 }
 
-@Override
 
-public void Update_patients(Patients p) {
-	// TODO Auto-generated method stub
-	
-}
 
-@Override
-public void Update_intolerance(Intolerance in) {
-	// TODO Auto-generated method stub
-	
-}
 
-@Override
 
-public void Insert_Doctor(Doctor d) {
-	// TODO Auto-generated method stub
-	
-}
-
-@Override
-public void Update_Doctor(Doctor j) {
-	// TODO Auto-generated method stub
-	
-}
 }
