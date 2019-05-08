@@ -851,4 +851,10 @@ public void Update_Doctor(Doctor j) {
 	// TODO Auto-generated method stub
 	
 }
+
+@Override
+public void Update_illness_Name(String new_Name, Illnesses i) {
+	// TODO Auto-generated method stub
+	
+}
 }
