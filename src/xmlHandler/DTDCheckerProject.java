@@ -1,4 +1,5 @@
-package illnessdisease.db;
+package xmlHandler;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +14,7 @@ import illnessdisease.db.CustomErrorHandler;
 public class DTDCheckerProject {
 
     public static void main(String[] args) {
-        File xmlFile = new File("/illness-treatment/src/illnessdisease/db/DTD.xml"); 
+        File xmlFile = new File("./xmls/DTD.xml"); 
         try {
         	// Create a DocumentBuilderFactory
             DocumentBuilderFactory dBF = DocumentBuilderFactory.newInstance();

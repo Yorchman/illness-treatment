@@ -9,7 +9,20 @@
    <!ELEMENT SideEffects (SideEffect*)>
    <!ELEMENT SideEffect (area)>
    <!ATTLIST SideEffect name CDATA #REQUIRED
-                  	  duration CDATA >
+                  	  duration CDATA #REQUIRED>
    <!ELEMENT area (#PCDATA)>
   
 ]>
+<Medicine id= "1"  name= "Aspirina"  seguridadSocial = "True">
+    <activePrinciple>Loratadina </activePrinciple>
+    <price>40.12 </price>
+    <SideEffects> 
+    	<SideEffect name= "dizziness"  duration= "2">
+    	<area> head </area>
+    	</SideEffect>
+    	
+    	<SideEffect name= "bleeding"  duration= "1">
+    	<area> nose </area>
+    	</SideEffect>
+    </SideEffects>
+  </Medicine>
