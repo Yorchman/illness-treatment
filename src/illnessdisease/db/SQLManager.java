@@ -47,13 +47,13 @@ String doctor= "CREATE TABLE doctors"
 				+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ " username TEXT ,"
 				+ " password TEXT NOT NULL)";
-				//+ " dob "
 				statement.execute(doctor);
 
-String sideEffects="CREATE TABLE sideEffects"    //Esto esta incompleto y mal.
+String sideEffects="CREATE TABLE sideEffects" 
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ " name TEXT NOT NULL,"
-		+ "  )";
+		+ " duration INTEGER,"
+		+ " area TEXT)";
 		statement.execute(sideEffects);
 
 
@@ -462,6 +462,7 @@ public void Update_Illnesses_Name(String new_name, Illnesses i) {
 	}
 	
 }
+//System.out.println("Update finished.");
 //ESTA MAL ESTE METODO(el de abajo)
 public void Update_illness(Illnesses i) {
 	try {
@@ -478,6 +479,7 @@ public void Update_illness(Illnesses i) {
 		e.printStackTrace();
 	}
 }
+//System.out.println("Update finished.");
 //Before doing this method we must print a list of patients with their ID, so the user can choose the one to update
 
 public void Update_patients_Name(String new_Name,Patients p) {
@@ -494,6 +496,7 @@ public void Update_patients_Name(String new_Name,Patients p) {
 		e.printStackTrace();
 	}
 }
+//System.out.println("Update finished.");
 //Before doing this method we must print a list of patients with their ID, so the user can choose the one to update
 public void Update_patients_Gender(String new_Gender,Patients p) {
 	try {
@@ -509,6 +512,7 @@ public void Update_patients_Gender(String new_Gender,Patients p) {
 		e.printStackTrace();
 	}
 }
+//System.out.println("Update finished.");
 public void Update_Symptoms_Diagnosis(String new_Diagnosis, Symptoms s) {
 	try {
 		
@@ -523,6 +527,7 @@ public void Update_Symptoms_Diagnosis(String new_Diagnosis, Symptoms s) {
 		e.printStackTrace();
 	}
 }
+//System.out.println("Update finished.");
 public void Update_Symptoms_Areas(String new_Area, Symptoms s) {
 	try {
 		
@@ -536,7 +541,7 @@ public void Update_Symptoms_Areas(String new_Area, Symptoms s) {
 	catch(Exception e) {
 		e.printStackTrace();
 	}
-}
+}//System.out.println("Update finished.");
 public void Update_Symptoms_Durartion(Integer new_Duration, Symptoms s) {
 	try {
 		
@@ -551,6 +556,7 @@ public void Update_Symptoms_Durartion(Integer new_Duration, Symptoms s) {
 		e.printStackTrace();
 	}
 }
+//System.out.println("Update finished.");
 //ESTA MAL ESTE METODO(el de abajo)
 public void Update_symptoms(Symptoms i) {
 	try {
@@ -568,6 +574,7 @@ public void Update_symptoms(Symptoms i) {
 		e.printStackTrace();
 	}
 }
+//System.out.println("Update finished.");
 //For this method to work we have to finish the CREATE SideEffects table
 public void Update_SideEffects_duration(Integer new_Duration, SideEffects s) {
 	try {
@@ -583,6 +590,7 @@ public void Update_SideEffects_duration(Integer new_Duration, SideEffects s) {
 		e.printStackTrace();
 	}
 }
+//System.out.println("Update finished.");
 public void Update_SideEffects_Area(Integer new_Area, SideEffects s) {
 	try {
 		
@@ -597,6 +605,7 @@ public void Update_SideEffects_Area(Integer new_Area, SideEffects s) {
 		e.printStackTrace();
 	}
 }
+//System.out.println("Update finished.");
 //ESTA MAL ESTE METODO(el de abajo)
 public void Update_sideeffects(SideEffects s) {
 	try {
@@ -614,7 +623,7 @@ public void Update_sideeffects(SideEffects s) {
 		e.printStackTrace();
 	}
 }
-		
+		//System.out.println("Update finished.");
 public void Update_intolerance_Name(String new_Name,Intolerance in) {
 	try {
 		
@@ -630,6 +639,7 @@ public void Update_intolerance_Name(String new_Name,Intolerance in) {
 	}
 	
 }
+//System.out.println("Update finished.");
 public void Update_Medicines_Name(String new_Name, Medicines m) {
 	try {
 		
@@ -645,6 +655,7 @@ public void Update_Medicines_Name(String new_Name, Medicines m) {
 	}
 	
 }
+//System.out.println("Update finished.");
 public void Update_Medicines_ActivePrinciple(String new_ActivePrinciple, Medicines m) {
 	try {
 		
@@ -660,6 +671,7 @@ public void Update_Medicines_ActivePrinciple(String new_ActivePrinciple, Medicin
 	}
 	
 }
+//System.out.println("Update finished.");
 public void Update_Medicines_price(double new_price, Medicines m) {
 	try {
 		
@@ -675,6 +687,7 @@ public void Update_Medicines_price(double new_price, Medicines m) {
 	}
 	
 }
+//System.out.println("Update finished.");
 //ESTA MAL ESTE METODO(el de abajo)
 public void Update_Medicines(Medicines j) {
 	try {
@@ -761,7 +774,7 @@ public void Delete_doctors(Doctor s) {
 		e.printStackTrace();
 	}
 }
-
+//System.out.println("Update finished.");
 public void Update_Doctors_price(String new_UserName, Doctor d) {
 	try {
 		
@@ -777,6 +790,7 @@ public void Update_Doctors_price(String new_UserName, Doctor d) {
 	}
 	
 }
+//System.out.println("Update finished.");
 public void Update_Doctors_Password(String new_Password, Doctor d) {
 	try {
 		
@@ -792,6 +806,7 @@ public void Update_Doctors_Password(String new_Password, Doctor d) {
 	}
 	
 }
+//System.out.println("Update finished.");
 //ESTE METODO DE ABAJO ESTA MAL.
 public void Update_Doctors(Doctor j) {
 	try {
