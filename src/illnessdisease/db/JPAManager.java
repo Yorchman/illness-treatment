@@ -396,6 +396,12 @@ public class JPAManager implements DBManager {
 	d.setPassword(new_Password);
 	e.getTransaction().commit();
 	}
+
+	@Override
+	public void Update_illness_Name(String new_Name, Illnesses i) {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
 
