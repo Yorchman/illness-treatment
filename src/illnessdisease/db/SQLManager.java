@@ -34,26 +34,28 @@ public  void connect(String path, String classname) {
 public void createTables() {
 	try {
 Statement statement= this.connection.createStatement();
+
 String patient= "CREATE TABLE patients"
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
+		+ "SSNN INTEGER NOT NULL,"
 		+ " name TEXT NOT NULL,"
+		+ "DOB DATE NOT NULL,"
 		+ " gender TEXT NULL,"
 		+ " photo BLOB ,"
 		+ "password TEXT NOT NULL)";
-		//+ " dob "
 		statement.execute(patient);
 		
 String doctor= "CREATE TABLE doctors"
 				+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-				+ " username TEXT ,"
+				+ " username TEXT NOT NULL,"
 				+ " password TEXT NOT NULL)";
-				//+ " dob "
 				statement.execute(doctor);
 
-String sideEffects="CREATE TABLE sideEffects"    //Esto esta incompleto y mal.
+String sideEffects="CREATE TABLE sideEffects" 
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ " name TEXT NOT NULL,"
-		+ "  )";
+		+ " duration INTEGER,"
+		+ " area TEXT)";
 		statement.execute(sideEffects);
 
 
@@ -61,6 +63,7 @@ String illness ="CREATE TABLE illness "
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ " name TEXT NOT NULL,"
 		+ " type TEXT,"
+		+ "causes TEXT,"
 		+ "contagious BOOLEAN, "
 		+ "  )";
 		statement.execute(illness);
@@ -74,7 +77,7 @@ String intolerance ="CREATE TABLE intolerance "
 String medicines ="CREATE TABLE medicines "
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ " name TEXT NOT NULL,"
-		+ " activeprinciple TEXT, "
+		+ " activePrinciple TEXT, "
 		+ " price REAL, "
 		+ " SSCover BOOLEAN "
 		+ "  )";
