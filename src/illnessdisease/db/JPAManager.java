@@ -313,7 +313,7 @@ public class JPAManager implements DBManager {
    	 s.setAreas(new_Area);
    	 e.getTransaction().commit();	
     }
-    public void Update_Symptoms_Durartion(Integer new_Duration, Symptoms s) {
+    public void Update_Symptoms_Duration(Integer new_Duration, Symptoms s) {
    	 e.getTransaction().begin();
    	 s.setDuration(new_Duration);
    	 e.getTransaction().commit();	
