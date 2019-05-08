@@ -4,29 +4,117 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import illnessdisease.db.*;
+import illnessdisease.pojo.*;
+/*import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+
+import javafx.stage.Stage;
+ */
+public class UI //extends Application
+	 {
+	 
+	public static void main(String[] args) {
+		
+	connect();
+	
+	
+	
+	
+	}
+	}
+	 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*{
+	 launch(args);
+	 }
+	
+	 
+	 
+	 Button btn;
+	 @Override public void start (Stage primaryStage)
+	 {
+	 // Create the button
+	 btn = new Button();
+	 btn.setText("Click me please!");
+	 btn.setOnAction(e -> buttonClick());
+	 // Add the button to a layout pane
+	 BorderPane pane = new BorderPane();
+	 pane.setCenter(btn);
+	 // Add the layout pane to a scene
+	 Scene scene = new Scene(pane, 300, 250);
+	 // Finalize and show the stage
+	 primaryStage.setScene(scene);
+	 primaryStage.setTitle("The Click Me App");
+	 primaryStage.show();
+	 }
+	 public void buttonClick()
+	 {
+	 if (btn.getText() == "Click me please!")
+	 {
+	 btn.setText("You clicked me!");
+	 }
+	 else
+	 {
+	 btn.setText("Click me please!");
+	 }
+	 }
+	
+	 }
+	 
+	 
 //YO creo los objetos y llamo al manager para que inserte movidas
- class UI {
-	public static void main(String args[]){
+	/*public static void main(String args[]){
 		SQLManager manager;
 		int option;
 		manager = new SQLManager();
 		//Load tables
 		manager.createTables();
-		//First we look if the user is a doctor or a patient.
-		int userType = decideUser(); //1 is patient and 2 is doctor
-		if(userType == 1){
-			while (true){
-				printMenu();
-				switch(printMenu()){
-				case 1:
-					System.out.println("Opción 1: Insert");
-					manager.createTables();            		
-				}
-			}
-		}else if(userType == 2){
-			
+		try{
+            BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Select an option: ");
+            option = Integer.parseInt(consola.readLine());
+            while (true){
+            	printMenu();
+            	switch(option){
+            	case 1:
+            		System.out.println("Opción 1: Insert");
+            		manager.createTables();
+            		
+            	}
+            }
+            
+            
+		}catch(IOException ex){
+			ex.printStackTrace();
 		}
-        
 	}
 	
 	public static int printMenu(){
@@ -43,18 +131,5 @@ import illnessdisease.db.*;
 		return 0;
 		}
 	}
-	
-	public static int decideUser(){
-		int option;
-		try{
-            BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("What kind of user are you?\n1.Patient\n2.Doctor");
-            System.out.println("Select an option: ");
-            option = Integer.parseInt(consola.readLine());
-            return option;
-		}catch(IOException ex){
-			ex.printStackTrace();
-		return 0;
-		}
-	}
-}
+	}*/
+
