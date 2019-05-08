@@ -595,12 +595,12 @@ public void Update_SideEffects_duration(Integer new_Duration, SideEffects s) {
 	}
 }
 //System.out.println("Update finished.");
-public void Update_SideEffects_Area(Integer new_Area, SideEffects s) {
+public void Update_SideEffects_Area(String new_Area, SideEffects s) {
 	try {
 		
 		String sql="Update sideEffects SET area=? where id=?;";
 		PreparedStatement prep = c.prepareStatement(sql);
-		prep.setInt(1, new_Area);
+		prep.setString(1, new_Area);
 		prep.setInt(2, s.getId());
 	  	prep.executeUpdate();
 	  	prep.close();
@@ -779,7 +779,7 @@ public void Delete_doctors(Doctor s) {
 	}
 }
 //System.out.println("Update finished.");
-public void Update_Doctors_price(String new_UserName, Doctor d) {
+public void Update_Doctors_UserName(String new_UserName, Doctor d) {
 	try {
 		
 		String sql ="UPDATE doctors SET username=? where id=?";
