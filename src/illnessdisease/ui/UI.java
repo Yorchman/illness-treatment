@@ -19,6 +19,7 @@ public class UI{ //extends Application
 	sqlm.connect("./db/DATABASENAME", "org.sqlite.JDBC" );
 	sqlm.createTables();
 	System.out.println("CREADAS CORRECTAMENTE (fuera del metodo)");
+	sqlm.close();
 	
 	int option;
 	while(true){
