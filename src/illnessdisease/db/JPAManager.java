@@ -253,7 +253,7 @@ public class JPAManager implements DBManager {
 	}
 	public void Delete_sideeffects(SideEffects j) {
 		Query q1 = e.createNativeQuery("SELECT * FROM sideEffects WHERE id = ?", SideEffects.class);
-		q1.setParameter(1, j.getId());
+		q1.setParameter(1,j.getId());
 		SideEffects side = (SideEffects) q1.getSingleResult();
 
 		e.getTransaction().begin();
