@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Medicine [
+   <!ELEMENT Medicine ( activePrinciple, price, SideEffects)>
+   <!ATTLIST Medicine id CDATA #REQUIRED
+                  	  name CDATA #REQUIRED
+                  	  seguridadSocial CDATA #REQUIRED>
+   <!ELEMENT activePrinciple (#PCDATA)>
+   <!ELEMENT price (#PCDATA)>
+   <!ELEMENT SideEffects (SideEffect*)>
+   <!ELEMENT SideEffect (area)>
+   <!ATTLIST SideEffect name CDATA #REQUIRED
+                  	  duration CDATA >
+   <!ELEMENT area (#PCDATA)>
+  
+]>
+
