@@ -103,7 +103,7 @@ public class Patients implements Serializable { /**
 	}
 		
 	
-	public Patients(Integer id, Integer sSN, String name, Date dOB, String gender, byte[] photo , String password) {
+	public Patients(Integer id, Integer SSN, String name, Date DOB, String gender, byte[] photo , String password) {
 		super();
 		this.id = id;
 		this.SSN = SSN;
@@ -195,3 +195,4 @@ public class Patients implements Serializable { /**
 	
 
 	}
+	
