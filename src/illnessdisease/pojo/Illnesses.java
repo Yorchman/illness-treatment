@@ -26,7 +26,7 @@ public class Illnesses implements Serializable{
      @Id
      @GeneratedValue(generator="illnesses")
      @TableGenerator(name="illnesses", table="sqlite_sequence",
-        pkColumnName="name", valueColumnName="seq", pkColumnValue="illnesses")
+pkColumnName="name", valueColumnName="seq", pkColumnValue="illnesses")
 private Integer id;
 private String name;
 private String type;
@@ -41,9 +41,6 @@ private List<Patients> patients;
 private List<Symptoms> symptoms;
 @ManyToMany(mappedBy = "medicines-illness")
 private List<Medicines> medicines;
-
-
-
 
 public Illnesses() {
 	super();
