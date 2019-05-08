@@ -1,12 +1,15 @@
 package illnessdisease.db;
 
 import illnessdisease.pojo.Doctor;
+
 import illnessdisease.pojo.Illnesses;
 import illnessdisease.pojo.Intolerance;
 import illnessdisease.pojo.Medicines;
 import illnessdisease.pojo.Patients;
 import illnessdisease.pojo.SideEffects;
 import illnessdisease.pojo.Symptoms;
+import sample.db.pojos.Department;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.List;
@@ -263,48 +266,136 @@ public class JPAManager implements DBManager {
 
 
 	}
+	
+	public Illnesses getIllnessFromID(Integer id) {
+		Query q1=this.e.createNativeQuery("SELECT * FROM illness WHERE id = ?", Illnesses.class);
+	    q1.setParameter(1, id);
+	    Illnesses ill=(Illnesses) q1.getSingleResult();
+	    return ill;
+	}
+	//use after getIllnessFromID because we will need the object that this method returns.
+	public void Update_Illnesses_Name(String new_Name,Illnesses i) {
+    e.getTransaction().begin();
+    i.setName(new_Name);
+	e.getTransaction().commit();
+	}
 
+	public Patients getPatientsFromID(Integer id) {
+		Query q1=this.e.createNativeQuery("SELECT * FROM patients WHERE id = ?", Patients.class);
+	    q1.setParameter(1, id);
+	    Patients patient=(Patients) q1.getSingleResult();
+	    return patient;
+	}
 	@Override
-	public void Update_illness(Illnesses i) {
-		// TODO Auto-generated method stub
+	public void Update_patients_Name(String new_Name,Patients p) {
+	e.getTransaction().begin();
+	p.setName(new_Name);
+	e.getTransaction().commit();
 
 	}
+	public void Update_patients_Gender(String new_Gender,Patients p){
+	 e.getTransaction().begin();
+	 p.setGender(new_Gender);
+	 e.getTransaction().commit();	
+	}
 
+	public Symptoms getSymptomsFromID(Integer id) {
+	Query q1=this.e.createNativeQuery("SELECT * FROM symptoms WHERE id = ?", Symptoms.class);
+	q1.setParameter(1, id);
+	Symptoms sym=(Symptoms) q1.getSingleResult();
+	return sym;
+	}
+	public void Update_Symptoms_Diagnosis(String new_Diagnosis, Symptoms s) {
+    e.getTransaction().begin();
+	s.setDiagnosis(new_Diagnosis);
+	e.getTransaction().commit();		
+
+	}
+    public void Update_Symptoms_Areas(String new_Area, Symptoms s) {
+   	 e.getTransaction().begin();
+   	 s.setAreas(new_Area);
+   	 e.getTransaction().commit();	
+    }
+    public void Update_Symptoms_Durartion(Integer new_Duration, Symptoms s) {
+   	 e.getTransaction().begin();
+   	 s.setDuration(new_Duration);
+   	 e.getTransaction().commit();	
+    }
+    
+	public SideEffects getSideEffectsFromID(Integer id) {
+	Query q1=this.e.createNativeQuery("SELECT * FROM sideEffects WHERE id = ?", SideEffects.class);
+	q1.setParameter(1, id);
+	SideEffects sEffect=(SideEffects) q1.getSingleResult();
+	return sEffect;
+	}
 	@Override
-	public void Update_patients(Patients p) {
-		// TODO Auto-generated method stub
+	public void Update_SideEffects_duration(Integer new_Duration, SideEffects s) {
+	e.getTransaction().begin();
+	s.setDuration(new_Duration);
+	e.getTransaction().commit();	
 
 	}
-
+	public void Update_SideEffects_Area(String new_Area, SideEffects s) {
+	  	 e.getTransaction().begin();
+	   	 s.setArea(new_Area);
+	   	 e.getTransaction().commit();
+	}
+	
+	public Intolerance getIntoleranceFromID(Integer id) {
+	Query q1=this.e.createNativeQuery("SELECT * FROM intolerance WHERE id = ?", Intolerance.class);
+	q1.setParameter(1, id);
+	Intolerance intolerance=(Intolerance) q1.getSingleResult();
+	return intolerance;
+	}
 	@Override
-	public void Update_symptoms(Symptoms i) {
-		// TODO Auto-generated method stub
+	public void Update_intolerance_Name(String new_Name,Intolerance in) {
+	  	 e.getTransaction().begin();
+	   	 in.setName(new_Name);
+	   	 e.getTransaction().commit();
 
 	}
 
+	public Medicines getMEdicinesFromID(Integer id) {
+	Query q1=this.e.createNativeQuery("SELECT * FROM medicines WHERE id = ?", Medicines.class);
+	q1.setParameter(1, id);
+	Medicines med=(Medicines) q1.getSingleResult();
+	return med;
+	}
 	@Override
-	public void Update_sideeffects(SideEffects s) {
-		// TODO Auto-generated method stub
+	public void Update_Medicines_Name(String new_Name, Medicines m) {
+	e.getTransaction().begin();
+	m.setName(new_Name);
+	e.getTransaction().commit();
 
 	}
-
-	@Override
-	public void Update_intolerance(Intolerance in) {
-		// TODO Auto-generated method stub
-
+	public void Update_Medicines_ActivePrinciple(String new_ActivePrinciple, Medicines m) {
+	e.getTransaction().begin();
+	m.setName(new_ActivePrinciple);
+	e.getTransaction().commit();
+	}
+    
+	public void Update_Medicines_price(double new_price, Medicines m) {
+	e.getTransaction().begin();
+	m.setPrice(new_price);
+	e.getTransaction().commit();
 	}
 
-	@Override
-	public void Update_Medicines(Medicines j) {
-		// TODO Auto-generated method stub
-
+	public Doctor getDoctorFromID(Integer id) {
+	Query q1=this.e.createNativeQuery("SELECT * FROM doctor WHERE id = ?", Doctor.class);
+	q1.setParameter(1, id);
+	Doctor dr=(Doctor) q1.getSingleResult();
+	return dr;
 	}
-
-	public void Update_Doctor(Doctor j) {
-		// TODO Auto-generated method stub
-
+	public void Update_Doctors_UserName(String new_UserName, Doctor d) {
+    e.getTransaction().begin();
+	d.setUserName(new_UserName);
+	e.getTransaction().commit();
 	}
-
+	public void Update_Doctors_Password(String new_Password, Doctor d) {
+	e.getTransaction().begin();
+	d.setPassword(new_Password);
+	e.getTransaction().commit();
+	}
 }
 
 
