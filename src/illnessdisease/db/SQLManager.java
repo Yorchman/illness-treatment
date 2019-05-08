@@ -154,6 +154,7 @@ String medicines_sidEffects= "CREATE TABLE medicines_sidEffects"
 	}catch(Exception e) {
 		e.printStackTrace();
 	}
+	System.out.println("CREADAS CORRECTAMENTE (Dentro del metodo)");
 }
 
 
