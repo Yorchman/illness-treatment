@@ -127,7 +127,7 @@ public class Patients implements Serializable { /**
 		return SSN;
 	}
 	public void setSSN(Integer SSN) {
-		SSN = SSN;
+		this.SSN = SSN;
 	}
 	public String getName() {
 		return name;
@@ -139,7 +139,7 @@ public class Patients implements Serializable { /**
 		return DOB;
 	}
 	public void setDOB(Date DOB) {
-		DOB = DOB;
+		this.DOB = DOB;
 	}
 	public String getGender() {
 		return gender;
