@@ -1,15 +1,12 @@
 package illnessdisease.db;
 
 import illnessdisease.pojo.Doctor;
-
 import illnessdisease.pojo.Illnesses;
 import illnessdisease.pojo.Intolerance;
 import illnessdisease.pojo.Medicines;
 import illnessdisease.pojo.Patients;
 import illnessdisease.pojo.SideEffects;
 import illnessdisease.pojo.Symptoms;
-import sample.db.pojos.Department;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.List;
@@ -380,21 +377,10 @@ public class JPAManager implements DBManager {
 	e.getTransaction().commit();
 	}
 
-	public Doctor getDoctorFromID(Integer id) {
-	Query q1=this.e.createNativeQuery("SELECT * FROM doctor WHERE id = ?", Doctor.class);
-	q1.setParameter(1, id);
-	Doctor dr=(Doctor) q1.getSingleResult();
-	return dr;
-	}
-	public void Update_Doctors_UserName(String new_UserName, Doctor d) {
-    e.getTransaction().begin();
-	d.setUserName(new_UserName);
-	e.getTransaction().commit();
-	}
-	public void Update_Doctors_Password(String new_Password, Doctor d) {
-	e.getTransaction().begin();
-	d.setPassword(new_Password);
-	e.getTransaction().commit();
+	@Override
+	public void Update_Medicines(Medicines j) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
