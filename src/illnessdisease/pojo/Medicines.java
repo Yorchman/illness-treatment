@@ -43,7 +43,7 @@ public class Medicines implements Serializable {
 	@XmlElement
 	private Double price;
 	@XmlAttribute
-	private Boolean seguridadSocial;
+	private Boolean SSCover;
 	@ManyToMany(mappedBy = "patients-medicines")
 	@XmlTransient
 	private List<Patients> patients;
@@ -81,7 +81,7 @@ public class Medicines implements Serializable {
 		this.illnesses = illnesses;
 	}
 	public Boolean getSeguridadSocial() {
-		return seguridadSocial;
+		return SSCover;
 	}
 	public Medicines() {
 		super();
@@ -96,7 +96,7 @@ public class Medicines implements Serializable {
 		this.name = name;
 		this.activePrinciple = activePrinciple;
 		this.price = price;
-		this.seguridadSocial = seguridadSocial;
+		this.SSCover = seguridadSocial;
 		this.patients = new ArrayList<Patients>();
 		this.sideEffects = new ArrayList<SideEffects>();
 		this.illnesses = new ArrayList<Illnesses>();
@@ -128,10 +128,10 @@ public class Medicines implements Serializable {
 		this.price = price;
 	}
 	public boolean isSeguridadSocial() {
-		return seguridadSocial;
+		return SSCover;
 	}
 	public void setSeguridadSocial(Boolean seguridadSocial) {
-		this.seguridadSocial = seguridadSocial;
+		this.SSCover = seguridadSocial;
 	}
 	@Override
 	public int hashCode() {
