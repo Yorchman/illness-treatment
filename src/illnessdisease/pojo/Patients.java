@@ -126,8 +126,8 @@ public class Patients implements Serializable { /**
 	public Integer getSSN() {
 		return SSN;
 	}
-	public void setSSN(Integer sSN) {
-		SSN = sSN;
+	public void setSSN(Integer SSN) {
+		SSN = SSN;
 	}
 	public String getName() {
 		return name;
@@ -138,8 +138,8 @@ public class Patients implements Serializable { /**
 	public Date getDOB() {
 		return DOB;
 	}
-	public void setDOB(Date dOB) {
-		DOB = dOB;
+	public void setDOB(Date DOB) {
+		DOB = DOB;
 	}
 	public String getGender() {
 		return gender;

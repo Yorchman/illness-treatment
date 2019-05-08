@@ -14,7 +14,7 @@
   
 ]>
 <Medicine id= "1"  name= "Aspirina"  seguridadSocial = "True">
-    <activePrinciple>Loratadina </activePrinciple>
+    <activePrinciple> Loratadina </activePrinciple>
     <price>40.12 </price>
     <SideEffects> 
     	<SideEffect name= "dizziness"  duration= "2">
