@@ -764,6 +764,12 @@ public void close() {
 }
 
 
+
+@Override
+public void Insert_Doctor(Doctor d) {
+//Done in JPA
+	
+}
 public void Delete_doctors(Doctor s) {
 	try {
 		
@@ -827,34 +833,16 @@ public void Update_Doctors(Doctor j) {
 }
 
 @Override
-
-public void Update_patients(Patients p) {
-	// TODO Auto-generated method stub
-	
-}
-
-@Override
-public void Update_intolerance(Intolerance in) {
-	// TODO Auto-generated method stub
-	
-}
-
-@Override
-
-public void Insert_Doctor(Doctor d) {
-	// TODO Auto-generated method stub
-	
-}
-
-@Override
-public void Update_Doctor(Doctor j) {
-	// TODO Auto-generated method stub
-	
-}
-
-@Override
 public void Update_illness_Name(String new_Name, Illnesses i) {
 	// TODO Auto-generated method stub
 	
 }
+
+@Override
+public void Update_Symptoms_Duration(Integer new_Duration, Symptoms s) {
+	// TODO Auto-generated method stub
+	
+}
+
+
 }

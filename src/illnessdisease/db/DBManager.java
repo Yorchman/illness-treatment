@@ -28,7 +28,7 @@ public interface DBManager {
 	public void Update_patients_Gender(String new_Gender,Patients p);
 	public void Update_Symptoms_Diagnosis(String new_Diagnosis, Symptoms s);
 	public void Update_Symptoms_Areas(String new_Area, Symptoms s);
-	public void Update_Symptoms_Durartion(Integer new_Duration, Symptoms s);
+	public void Update_Symptoms_Duration(Integer new_Duration, Symptoms s);
 	public void Update_SideEffects_duration(Integer new_Duration, SideEffects s);
 	public void Update_SideEffects_Area(String new_Area, SideEffects s);
 	public void Update_intolerance_Name(String new_Name,Intolerance in);

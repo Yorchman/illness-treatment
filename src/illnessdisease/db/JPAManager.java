@@ -8,7 +8,6 @@ import illnessdisease.pojo.Medicines;
 import illnessdisease.pojo.Patients;
 import illnessdisease.pojo.SideEffects;
 import illnessdisease.pojo.Symptoms;
-import sample.db.pojos.Department;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -316,7 +315,7 @@ public class JPAManager implements DBManager {
    	 s.setAreas(new_Area);
    	 e.getTransaction().commit();	
     }
-    public void Update_Symptoms_Durartion(Integer new_Duration, Symptoms s) {
+    public void Update_Symptoms_Duration(Integer new_Duration, Symptoms s) {
    	 e.getTransaction().begin();
    	 s.setDuration(new_Duration);
    	 e.getTransaction().commit();	
