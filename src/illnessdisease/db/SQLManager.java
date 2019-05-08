@@ -17,11 +17,11 @@ public class SQLManager implements DBManager {
 //	private Statement statement;
 	private static Connection c;
 
-public void connect(String path, String classname) {
+public  void connect(String path, String classname) {
 	try {
 
 	Class.forName(classname);
-	this.connection= DriverManager.getConnection(path);
+	this.connection= DriverManager.getConnection("jdbc:sqlite:" + path);
 	connection.createStatement().execute("PRAGMA foreign_keys= ON");
 	//System.out.println("database connection opened");
 
@@ -625,5 +625,17 @@ public void Update_Doctors(Doctor j) {
 	catch(Exception e) {
 		e.printStackTrace();
 	}
+}
+
+@Override
+public void Insert_Doctor(Doctor d) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void Update_Doctor(Doctor j) {
+	// TODO Auto-generated method stub
+	
 }
 }
