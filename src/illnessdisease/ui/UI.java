@@ -2,7 +2,7 @@ package illnessdisease.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+import java.sql.SQLException;
 
 import illnessdisease.db.*;
 import illnessdisease.pojo.*;
@@ -14,10 +14,13 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
  */
 public class UI{ //extends Application
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 	SQLManager sqlm = new SQLManager();
+	JPAManager jpam = new JPAManager();
 	sqlm.connect("./db/DATABASENAME", "org.sqlite.JDBC" );
 	sqlm.createTables();
+	//hecho por yorch comprobar si está bien
+	jpam.connect(); // no se si hay que hacer este connect pero APELICACUI!
 	System.out.println("CREADAS CORRECTAMENTE (fuera del metodo)");
 	sqlm.close();
 	
@@ -59,11 +62,49 @@ public class UI{ //extends Application
 	        			}
 	        			else System.out.println("ERROR - You didn´t type Y or N, try again :)");	
 	        		}
+	        		//Podemos llamar al constructor sin id no? se debe poner solo con autoincrement (creo)
+	        		Illnesses insertedIllness = new Illnesses(id,name,type,causes,contagious); //sin id
+	        		jpam.Insert_illness(insertedIllness);
 	        		break;
+	        		
 	        	case 2:
-	        		System.out.println();
+	        		System.out.println("OPTION SELECTED: SEARCH ILLNESS");
+	        		
+	        		break;
+	        	case 3: 
+	        		System.out.println("OPTION SELECTED: DELETE ILLNESS");
+	        		sqlm.printIllnes();
+	        		System.out.println("Insert the name of the illness that you want to delete: ");
+	        		id = Integer.parseInt(consola.readLine());
+	        		Illnesses illness = jpam.getIllnessFromID(id);
+	        		jpam.Delete_illness(illness); //eliminamos el illness encontrado
+	        		//Se debería meter en un if pero no sé comprobar si el searchIllness ha devuelto algo valido 
+	        		//o no. Se podría hacer if(esa movida != null) ???
+	        		
+
+	        		break;
+	        	case 4: 
+	        		System.out.println("OPTION SELECTED: UPDATE ILLNESS");
+	        		System.out.println("INTRODUCE THE ID OF THE ILLNESS THAT YOU WANT TO DELETE: ");
+	        		id  = Integer.parseInt(consola.readLine());
+	        		//Hacer busqueda igual que en el case 3
+	        		//Con lo que de esa busqueda:
+	        		illness = jpam.getIllnessFromID(id);
+	        		System.out.println("Insert the new name: ");
+	        		String newName = consola.readLine();
+	        		System.out.println("Insert the new type: ");
+	        		String newType = consola.readLine();
+	        		System.out.println("Insert the new causes: ");
+	        		String newCauses = consola.readLine();
+	        		jpam.Update_Illnesses_Name(newName, illness); //lo hacemos
+	        		sqlm.Update_illness(i);
+	        		//Hacer UPDATE sobre lo que nos dio la busqueda anterior
+	        		//sqlm.Update_illness_Name(newName, i);
+	        	case 5: 
+	        		System.out.println("");
 	        		
 	        	}
+	        	
 	        	
 	        	break;
 	        case 2: 
@@ -107,12 +148,11 @@ public class UI{ //extends Application
 	*/
 	
 	static void menu2(){
-
 		System.out.println("Introduce 1 to insert ");
 		System.out.println("Introduce 2 to search");
 		System.out.println("Introduce 3 to delete");
-		System.out.println("Introduce 4 to select");
-		System.out.println("Introduce 5 to update");
+		System.out.println("Introduce 4 to update");
+		System.out.println("Introduce 5 to ");
 		System.out.println("Introduce 6 to exit");
 	}
 	

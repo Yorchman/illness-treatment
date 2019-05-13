@@ -53,6 +53,18 @@ public Illnesses(Integer id, String name, String type, String causes, boolean co
 	this.id = id;
 	this.name = name;
 	this.type = type;
+	this.causes = causes;
+	this.contagious = contagious;
+	this.patients = new ArrayList<Patients>();
+	this.symptoms = new ArrayList<Symptoms>();
+	this.medicines = new ArrayList<Medicines>();
+}
+
+public Illnesses (String name, String type, String causes, boolean contagious) {
+	super();
+	this.name = name;
+	this.type = type;
+	this.causes = causes;
 	this.contagious = contagious;
 	this.patients = new ArrayList<Patients>();
 	this.symptoms = new ArrayList<Symptoms>();
