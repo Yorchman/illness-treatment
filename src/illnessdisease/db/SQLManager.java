@@ -28,7 +28,7 @@ public  void connect(String path, String classname) {
 }
 	catch(Exception e) {
 		e.printStackTrace();
-		//System.out.println("La conexion no pudo establecerse con éxito");
+		//System.out.println("La conexión no pudo establecerse con éxito");
 	}}
 
 public void createTables() {

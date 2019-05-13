@@ -13,7 +13,6 @@ import javax.persistence.TableGenerator;
 @Entity
 @Table(name="intolerance")
 public class Intolerance  implements Serializable {
-
 	/**
 	 * 
 	 */
@@ -41,8 +40,15 @@ public class Intolerance  implements Serializable {
 		this.id = id;
 		this.name = name;
 		this.patients = new ArrayList<Patients>();
-		
 	}
+	
+	public Intolerance( String name) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.patients = new ArrayList<Patients>();
+	}
+	
 	public Integer getId() {
 		return id;
 	}
