@@ -7,8 +7,6 @@ import illnessdisease.pojo.Medicines;
 import illnessdisease.pojo.Patients;
 import illnessdisease.pojo.SideEffects;
 import illnessdisease.pojo.Symptoms;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.List;
 
 import javax.persistence.*;
@@ -80,90 +78,77 @@ public class JPAManager implements DBManager {
 
 	}
 
-	public void searchIllnessbyname(Illnesses i) {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	public List<Illnesses> searchIllnessbyname(String name) {
+		//BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		List<Illnesses> listIllnesses= null;
 	try {
 				
-		System.out.print("Write the illness' name: ");
-		String name = reader.readLine();
-		System.out.println("Matching illnesses:");
+		//System.out.print("Write the illness' name: ");
+		//String name = reader.readLine();
+		//System.out.println("Matching illnesses:");
 		Query q1 = e.createNativeQuery("SELECT * FROM Illnesses WHERE name LIKE ?", Illnesses.class);
 		q1.setParameter(1, "%" + name + "%");
-		List<Illnesses> listIllnesses = (List<Illnesses>) q1.getResultList();
-		
-		
-		for (Illnesses illness : listIllnesses) {
-			System.out.println(illness);
+		listIllnesses = (List<Illnesses>) q1.getResultList();
+
+}catch (Exception e) {
+	e.printStackTrace();	
 		}
+	return listIllnesses;
 	}
 	
-	catch (Exception e) {
-		
-		}
-	}
-	
-	public void searchPatientsbyname(Patients p) {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	public List<Patients> searchPatientsbyname(String name) {
+		//BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		List<Patients> listPatients= null;
 	try {
 				
-		System.out.print("Write the patient's name: ");
-		String name = reader.readLine();
-		System.out.println("Matching illnesses:");
+		//System.out.print("Write the patient's name: ");
+		//String name = reader.readLine();
+		//System.out.println("Matching illnesses:");
 		Query q1 = e.createNativeQuery("SELECT * FROM Patients WHERE name LIKE ?", Patients.class);
 		q1.setParameter(1, "%" + name + "%");
-		List<Patients> listPatients = (List<Patients>) q1.getResultList();
-		
-		
-		for (Patients patients : listPatients) {
-			System.out.println(patients);
+		listPatients = (List<Patients>) q1.getResultList();
+
+	}catch (Exception e) {
+	e.printStackTrace();	
 		}
+	return listPatients;
 	}
 	
-	catch (Exception e) {
-		
-		}	
-	}
-	public void searchMedicinesbyname(Medicines m) {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	public List<Medicines> searchMedicinesbyname(String name) {
+		//BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		List<Medicines> listMedicines= null;
 	try {
 				
-		System.out.print("Write the medicine's name: ");
-		String name = reader.readLine();
-		System.out.println("Matching medicines:");
+		//System.out.print("Write the medicine's name: ");
+		//String name = reader.readLine();
+		//System.out.println("Matching medicines:");
 		Query q1 = e.createNativeQuery("SELECT * FROM Medicines WHERE name LIKE ?", Medicines.class);
 		q1.setParameter(1, "%" + name + "%");
-		List<Medicines> listMedicines = (List<Medicines>) q1.getResultList();
+		listMedicines = (List<Medicines>) q1.getResultList();
 		
-		
-		for (Medicines medicines : listMedicines) {
-			System.out.println(medicines);
-		}
-	}
-	
-	catch (Exception e) {
-		
+	}catch (Exception e) {
+		e.printStackTrace();
 		}	
+	return listMedicines;
 	}
-	public void searchSideEffectsbyname(SideEffects s) {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	public List<SideEffects> searchSideEffectsbyname(String name) {
+		List<SideEffects> listSideEffects= null;
+		//BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	try {
 				
-		System.out.print("Write the  SideEffects' name: ");
-		String name = reader.readLine();
-		System.out.println("Matching SideEffects:");
+		//System.out.print("Write the  SideEffects' name: ");
+		//String name = reader.readLine();
+		//System.out.println("Matching SideEffects:");
 		Query q1 = e.createNativeQuery("SELECT * FROM SideEffects WHERE name LIKE ?", SideEffects.class);
 		q1.setParameter(1, "%" + name + "%");
-		List<SideEffects> listSideEffects = (List<SideEffects>) q1.getResultList();
+		listSideEffects = (List<SideEffects>) q1.getResultList();
+			
 		
+	}catch (Exception e) {
+		e.printStackTrace();
 		
-		for (SideEffects sideEffects : listSideEffects) {
-			System.out.println(sideEffects);
 		}
-	}
-	
-	catch (Exception e) {
-		
-		}	
+	return listSideEffects;	
 	}
 	public void close() {
 		try {
@@ -334,12 +319,13 @@ public class JPAManager implements DBManager {
 
 	}
 
-	public Medicines getMEdicinesFromID(Integer id) {
+	public Medicines getMedicinesFromID(Integer id) {
 	Query q1=this.e.createNativeQuery("SELECT * FROM medicines WHERE id = ?", Medicines.class);
 	q1.setParameter(1, id);
 	Medicines med=(Medicines) q1.getSingleResult();
 	return med;
 	}
+	
 	@Override
 	public void Update_Medicines_Name(String new_Name, Medicines m) {
 	e.getTransaction().begin();
@@ -359,10 +345,26 @@ public class JPAManager implements DBManager {
 	e.getTransaction().commit();
 	}
 
+	public Doctor getDoctorFromID(Integer id) {
+	Query q1=this.e.createNativeQuery("SELECT * FROM doctors WHERE id = ?", Doctor.class);
+	q1.setParameter(1, id);
+	Doctor dr=(Doctor) q1.getSingleResult();
+	return dr;
+	}
 	@Override
-	public void Update_Medicines(Medicines j) {
-		// TODO Auto-generated method stub
+	public void Update_Doctors_UserName(String new_UserName, Doctor d) {
+		e.getTransaction().begin();
+		d.setUserName(new_UserName);
+		e.getTransaction().commit();
+		
+	}
 
+	@Override
+	public void Update_Doctors_Password(String new_Password, Doctor d) {
+		e.getTransaction().begin();
+		d.setPassword(new_Password);
+		e.getTransaction().commit();
+		
 	}
 
 	
