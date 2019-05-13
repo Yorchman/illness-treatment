@@ -259,6 +259,13 @@ public class JPAManager implements DBManager {
 	return patient;
 	}
 	@Override
+	public void Update_illness_Name(String new_Name, Illnesses i) {
+		e.getTransaction().begin();
+		i.setName(new_Name);
+		e.getTransaction().commit();
+		
+	}
+	@Override
 	public void Update_patients_Name(String new_Name,Patients p) {
 	e.getTransaction().begin();
 	p.setName(new_Name);
@@ -358,11 +365,7 @@ public class JPAManager implements DBManager {
 
 	}
 
-	@Override
-	public void Update_illness_Name(String new_Name, Illnesses i) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }
 
 
