@@ -39,7 +39,7 @@ private List<Patients> patients;
 	joinColumns={@JoinColumn(name="illness_id", referencedColumnName="id")},
     inverseJoinColumns={@JoinColumn(name="symptoms_id", referencedColumnName="id")})
 private List<Symptoms> symptoms;
-@ManyToMany(mappedBy = "medicines-illness")
+@ManyToMany(mappedBy = "illnesses")
 private List<Medicines> medicines;
 
 public Illnesses() {

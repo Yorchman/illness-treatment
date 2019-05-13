@@ -41,6 +41,7 @@ public class Patients implements Serializable { /**
 		joinColumns={@JoinColumn(name="patients_id", referencedColumnName="id")},
 	    inverseJoinColumns={@JoinColumn(name="symptoms_id", referencedColumnName="id")})
 	private List<Symptoms> symptoms;
+	private List<Intolerance> intolerances;
 	public List<Illnesses> getIllnesses() {
 		return illnesses;
 	}

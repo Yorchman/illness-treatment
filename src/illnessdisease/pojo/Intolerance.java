@@ -23,7 +23,7 @@ public class Intolerance  implements Serializable {
        pkColumnName="name", valueColumnName="seq", pkColumnValue="intolerance")
 	private Integer id;
 	private String name;
-	@ManyToMany(mappedBy = "patients-intolerance")
+	@ManyToMany(mappedBy = "intolerances")
 	private List<Patients> patients;
 	public List<Patients> getPatients() {
 		return patients;
