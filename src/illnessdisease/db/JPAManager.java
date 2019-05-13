@@ -1,14 +1,12 @@
 package illnessdisease.db;
 
 import illnessdisease.pojo.Doctor;
-
 import illnessdisease.pojo.Illnesses;
 import illnessdisease.pojo.Intolerance;
 import illnessdisease.pojo.Medicines;
 import illnessdisease.pojo.Patients;
 import illnessdisease.pojo.SideEffects;
 import illnessdisease.pojo.Symptoms;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.List;
@@ -176,10 +174,7 @@ public class JPAManager implements DBManager {
 	}
 
 	@Override
-	public void Delete_illness(Illnesses i) {
-		Query q1 = e.createNativeQuery("SELECT * FROM illness WHERE id = ?", Illnesses.class);
-		q1.setParameter(1, i.getId());
-		Illnesses illness = (Illnesses) q1.getSingleResult();
+	public void Delete_illness(Illnesses illness) {
 
 		e.getTransaction().begin();
 		e.remove(illness);
@@ -189,11 +184,7 @@ public class JPAManager implements DBManager {
 	}
 
 	@Override
-	public void Delete_symptoms(Symptoms i) {
-		Query q1 = e.createNativeQuery("SELECT * FROM symptoms WHERE id = ?", Symptoms.class);
-		q1.setParameter(1, i.getId());
-		Symptoms symptom = (Symptoms) q1.getSingleResult();
-
+	public void Delete_symptoms(Symptoms symptom) {
 		e.getTransaction().begin();
 		e.remove(symptom);
 		e.getTransaction().commit();
@@ -202,11 +193,7 @@ public class JPAManager implements DBManager {
 	}
 
 	@Override
-	public void Delete_patients(Patients p) {
-		Query q1 = e.createNativeQuery("SELECT * FROM patients WHERE id = ?", Patients.class);
-		q1.setParameter(1, p.getId());
-		Patients patient = (Patients) q1.getSingleResult();
-
+	public void Delete_patients(Patients patient) {
 		e.getTransaction().begin();
 		e.remove(patient);
 		e.getTransaction().commit();
@@ -215,11 +202,7 @@ public class JPAManager implements DBManager {
 	}
 
 	@Override
-	public void Delete_intolerance(Intolerance in) {
-		Query q1 = e.createNativeQuery("SELECT * FROM intolerance WHERE id = ?", Intolerance.class);
-		q1.setParameter(1, in.getId());
-		Intolerance intolerance = (Intolerance) q1.getSingleResult();
-
+	public void Delete_intolerance(Intolerance intolerance) {
 		e.getTransaction().begin();
 		e.remove(intolerance);
 		e.getTransaction().commit();
@@ -227,36 +210,26 @@ public class JPAManager implements DBManager {
 
 	}
 	
-	public void Delete_doctors(Doctor in) {
-
-		Query q1 = e.createNativeQuery("SELECT * FROM doctors WHERE id = ?", Doctor.class);
-		q1.setParameter(1, in.getId());
-		Doctor doctor = (Doctor) q1.getSingleResult();
+	public void Delete_doctors(Doctor dr) {
 
 		e.getTransaction().begin();
-		e.remove(doctor);
+		e.remove(dr);
 		e.getTransaction().commit();
 		e.close();
 
 	}
 
 	@Override
-	public void Delete_Medicines(Medicines j) {
-		Query q1 = e.createNativeQuery("SELECT * FROM medicines WHERE id = ?", Medicines.class);
-		q1.setParameter(1, j.getId());
-		Medicines medicine = (Medicines) q1.getSingleResult();
+	public void Delete_Medicines(Medicines med) {
 
 		e.getTransaction().begin();
-		e.remove(medicine);
+		e.remove(med);
 		e.getTransaction().commit();
 		e.close();
 
 
 	}
-	public void Delete_sideeffects(SideEffects j) {
-		Query q1 = e.createNativeQuery("SELECT * FROM sideEffects WHERE id = ?", SideEffects.class);
-		q1.setParameter(1,j.getId());
-		SideEffects side = (SideEffects) q1.getSingleResult();
+	public void Delete_sideeffects(SideEffects side) {
 
 		e.getTransaction().begin();
 		e.remove(side);
@@ -280,10 +253,10 @@ public class JPAManager implements DBManager {
 	}
 
 	public Patients getPatientsFromID(Integer id) {
-		Query q1=this.e.createNativeQuery("SELECT * FROM patients WHERE id = ?", Patients.class);
-	    q1.setParameter(1, id);
-	    Patients patient=(Patients) q1.getSingleResult();
-	    return patient;
+	Query q1=this.e.createNativeQuery("SELECT * FROM patients WHERE id = ?", Patients.class);
+	q1.setParameter(1, id);
+	Patients patient=(Patients) q1.getSingleResult();
+	return patient;
 	}
 	@Override
 	public void Update_illness_Name(String new_Name, Illnesses i) {
@@ -386,21 +359,10 @@ public class JPAManager implements DBManager {
 	e.getTransaction().commit();
 	}
 
-	public Doctor getDoctorFromID(Integer id) {
-	Query q1=this.e.createNativeQuery("SELECT * FROM doctor WHERE id = ?", Doctor.class);
-	q1.setParameter(1, id);
-	Doctor dr=(Doctor) q1.getSingleResult();
-	return dr;
-	}
-	public void Update_Doctors_UserName(String new_UserName, Doctor d) {
-    e.getTransaction().begin();
-	d.setUserName(new_UserName);
-	e.getTransaction().commit();
-	}
-	public void Update_Doctors_Password(String new_Password, Doctor d) {
-	e.getTransaction().begin();
-	d.setPassword(new_Password);
-	e.getTransaction().commit();
+	@Override
+	public void Update_Medicines(Medicines j) {
+		// TODO Auto-generated method stub
+
 	}
 
 	
