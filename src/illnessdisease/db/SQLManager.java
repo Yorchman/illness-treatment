@@ -13,7 +13,7 @@ import illnessdisease.pojo.Intolerance;
 import java.io.*;
 
 public class SQLManager implements DBManager {
-	private Connection connection;
+	private static Connection connection;
 //	private Statement statement;
 	private static Connection c;
 
@@ -29,7 +29,8 @@ public  void connect(String path, String classname) {
 	catch(Exception e) {
 		e.printStackTrace();
 		//System.out.println("La conexión no pudo establecerse con éxito");
-	}}
+	}
+}
 
 public void createTables() {
 	try {
@@ -59,7 +60,7 @@ String sideEffects="CREATE TABLE sideEffects"
 		statement.execute(sideEffects);
 
 
-String illness ="CREATE TABLE illness "
+String illness ="CREATE TABLE illnesses "
 		+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		+ " name TEXT NOT NULL,"
 		+ " type TEXT,"
@@ -93,7 +94,7 @@ String symptoms ="CREATE TABLE symptoms "
 
 		statement.execute(symptoms);
 		
-String patient_illness= "CREATE TABLE patient_illness"
+String patient_illness= "CREATE TABLE patient_lillness"
 		+ "(patient_id INTEGER, "
 		+ "illness_id INTEGER, "  
 		+ "PRIMARY KEY (patient_id, illness_id), "
@@ -167,11 +168,12 @@ String medicines_sidEffects= "CREATE TABLE medicines_sidEffects"
 public void Insert_illness(Illnesses i) {
 	try {
 		
-		String sql="INSERT INTO illnesses( name, type, contagious,patients) "+ "VALUES (?,?,?,?);";
+		String sql="INSERT INTO illnesses( name, type, causes, contagious) "+ "VALUES (?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, i.getName());
 		prep.setString(2, i.getType());
-		prep.setBoolean(3, i.isContagious());
+		prep.setString(3, i.getCauses());
+		prep.setBoolean(4, i.isContagious());
 		
 	
 		prep.executeUpdate();
@@ -711,7 +713,7 @@ public void Update_Medicines(Medicines j) {
 
 public static List<Illnesses> printIllnes() throws SQLException {
 	List<Illnesses> list_illness=new ArrayList<Illnesses>();
-	Statement stmt = c.createStatement();
+	Statement stmt = connection.createStatement();
 	String sql = "SELECT * FROM illnesses";
 	ResultSet rs = stmt.executeQuery(sql);
 	while (rs.next()) {
@@ -720,7 +722,7 @@ public static List<Illnesses> printIllnes() throws SQLException {
 		String type= rs.getString("type");
 		String causes = rs.getString("causes");
 		boolean contagious=rs.getBoolean("contagious");
-	    Illnesses illnes  = new Illnesses(id, name, type, causes, contagious);
+	    Illnesses illnes  = new Illnesses(name, type, causes, contagious);
 		System.out.println(illnes);
 	}
 	rs.close();

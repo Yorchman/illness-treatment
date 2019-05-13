@@ -40,12 +40,10 @@ public class JPAManager implements DBManager {
 
 	}
 
-	public void Insert_illness(Illnesses c) {
-
+	public void Insert_illness(Iullnesses c) {
 		e.getTransaction().begin();
 		e.persist(c);
 		e.getTransaction().commit();
-
 	}
 
 	public void Insert_symptoms(Symptoms c) {

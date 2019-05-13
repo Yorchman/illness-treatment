@@ -98,6 +98,12 @@ public boolean equals(Object obj) {
 }
 
 
+
+@Override
+public String toString() {
+	return "Illnesses [id=" + id + ", name=" + name + ", type=" + type + ", causes=" + causes + ", contagious="
+			+ contagious + ", patients=" + patients + ", symptoms=" + symptoms + ", medicines=" + medicines + "]";
+}
 public Integer getId() {
 	return id;
 }

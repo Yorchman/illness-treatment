@@ -10,12 +10,12 @@
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
  
 		<!-- Entity Class -->
-		<class>sample.db.pojos.Illnesses</class>
-		<class>sample.db.pojos.Intolerance</class>
-		<class>sample.db.pojos.Medicines</class>
-		<class>sample.db.pojos.Patients</class>
-		<class>sample.db.pojos.SideEffects</class>
-		<class>sample.db.pojos.Symptoms</class>
+		<class>illnessdisease.pojo.Illnesses</class>
+		<class>illnessdisease.pojo.Intolerance</class>
+		<class>illnessdisease.pojo.Medicines</class>
+		<class>illnessdisease.pojo.Patients</class>
+		<class>illnessdisease.pojo.SideEffects</class>
+		<class>illnessdisease.pojo.Symptoms</class>
  
 		<properties>	
 			<!-- Connection properties -->

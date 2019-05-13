@@ -22,7 +22,7 @@ public class UI{ //extends Application
 	//hecho por yorch comprobar si está bien
 	jpam.connect(); // no se si hay que hacer este connect pero APELICACUI!
 	System.out.println("CREADAS CORRECTAMENTE (fuera del metodo)");
-	sqlm.close();
+	
 	
 	int option;
 	while(true){
@@ -38,8 +38,8 @@ public class UI{ //extends Application
 	        	option = Integer.parseInt(consola.readLine());
 	        	switch(option){
 	        	case 1: 
+	        		
 	        		System.out.println("OPTION SELECTED: INSERT ILLNESS");
-	        		Integer id;
 	        		String name;
 	        		String type;
 	        		String causes;
@@ -62,9 +62,11 @@ public class UI{ //extends Application
 	        			}
 	        			else System.out.println("ERROR - You didn´t type Y or N, try again :)");	
 	        		}
-	        		//Podemos llamar al constructor sin id no? se debe poner solo con autoincrement (creo)
-	        		Illnesses insertedIllness = new Illnesses(id,name,type,causes,contagious); //sin id
+	        		Illnesses insertedIllness = new Illnesses(name,type,causes,contagious); //sin id
 	        		jpam.Insert_illness(insertedIllness);
+	        		System.out.println("AHORA VOY A IMPRIMIR LAS ILLNESSES: \n\n");
+	        		sqlm.printIllnes();
+	        		sqlm.close();
 	        		break;
 	        		
 	        	case 2:
@@ -75,7 +77,7 @@ public class UI{ //extends Application
 	        		System.out.println("OPTION SELECTED: DELETE ILLNESS");
 	        		sqlm.printIllnes();
 	        		System.out.println("Insert the name of the illness that you want to delete: ");
-	        		id = Integer.parseInt(consola.readLine());
+	        		int id = Integer.parseInt(consola.readLine());
 	        		Illnesses illness = jpam.getIllnessFromID(id);
 	        		jpam.Delete_illness(illness); //eliminamos el illness encontrado
 	        		//Se debería meter en un if pero no sé comprobar si el searchIllness ha devuelto algo valido 
@@ -97,7 +99,7 @@ public class UI{ //extends Application
 	        		System.out.println("Insert the new causes: ");
 	        		String newCauses = consola.readLine();
 	        		jpam.Update_Illnesses_Name(newName, illness); //lo hacemos
-	        		sqlm.Update_illness(i);
+	        		//sqlm.Update_illness(i);
 	        		//Hacer UPDATE sobre lo que nos dio la busqueda anterior
 	        		//sqlm.Update_illness_Name(newName, i);
 	        	case 5: 
@@ -123,7 +125,7 @@ public class UI{ //extends Application
 	
 	public static void printMenu(){
 		System.out.println("-----WELCOME-----");
-		System.out.println("OPTION 1: PATIENT");
+		System.out.println("OPTION 1: ILLNESSES");
 		System.out.println("OPTION 2: INTOLERANCE");
 		System.out.println("OPTION 3: MEDICINES");
 		System.out.println("OPTION 4: PATIENTS");
