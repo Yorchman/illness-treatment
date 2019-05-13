@@ -28,9 +28,9 @@ public class Symptoms  implements Serializable{
 	private String Diagnosis;
 	private String Areas;
 	private Integer Duration;
-	@ManyToMany(mappedBy = "patients-symptoms")
+	@ManyToMany(mappedBy = "symptoms")
 	private List<Patients> patients;
-	@ManyToMany(mappedBy = "illness-disease")
+	@ManyToMany(mappedBy = "symptoms")
 	private List<Illnesses> illnesses;
 	public Symptoms() {
 		super();

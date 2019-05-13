@@ -38,7 +38,7 @@ public class JPAManager implements DBManager {
 
 	}
 
-	public void Insert_illness(Iullnesses c) {
+	public void Insert_illness(Illnesses c) {
 		e.getTransaction().begin();
 		e.persist(c);
 		e.getTransaction().commit();

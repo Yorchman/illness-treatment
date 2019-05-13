@@ -44,7 +44,7 @@ public class Medicines implements Serializable {
 	private Double price;
 	@XmlAttribute
 	private Boolean SSCover;
-	@ManyToMany(mappedBy = "patients-medicines")
+	@ManyToMany(mappedBy = "medicines")
 	@XmlTransient
 	private List<Patients> patients;
 	@ManyToMany

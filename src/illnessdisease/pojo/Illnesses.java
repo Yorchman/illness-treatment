@@ -32,7 +32,7 @@ private String name;
 private String type;
 private String causes;
 private boolean contagious;
-@ManyToMany(mappedBy = "patients-illness")
+@ManyToMany(mappedBy = "illnesses")
 private List<Patients> patients;
 @ManyToMany
 @JoinTable(name="illness-disease",

@@ -39,7 +39,7 @@ public class SideEffects implements Serializable{
 	private Integer duration;
 	@XmlElement
 	private String area;
-	@ManyToMany(mappedBy = "medicines-sideEffects")
+	@ManyToMany(mappedBy = "sideEffects")
 	@XmlTransient
 	private List<Medicines> medicines;
 	
