@@ -112,6 +112,7 @@ public class UI{ //extends Application
 	        		//sqlm.Update_illness(i);
 	        		//Hacer UPDATE sobre lo que nos dio la busqueda anterior
 	        		//sqlm.Update_illness_Name(newName, i);
+	        		break;
 	        	case 5: 
 	        		System.out.println("");
 	        		
