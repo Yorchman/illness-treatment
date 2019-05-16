@@ -752,7 +752,7 @@ public List<Patients> searchByName(String name){
 		String search ="SELECT FROM patients WHERE name=?;";
 	PreparedStatement ps=connection.prepareStatement(search);
 	ps.setString(1,name);
-	ResultSet rs=ps.executeQuery(search);
+	ResultSet rs=ps.executeQuery();
 	while(rs.next()){
 	int id = rs.getInt("id");
 		int SSN = rs.getInt("SSN");

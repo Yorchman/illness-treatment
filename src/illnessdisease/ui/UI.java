@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
+import java.util.List;
 
 import illnessdisease.db.*;
 import illnessdisease.pojo.*;
@@ -71,7 +72,16 @@ public class UI{ //extends Application
 	        		
 	        	case 2:
 	        		System.out.println("OPTION SELECTED: SEARCH ILLNESS");
-	        		
+	        		System.out.println("Introduce the name of the illness you are looking for: ");
+	        		String nameIllness=consola.readLine();
+	        		List<Illnesses> listIllnesses=jpam.searchIllnessbyname(nameIllness);
+	        		if(listIllnesses!=null){
+	        			
+	        			for(Illnesses s: listIllnesses) {
+	        				System.out.println(s);
+	        				}}else {
+	        					System.out.println("the illness with that name doesn't appear in our database");
+	        				}
 	        		break;
 	        	case 3: 
 	        		System.out.println("OPTION SELECTED: DELETE ILLNESS");
@@ -102,6 +112,7 @@ public class UI{ //extends Application
 	        		//sqlm.Update_illness(i);
 	        		//Hacer UPDATE sobre lo que nos dio la busqueda anterior
 	        		//sqlm.Update_illness_Name(newName, i);
+	        		break;
 	        	case 5: 
 	        		System.out.println("");
 	        		
