@@ -20,10 +20,9 @@ import javax.persistence.TableGenerator;
 public class Illnesses implements Serializable{
 
 	
-	
-	private static final long serialVersionUID = -4120176035031838818L;
 
-     @Id
+	private static final long serialVersionUID = 2054377520906325259L;
+	@Id
      @GeneratedValue(generator="illnesses")
      @TableGenerator(name="illnesses", table="sqlite_sequence",
 pkColumnName="name", valueColumnName="seq", pkColumnValue="illnesses")

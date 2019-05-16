@@ -99,7 +99,7 @@ String patient_illness= "CREATE TABLE patient_lillness"
 		+ "illness_id INTEGER, "  
 		+ "PRIMARY KEY (patient_id, illness_id), "
 		+ " FOREIGN KEY (patient_id) REFERENCES patient(id), "
-		+ " FOREIGN KEY (illness_id) REFERENCES illness(id) "
+		+ " FOREIGN KEY (illness_id) REFERENCES illnesses(id) "
 		+ ")";
 		statement.execute(patient_illness);
 
@@ -133,7 +133,7 @@ String patient_medicines= "CREATE TABLE patient_medicines"
 String illness_symptoms = "CREATE TABLE illness_symptoms"
 		+ "(illness_id INTEGER, "
 		+ "symptoms_id INTEGER, "
-		+ " FOREIGN KEY (illness_id) REFERENCES illness(id), "
+		+ " FOREIGN KEY (illness_id) REFERENCES illnesses(id), "
 		+ " FOREIGN KEY (symptoms_id) REFERENCES symptoms(id) "
 		+ " )";
 		statement.execute(illness_symptoms);
@@ -141,7 +141,7 @@ String illness_symptoms = "CREATE TABLE illness_symptoms"
 String illness_medicines= "CREATE TABLE illness_medicines"
 		+ "(illness_id INTEGER, "
 		+ "medicines_id INTEGER, "
-		+ " FOREIGN KEY (illness_id) REFERENCES illness(id), "
+		+ " FOREIGN KEY (illness_id) REFERENCES illnesses(id), "
 		+ " FOREIGN KEY (medicines_id) REFERENCES medicines(id) "
 		+ " )";
 		statement.execute(illness_medicines);
@@ -230,7 +230,7 @@ public void Insert_symptoms(Symptoms i) {
 		PreparedStatement prep2=connection.prepareStatement(query);
 		ResultSet rs=prep2.executeQuery();
 		Integer lastId=rs.getInt("lastId");
-	PreparedStatement prep4=connection.prepareStatement("INSERT INTO illness_symptoms(illness.id,symptom.id)"+" VALUES(?,?) ");
+	PreparedStatement prep4=connection.prepareStatement("INSERT INTO illness_symptoms(illnesses.id,symptom.id)"+" VALUES(?,?) ");
 	prep4.setInt(1, IDil);
 	prep4.setInt(2, lastId);
 	prep4.executeUpdate();
@@ -274,7 +274,7 @@ public void Insert_patients(Patients p) {
 			PreparedStatement prep2=connection.prepareStatement(query);
 			ResultSet rs=prep2.executeQuery();
 			Integer lastId=rs.getInt("lastId");
-		PreparedStatement prep4=connection.prepareStatement("INSERT INTO patient_illness(patients.id,illness.id)"+" VALUES(?,?) ");
+		PreparedStatement prep4=connection.prepareStatement("INSERT INTO patient_illness(patients.id,illnesses.id)"+" VALUES(?,?) ");
 		prep4.setInt(2, IDil);
 		prep4.setInt(1, lastId);
 		prep4.executeUpdate();
@@ -472,7 +472,7 @@ public void Delete_Medicines(Medicines j) {
 public void Update_Illnesses_Name(String new_name, Illnesses i) {
 	try {
 		
-		String sql ="UPDATE illness SET name=? where id=?";
+		String sql ="UPDATE illnesses SET name=? where id=?";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, new_name);
 		prep.setInt(2, i.getId());
@@ -486,7 +486,7 @@ public void Update_Illnesses_Name(String new_name, Illnesses i) {
 }
 //System.out.println("Update finished.");
 //ESTA MAL ESTE METODO(el de abajo)
-public void Update_illness(Illnesses i) {
+/*public void Update_illness(Illnesses i) {
 	try {
 		
 		String sql="UPDATE INTO illnesses( name, type, contagious) "+ "VALUES (?,?,?);";
@@ -500,7 +500,7 @@ public void Update_illness(Illnesses i) {
 	catch(Exception e) {
 		e.printStackTrace();
 	}
-}
+}*/
 //System.out.println("Update finished.");
 //Before doing this method we must print a list of patients with their ID, so the user can choose the one to update
 
