@@ -48,6 +48,7 @@ public Illnesses() {
 	this.symptoms = new ArrayList<Symptoms>();
 	this.medicines = new ArrayList<Medicines>();
 }
+
 public Illnesses(Integer id, String name, String type, String causes, boolean contagious) {
 	super();
 	this.id = id;

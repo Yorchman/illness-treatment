@@ -13,9 +13,9 @@ import illnessdisease.pojo.Intolerance;
 import java.io.*;
 
 public class SQLManager implements DBManager {
-	private static Connection connection;
+	private  Connection connection;
 //	private Statement statement;
-	private static Connection c;
+
 
 public  void connect(String path, String classname) {
 	try {
@@ -154,6 +154,22 @@ String medicines_sidEffects= "CREATE TABLE medicines_sidEffects"
 		+ " )";
 		statement.execute(medicines_sidEffects);
        
+		Statement stmtSeq = connection.createStatement();
+		String sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('illnesses', 1)";
+		stmtSeq.executeUpdate(sqlSeq);
+		sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('intolerance', 1)";
+		stmtSeq.executeUpdate(sqlSeq);
+		sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('medicines', 1)";
+		stmtSeq.executeUpdate(sqlSeq);
+		sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('symptoms', 1)";
+		stmtSeq.executeUpdate(sqlSeq);
+		sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('sideEffects', 1)";
+		stmtSeq.executeUpdate(sqlSeq);
+		sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('patients', 1)";
+		stmtSeq.executeUpdate(sqlSeq);
+		sqlSeq = "INSERT INTO sqlite_sequence (name, seq) VALUES ('doctors', 1)";
+		stmtSeq.executeUpdate(sqlSeq);
+		stmtSeq.close();
 
 	}catch(Exception e) {
 		e.printStackTrace();
@@ -346,7 +362,7 @@ public void Insert_Medicines(Medicines j) {
 
 public List<Patients> printPatient() throws SQLException {
 	List<Patients> list_patients =new ArrayList<Patients>();
-	Statement stmt = c.createStatement();
+	Statement stmt = connection.createStatement();
 	String sql = "SELECT * FROM patients";
 	ResultSet rs = stmt.executeQuery(sql);
 	while (rs.next()) {
@@ -457,7 +473,7 @@ public void Update_Illnesses_Name(String new_name, Illnesses i) {
 	try {
 		
 		String sql ="UPDATE illness SET name=? where id=?";
-		PreparedStatement prep = c.prepareStatement(sql);
+		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, new_name);
 		prep.setInt(2, i.getId());
 	  	prep.executeUpdate();
@@ -492,7 +508,7 @@ public void Update_patients_Name(String new_Name,Patients p) {
 	try {
 		
 		String sql="Update patients SET name=? where id=?;";
-		PreparedStatement prep = c.prepareStatement(sql);
+		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, new_Name);
 		prep.setInt(2, p.getId());
 	  	prep.executeUpdate();
@@ -508,7 +524,7 @@ public void Update_patients_Gender(String new_Gender,Patients p) {
 	try {
 		
 		String sql="Update patients SET gender=? where id=?;";
-		PreparedStatement prep = c.prepareStatement(sql);
+		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, new_Gender);
 		prep.setInt(2, p.getId());
 	  	prep.executeUpdate();
@@ -523,7 +539,7 @@ public void Update_Symptoms_Diagnosis(String new_Diagnosis, Symptoms s) {
 	try {
 		
 		String sql="Update symptoms SET diagnosis=? where id=?;";
-		PreparedStatement prep = c.prepareStatement(sql);
+		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, new_Diagnosis);
 		prep.setInt(2, s.getId());
 	  	prep.executeUpdate();
@@ -538,7 +554,7 @@ public void Update_Symptoms_Areas(String new_Area, Symptoms s) {
 	try {
 		
 		String sql="Update symptoms SET area=? where id=?;";
-		PreparedStatement prep = c.prepareStatement(sql);
+		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, new_Area);
 		prep.setInt(2, s.getId());
 	  	prep.executeUpdate();
@@ -552,7 +568,7 @@ public void Update_Symptoms_Durartion(Integer new_Duration, Symptoms s) {
 	try {
 		
 		String sql="Update symptoms SET duration=? where id=?;";
-		PreparedStatement prep = c.prepareStatement(sql);
+		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, new_Duration);
 		prep.setInt(2, s.getId());
 	  	prep.executeUpdate();
@@ -586,7 +602,7 @@ public void Update_SideEffects_duration(Integer new_Duration, SideEffects s) {
 	try {
 		
 		String sql="Update sideEffects SET duration=? where id=?;";
-		PreparedStatement prep = c.prepareStatement(sql);
+		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, new_Duration);
 		prep.setInt(2, s.getId());
 	  	prep.executeUpdate();
@@ -601,7 +617,7 @@ public void Update_SideEffects_Area(String new_Area, SideEffects s) {
 	try {
 		
 		String sql="Update sideEffects SET area=? where id=?;";
-		PreparedStatement prep = c.prepareStatement(sql);
+		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, new_Area);
 		prep.setInt(2, s.getId());
 	  	prep.executeUpdate();
@@ -634,7 +650,7 @@ public void Update_intolerance_Name(String new_Name,Intolerance in) {
 	try {
 		
 		String sql ="UPDATE intolerance SET name=? where id=?";
-		PreparedStatement prep = c.prepareStatement(sql);
+		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, new_Name);
 		prep.setInt(2, in.getId());
 	  	prep.executeUpdate();
@@ -650,7 +666,7 @@ public void Update_Medicines_Name(String new_Name, Medicines m) {
 	try {
 		
 		String sql ="UPDATE medicines SET name=? where id=?";
-		PreparedStatement prep = c.prepareStatement(sql);
+		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, new_Name);
 		prep.setInt(2, m.getId());
 	  	prep.executeUpdate();
@@ -666,7 +682,7 @@ public void Update_Medicines_ActivePrinciple(String new_ActivePrinciple, Medicin
 	try {
 		
 		String sql ="UPDATE medicines SET activePrinciple=? where id=?";
-		PreparedStatement prep = c.prepareStatement(sql);
+		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, new_ActivePrinciple);
 		prep.setInt(2, m.getId());
 	  	prep.executeUpdate();
@@ -682,7 +698,7 @@ public void Update_Medicines_price(double new_price, Medicines m) {
 	try {
 		
 		String sql ="UPDATE medicines SET activePrinciple=? where id=?";
-		PreparedStatement prep = c.prepareStatement(sql);
+		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setDouble(1, new_price);
 		prep.setInt(2, m.getId());
 	  	prep.executeUpdate();
@@ -711,7 +727,7 @@ public void Update_Medicines(Medicines j) {
 	}
 }
 
-public static List<Illnesses> printIllnes() throws SQLException {
+public  List<Illnesses> printIllnes() throws SQLException {
 	List<Illnesses> list_illness=new ArrayList<Illnesses>();
 	Statement stmt = connection.createStatement();
 	String sql = "SELECT * FROM illnesses";
@@ -791,7 +807,7 @@ public void Update_Doctors_UserName(String new_UserName, Doctor d) {
 	try {
 		
 		String sql ="UPDATE doctors SET username=? where id=?";
-		PreparedStatement prep = c.prepareStatement(sql);
+		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, new_UserName);
 		prep.setInt(2, d.getId());
 	  	prep.executeUpdate();
@@ -807,7 +823,7 @@ public void Update_Doctors_Password(String new_Password, Doctor d) {
 	try {
 		
 		String sql ="UPDATE doctors SET password=? where id=?";
-		PreparedStatement prep = c.prepareStatement(sql);
+		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, new_Password);
 		prep.setInt(2, d.getId());
 	  	prep.executeUpdate();

@@ -17,10 +17,9 @@ public class UI{ //extends Application
 	public static void main(String[] args) throws SQLException {
 	SQLManager sqlm = new SQLManager();
 	JPAManager jpam = new JPAManager();
-	sqlm.connect("./db/DATABASENAME", "org.sqlite.JDBC" );
+	sqlm.connect("./db/illnessdisease.db", "org.sqlite.JDBC" );
 	sqlm.createTables();
-	//hecho por yorch comprobar si está bien
-	jpam.connect(); // no se si hay que hacer este connect pero APELICACUI!
+	jpam.connect(); 
 	System.out.println("CREADAS CORRECTAMENTE (fuera del metodo)");
 	
 	
@@ -51,12 +50,13 @@ public class UI{ //extends Application
 	        		type = consola.readLine();
 	        		System.out.println("Insert causes: ");
 	        		causes = consola.readLine();
-	        		System.out.println("Is it contagious? (Y/N)");
 	        		while(true){
-	        			if(consola.readLine().equals("Y")){
+	        		System.out.println("Is it contagious? (Y/N)");	 
+	        		String leido = consola.readLine();
+	        			if(leido.equals("Y")){
 	        			contagious = true;
 	        			break;
-	        			}else if(consola.readLine().equals("N")){
+	        			}else if(leido.equals("N")){
 	        				contagious = false;
 	        				break;
 	        			}
