@@ -122,6 +122,23 @@ public class Patients implements Serializable { /**
 		this.medicines = new ArrayList<Medicines>();
 		this.intelorance=new  ArrayList<Intolerance>();
 	}
+	
+	public void addIllness(Illnesses illness){
+		illnesses.add(illness);
+	}
+	
+	public void addSymptom(Symptoms symptom){
+		symptoms.add(symptom);
+	}
+	
+	public void addMedicine(Medicines medicine){
+		medicines.add(medicine);
+	}
+	
+	public void addIntolerance(Intolerance intolerance){
+		intolerances.add(intolerance);
+	}
+	
 	public Integer getId() {
 		return id;
 	}

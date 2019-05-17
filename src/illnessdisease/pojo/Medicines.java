@@ -102,6 +102,19 @@ public class Medicines implements Serializable {
 		this.illnesses = new ArrayList<Illnesses>();
 	
 	}
+	
+	public void addPatient(Patients patient){
+		patients.add(patient);
+	}
+	
+	public void addSideEffect(SideEffects sideEffect){
+		sideEffects.add(sideEffect);
+	}
+	
+	public void addIllness(Illnesses illness){
+		illnesses.add(illness);
+	}
+	
 	public Integer getId() {
 		return id;
 	}
