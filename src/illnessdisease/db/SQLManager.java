@@ -738,7 +738,7 @@ public  List<Illnesses> printIllnes() throws SQLException {
 		String type= rs.getString("type");
 		String causes = rs.getString("causes");
 		boolean contagious=rs.getBoolean("contagious");
-	    Illnesses illnes  = new Illnesses(name, type, causes, contagious);
+	    Illnesses illnes  = new Illnesses(id,name, type, causes, contagious);
 		list_illness.add(illnes);
 	}
 	rs.close();
@@ -754,7 +754,7 @@ public  List<Intolerance> printIntolerance() throws SQLException {
 	while (rs.next()) {
 		int id = rs.getInt("id");
 		String name = rs.getString("name");
-	    Intolerance intolerances  = new Intolerance(name);
+	    Intolerance intolerances  = new Intolerance(id,name);
 		list_into.add(intolerances);
 	}
 	rs.close();
@@ -771,7 +771,7 @@ public  List<Doctor> printDoctor() throws SQLException {
 		int id = rs.getInt("id");
 		String Username = rs.getString("username");
 		String Password= rs.getString("password");
-	    Doctor dr  = new Doctor(Username,Password);
+	    Doctor dr  = new Doctor(id,Username,Password);
 		list_dr.add(dr);
 	}
 	rs.close();
@@ -779,61 +779,61 @@ public  List<Doctor> printDoctor() throws SQLException {
 	return list_dr;
 }
 
-public  List<Illnesses> printIllnes() throws SQLException {
-	List<Illnesses> list_illness=new ArrayList<Illnesses>();
+public  List<Medicines> printMedicines() throws SQLException {
+	List<Medicines> list_medicines=new ArrayList<Medicines>();
 	Statement stmt = connection.createStatement();
-	String sql = "SELECT * FROM illnesses";
+	String sql = "SELECT * FROM medicines";
 	ResultSet rs = stmt.executeQuery(sql);
 	while (rs.next()) {
-		int id = rs.getInt("id");
+		Integer id = rs.getInt("id");
 		String name = rs.getString("name");
-		String type= rs.getString("type");
-		String causes = rs.getString("causes");
-		boolean contagious=rs.getBoolean("contagious");
-	    Illnesses illnes  = new Illnesses(name, type, causes, contagious);
-		list_illness.add(illnes);
+		String activePrinciple= rs.getString("activePrinciple");
+		Double price = rs.getDouble("price");
+		Boolean sscover=rs.getBoolean("SSCover");
+	    Medicines med  = new Medicines(id,name,activePrinciple,price,sscover);
+		list_medicines.add(med);
 	}
 	rs.close();
 	stmt.close();
-	return list_illness;
+	return list_medicines;
 }
 
-public  List<Illnesses> printIllnes() throws SQLException {
-	List<Illnesses> list_illness=new ArrayList<Illnesses>();
+public  List<SideEffects> printSideEffects() throws SQLException {
+	List<SideEffects> list_sideEffects=new ArrayList<SideEffects>();
 	Statement stmt = connection.createStatement();
-	String sql = "SELECT * FROM illnesses";
+	String sql = "SELECT * FROM sideEffects";
 	ResultSet rs = stmt.executeQuery(sql);
 	while (rs.next()) {
 		int id = rs.getInt("id");
 		String name = rs.getString("name");
-		String type= rs.getString("type");
-		String causes = rs.getString("causes");
-		boolean contagious=rs.getBoolean("contagious");
-	    Illnesses illnes  = new Illnesses(name, type, causes, contagious);
-		list_illness.add(illnes);
+		int duration= rs.getInt("duration");
+		String area = rs.getString("area");
+		
+	    SideEffects side  = new SideEffects(id,name,duration,area);
+		list_sideEffects.add(side);
 	}
 	rs.close();
 	stmt.close();
-	return list_illness;
+	return list_sideEffects;
 }
 
-public  List<Illnesses> printIllnes() throws SQLException {
-	List<Illnesses> list_illness=new ArrayList<Illnesses>();
+public  List<Symptoms> printSymptoms() throws SQLException {
+	List<Symptoms> list_symp=new ArrayList<Symptoms>();
 	Statement stmt = connection.createStatement();
-	String sql = "SELECT * FROM illnesses";
+	String sql = "SELECT * FROM symptoms";
 	ResultSet rs = stmt.executeQuery(sql);
 	while (rs.next()) {
 		int id = rs.getInt("id");
 		String name = rs.getString("name");
-		String type= rs.getString("type");
-		String causes = rs.getString("causes");
-		boolean contagious=rs.getBoolean("contagious");
-	    Illnesses illnes  = new Illnesses(name, type, causes, contagious);
-		list_illness.add(illnes);
+		String diagnosis= rs.getString("diagnosis");
+		String area = rs.getString("areas");
+		int duration =rs.getInt("duration");
+	    Symptoms sym  = new Symptoms(id,name, diagnosis, area, duration);
+		list_symp.add(sym);
 	}
 	rs.close();
 	stmt.close();
-	return list_illness;
+	return list_symp;
 }
 public List<Patients> searchByName(String name){
  List<Patients> list_patients =new ArrayList<Patients>();
