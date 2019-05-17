@@ -97,7 +97,17 @@ public boolean equals(Object obj) {
 	return true;
 }
 
+public void addMedicine(Medicines medicine){
+	medicines.add(medicine);
+}
 
+public void addSymptom(Symptoms symptom){
+	symptoms.add(symptom);
+}
+
+public void addPatient(Patients patient){
+	patients.add(patient);
+}
 
 @Override
 public String toString() {

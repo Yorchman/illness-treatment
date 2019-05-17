@@ -61,6 +61,11 @@ public class SideEffects implements Serializable{
 		this.area = area;
 		this.medicines = new ArrayList<Medicines>();
 	}
+	
+	public void addMedicine(Medicines medicine){
+		medicines.add(medicine);
+	}
+	
 	public Integer getId() {
 		return id;
 	}
