@@ -10,7 +10,7 @@ import illnessdisease.pojo.SideEffects;
 import illnessdisease.pojo.Medicines;
 import illnessdisease.pojo.Symptoms;
 import illnessdisease.pojo.Intolerance;
-import java.io.*;
+
 
 public class SQLManager implements DBManager {
 	private  Connection connection;
