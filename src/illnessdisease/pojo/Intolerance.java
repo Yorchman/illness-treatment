@@ -49,6 +49,10 @@ public class Intolerance  implements Serializable {
 		this.patients = new ArrayList<Patients>();
 	}
 	
+	public void addPatient(Patients patient){
+		patients.add(patient);
+	}
+	
 	public Integer getId() {
 		return id;
 	}

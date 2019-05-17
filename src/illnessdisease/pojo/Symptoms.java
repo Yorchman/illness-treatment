@@ -57,6 +57,15 @@ public class Symptoms  implements Serializable{
 		Areas = areas;
 		Duration = duration;
 	}
+	
+	public void addIllness(Illnesses illness){
+		illnesses.add(illness);
+	}
+	
+	public void addPatient(Patients patient){
+		patients.add(patient);
+	}
+	
 	public Integer getId() {
 		return id;
 	}
