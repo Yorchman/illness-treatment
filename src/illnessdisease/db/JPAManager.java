@@ -87,6 +87,7 @@ public class JPAManager implements DBManager {
 		Query q1 = e.createNativeQuery("SELECT * FROM Illnesses WHERE name LIKE ?", Illnesses.class);
 		q1.setParameter(1, "%" + name + "%");
 		listIllnesses = (List<Illnesses>) q1.getResultList();
+		if(listIllnesses.size()==0) return null;
 
 }catch (Exception e) {
 	e.printStackTrace();	
@@ -102,7 +103,7 @@ public class JPAManager implements DBManager {
 		//System.out.print("Write the patient's name: ");
 		//String name = reader.readLine();
 		//System.out.println("Matching illnesses:");
-		Query q1 = e.createNativeQuery("SELECT * FROM Patients WHERE name LIKE ?", Patients.class);
+		Query q1 = e.createNativeQuery("SELECT * FROM patients WHERE name LIKE ?", Patients.class);
 		q1.setParameter(1, "%" + name + "%");
 		listPatients = (List<Patients>) q1.getResultList();
 
@@ -120,7 +121,7 @@ public class JPAManager implements DBManager {
 		//System.out.print("Write the medicine's name: ");
 		//String name = reader.readLine();
 		//System.out.println("Matching medicines:");
-		Query q1 = e.createNativeQuery("SELECT * FROM Medicines WHERE name LIKE ?", Medicines.class);
+		Query q1 = e.createNativeQuery("SELECT * FROM medicines WHERE name LIKE ?", Medicines.class);
 		q1.setParameter(1, "%" + name + "%");
 		listMedicines = (List<Medicines>) q1.getResultList();
 		
@@ -137,7 +138,7 @@ public class JPAManager implements DBManager {
 		//System.out.print("Write the  SideEffects' name: ");
 		//String name = reader.readLine();
 		//System.out.println("Matching SideEffects:");
-		Query q1 = e.createNativeQuery("SELECT * FROM SideEffects WHERE name LIKE ?", SideEffects.class);
+		Query q1 = e.createNativeQuery("SELECT * FROM sideEffects WHERE name LIKE ?", SideEffects.class);
 		q1.setParameter(1, "%" + name + "%");
 		listSideEffects = (List<SideEffects>) q1.getResultList();
 			
@@ -223,7 +224,7 @@ public class JPAManager implements DBManager {
 	}
 	
 	public Illnesses getIllnessFromID(Integer id) {
-		Query q1=this.e.createNativeQuery("SELECT * FROM illness WHERE id = ?", Illnesses.class);
+		Query q1=this.e.createNativeQuery("SELECT * FROM illnesses WHERE id = ?", Illnesses.class);
 	    q1.setParameter(1, id);
 	    Illnesses ill=(Illnesses) q1.getSingleResult();
 	    return ill;

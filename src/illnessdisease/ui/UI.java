@@ -18,10 +18,9 @@ public class UI{ //extends Application
 	public static void main(String[] args) throws SQLException {
 	SQLManager sqlm = new SQLManager();
 	JPAManager jpam = new JPAManager();
-	sqlm.connect("./db/DATABASENAME", "org.sqlite.JDBC" );
+	sqlm.connect("./db/illnessdisease.db", "org.sqlite.JDBC" );
 	sqlm.createTables();
-	//hecho por yorch comprobar si está bien
-	jpam.connect(); // no se si hay que hacer este connect pero APELICACUI!
+	jpam.connect(); 
 	System.out.println("CREADAS CORRECTAMENTE (fuera del metodo)");
 	
 	
@@ -52,12 +51,13 @@ public class UI{ //extends Application
 	        		type = consola.readLine();
 	        		System.out.println("Insert causes: ");
 	        		causes = consola.readLine();
-	        		System.out.println("Is it contagious? (Y/N)");
 	        		while(true){
-	        			if(consola.readLine().equals("Y")){
+	        		System.out.println("Is it contagious? (Y/N)");	 
+	        		String leido = consola.readLine();
+	        			if(leido.equals("Y")){
 	        			contagious = true;
 	        			break;
-	        			}else if(consola.readLine().equals("N")){
+	        			}else if(leido.equals("N")){
 	        				contagious = false;
 	        				break;
 	        			}
@@ -67,29 +67,31 @@ public class UI{ //extends Application
 	        		jpam.Insert_illness(insertedIllness);
 	        		System.out.println("AHORA VOY A IMPRIMIR LAS ILLNESSES: \n\n");
 	        		sqlm.printIllnes();
-	        		sqlm.close();
+	        	
 	        		break;
 	        		
 	        	case 2:
 	        		System.out.println("OPTION SELECTED: SEARCH ILLNESS");
 	        		System.out.println("Introduce the name of the illness you are looking for: ");
 	        		String nameIllness=consola.readLine();
-	        		List<Illnesses> listIllnesses=jpam.searchIllnessbyname(nameIllness);
-	        		if(listIllnesses!=null){
-	        			
+	        		List<Illnesses> listIllnesses= jpam.searchIllnessbyname(nameIllness);
+	        		if(listIllnesses!=null){		
 	        			for(Illnesses s: listIllnesses) {
 	        				System.out.println(s);
-	        				}}else {
-	        					System.out.println("the illness with that name doesn't appear in our database");
-	        				}
+	        			}
+	        		}else {
+	        			System.out.println("the illness with that name doesn't appear in our database");
+	        		}
 	        		break;
 	        	case 3: 
 	        		System.out.println("OPTION SELECTED: DELETE ILLNESS");
 	        		sqlm.printIllnes();
-	        		System.out.println("Insert the name of the illness that you want to delete: ");
+	        		System.out.println("Insert the id of the illness that you want to delete: ");
 	        		int id = Integer.parseInt(consola.readLine());
 	        		Illnesses illness = jpam.getIllnessFromID(id);
-	        		jpam.Delete_illness(illness); //eliminamos el illness encontrado
+	        		
+	        		jpam.Delete_illness(illness);
+	        		jpam.close();//eliminamos el illness encontrado
 	        		//Se debería meter en un if pero no sé comprobar si el searchIllness ha devuelto algo valido 
 	        		//o no. Se podría hacer if(esa movida != null) ???
 	        		
