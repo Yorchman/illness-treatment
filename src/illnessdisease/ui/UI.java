@@ -14,7 +14,7 @@ import javafx.scene.layout.*;
 
 import javafx.stage.Stage;
  */
-public class UI{ //extends Application
+public class UI { // extends Application
 	public static void main(String[] args) throws SQLException {
 	SQLManager sqlm = new SQLManager();
 	JPAManager jpam = new JPAManager();
@@ -64,12 +64,44 @@ public class UI{ //extends Application
 	        			else System.out.println("ERROR - You didn´t type Y or N, try again :)");	
 	        		}
 	        		Illnesses insertedIllness = new Illnesses(name,type,causes,contagious); //sin id
+	        		System.out.println("Does this illness produce any symptom?(yes/no)");
+	        		String respuesta=consola.readLine();
+	        		if(respuesta.equals("yes")) {
+	        			
+	        		
+	        		
+	        			System.out.println("now i am going to print the symptoms: \n\n");
+	        			List<Symptoms> s=sqlm.printSymptoms();
+	        			for(Symptoms s2: s) {
+	        				System.out.println(s2);
+	     
+	        		
+	        			}
+	        			int a=0;
+	        			while( a==0) {
+	        				System.out.println("introduce the, one id of the symptom that the illness produce");
+	        				int ids=Integer.parseInt(consola.readLine());
+	        				Symptoms s3=jpam.getSymptomsFromID(ids);
+	        		
+	        		
+	        				insertedIllness.addSymptom(s3);
+	        				System.out.println("does the illness produce any symptoms more?(yes/no");
+	        				String respuesta2=consola.readLine();
+	        				if(respuesta2.equals("yes")) {
+	        					a=0;
+	        				}
+	        				else {
+	        					a++;
+	        				}
+	        			}
+	        		}
 	        		jpam.Insert_illness(insertedIllness);
 	        		System.out.println("AHORA VOY A IMPRIMIR LAS ILLNESSES: \n\n");
 	        		List<Illnesses> li=sqlm.printIllnes();
 	        		for(Illnesses il: li) {
 	        			System.out.println(il);
 	        		}
+	        		
 	        	
 	        		break;
 	        		
@@ -121,10 +153,10 @@ public class UI{ //extends Application
 	        	case 5: 
 	        		System.out.println("");
 	        		
-	        	}
+	        
 	        	
 	        	
-	        	break;
+	        	break;}
 	        case 2: 
 	        	System.out.println("YOU SELECTED INTOLERANCE, SELECT AN OPTION:  ");
 	        	
@@ -199,11 +231,11 @@ public class UI{ //extends Application
 	        	
 	        	break;}
 	        break;
-	        
-	        }}catch(IOException ex){
+	        }
+	        	}catch(IOException ex){
 			ex.printStackTrace();
-		} 
-	}
+		} }
+	
 	
 	}
 	
