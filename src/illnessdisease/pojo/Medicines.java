@@ -89,8 +89,19 @@ public class Medicines implements Serializable {
 		this.sideEffects = new ArrayList<SideEffects>();
 		this.illnesses = new ArrayList<Illnesses>();
 	}
-	public Medicines(Integer id, String name, String activePrinciple, String restrictions, Double price,
-			boolean seguridadSocial) {
+	public Medicines(Integer id, String name, String activePrinciple, Double price,boolean seguridadSocial) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.activePrinciple = activePrinciple;
+		this.price = price;
+		this.SSCover = seguridadSocial;
+		this.patients = new ArrayList<Patients>();
+		this.sideEffects = new ArrayList<SideEffects>();
+		this.illnesses = new ArrayList<Illnesses>();
+	
+	}
+	public Medicines( String name, String activePrinciple, Double price,boolean seguridadSocial) {
 		super();
 		this.id = id;
 		this.name = name;
