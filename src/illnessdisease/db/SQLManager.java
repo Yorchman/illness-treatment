@@ -10,7 +10,7 @@ import illnessdisease.pojo.SideEffects;
 import illnessdisease.pojo.Medicines;
 import illnessdisease.pojo.Symptoms;
 import illnessdisease.pojo.Intolerance;
-import java.io.*;
+
 
 public class SQLManager implements DBManager {
 	private  Connection connection;
@@ -469,7 +469,7 @@ public void Delete_Medicines(Medicines j) {
 		e.printStackTrace();
 	}
 }
-public void Update_Illnesses_Name(String new_name, Illnesses i) {
+public void Update_illness_Name(String new_name, Illnesses i) {
 	try {
 		
 		String sql ="UPDATE illnesses SET name=? where id=?";
@@ -564,7 +564,7 @@ public void Update_Symptoms_Areas(String new_Area, Symptoms s) {
 		e.printStackTrace();
 	}
 }//System.out.println("Update finished.");
-public void Update_Symptoms_Durartion(Integer new_Duration, Symptoms s) {
+public void Update_Symptoms_Duration(Integer new_Duration, Symptoms s) {
 	try {
 		
 		String sql="Update symptoms SET duration=? where id=?;";
@@ -937,18 +937,6 @@ public void Update_Doctors(Doctor j) {
 	catch(Exception e) {
 		e.printStackTrace();
 	}
-}
-
-@Override
-public void Update_illness_Name(String new_Name, Illnesses i) {
-	// TODO Auto-generated method stub
-	
-}
-
-@Override
-public void Update_Symptoms_Duration(Integer new_Duration, Symptoms s) {
-	// TODO Auto-generated method stub
-	
 }
 
 
