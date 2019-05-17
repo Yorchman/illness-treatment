@@ -739,11 +739,27 @@ public  List<Illnesses> printIllnes() throws SQLException {
 		String causes = rs.getString("causes");
 		boolean contagious=rs.getBoolean("contagious");
 	    Illnesses illnes  = new Illnesses(name, type, causes, contagious);
-		System.out.println(illnes);
+		list_illness.add(illnes);
 	}
 	rs.close();
 	stmt.close();
 	return list_illness;
+}
+
+public  List<Intolerance> printIntolerance() throws SQLException {
+	List<Intolerance> list_into=new ArrayList<Intolerance>();
+	Statement stmt = connection.createStatement();
+	String sql = "SELECT * FROM intolerance";
+	ResultSet rs = stmt.executeQuery(sql);
+	while (rs.next()) {
+		int id = rs.getInt("id");
+		String name = rs.getString("name");
+	    Intolerance intolerances  = new Intolerance(name);
+		list_into.add(intolerances);
+	}
+	rs.close();
+	stmt.close();
+	return list_into;
 }
 
 public List<Patients> searchByName(String name){
