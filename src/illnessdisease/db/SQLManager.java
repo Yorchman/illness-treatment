@@ -762,6 +762,79 @@ public  List<Intolerance> printIntolerance() throws SQLException {
 	return list_into;
 }
 
+public  List<Doctor> printDoctor() throws SQLException {
+	List<Doctor> list_dr=new ArrayList<Doctor>();
+	Statement stmt = connection.createStatement();
+	String sql = "SELECT * FROM doctors";
+	ResultSet rs = stmt.executeQuery(sql);
+	while (rs.next()) {
+		int id = rs.getInt("id");
+		String Username = rs.getString("username");
+		String Password= rs.getString("password");
+	    Doctor dr  = new Doctor(Username,Password);
+		list_dr.add(dr);
+	}
+	rs.close();
+	stmt.close();
+	return list_dr;
+}
+
+public  List<Illnesses> printIllnes() throws SQLException {
+	List<Illnesses> list_illness=new ArrayList<Illnesses>();
+	Statement stmt = connection.createStatement();
+	String sql = "SELECT * FROM illnesses";
+	ResultSet rs = stmt.executeQuery(sql);
+	while (rs.next()) {
+		int id = rs.getInt("id");
+		String name = rs.getString("name");
+		String type= rs.getString("type");
+		String causes = rs.getString("causes");
+		boolean contagious=rs.getBoolean("contagious");
+	    Illnesses illnes  = new Illnesses(name, type, causes, contagious);
+		list_illness.add(illnes);
+	}
+	rs.close();
+	stmt.close();
+	return list_illness;
+}
+
+public  List<Illnesses> printIllnes() throws SQLException {
+	List<Illnesses> list_illness=new ArrayList<Illnesses>();
+	Statement stmt = connection.createStatement();
+	String sql = "SELECT * FROM illnesses";
+	ResultSet rs = stmt.executeQuery(sql);
+	while (rs.next()) {
+		int id = rs.getInt("id");
+		String name = rs.getString("name");
+		String type= rs.getString("type");
+		String causes = rs.getString("causes");
+		boolean contagious=rs.getBoolean("contagious");
+	    Illnesses illnes  = new Illnesses(name, type, causes, contagious);
+		list_illness.add(illnes);
+	}
+	rs.close();
+	stmt.close();
+	return list_illness;
+}
+
+public  List<Illnesses> printIllnes() throws SQLException {
+	List<Illnesses> list_illness=new ArrayList<Illnesses>();
+	Statement stmt = connection.createStatement();
+	String sql = "SELECT * FROM illnesses";
+	ResultSet rs = stmt.executeQuery(sql);
+	while (rs.next()) {
+		int id = rs.getInt("id");
+		String name = rs.getString("name");
+		String type= rs.getString("type");
+		String causes = rs.getString("causes");
+		boolean contagious=rs.getBoolean("contagious");
+	    Illnesses illnes  = new Illnesses(name, type, causes, contagious);
+		list_illness.add(illnes);
+	}
+	rs.close();
+	stmt.close();
+	return list_illness;
+}
 public List<Patients> searchByName(String name){
  List<Patients> list_patients =new ArrayList<Patients>();
 	try {

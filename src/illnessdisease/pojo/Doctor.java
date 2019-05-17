@@ -35,6 +35,12 @@ public class Doctor implements Serializable{
 		this.userName = userName;
 		this.password = password;
 	}
+	public Doctor(String userName, String password) {
+		super();
+		this.id = id;
+		this.userName = userName;
+		this.password = password;
+	}
 	
 	public Integer getId() {
 		return id;
