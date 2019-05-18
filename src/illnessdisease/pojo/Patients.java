@@ -90,12 +90,12 @@ public class Patients implements Serializable { /**
 		return serialVersionUID;
 	}
 	@ManyToMany
-	@JoinTable(name="patients-medicines",
+	@JoinTable(name="patients_medicines",
 		joinColumns={@JoinColumn(name="patients_id", referencedColumnName="id")},
 	    inverseJoinColumns={@JoinColumn(name="medicines_id", referencedColumnName="id")})
 	private List<Medicines> medicines;
 	@ManyToMany
-	@JoinTable(name="patients-intolerance",
+	@JoinTable(name="patients_intolerance",
 		joinColumns={@JoinColumn(name="patients_id", referencedColumnName="id")},
 	    inverseJoinColumns={@JoinColumn(name="intolerance_id", referencedColumnName="id")})
 	private List<Intolerance> intelorance;

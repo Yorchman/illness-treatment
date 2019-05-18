@@ -79,13 +79,13 @@ public class UI { // extends Application
 	        			}
 	        			int a=0;
 	        			while( a==0) {
-	        				System.out.println("introduce the, one id of the symptom that the illness produce");
+	        				System.out.println("introduce the id of the symptom that the illness produces: ");
 	        				int ids=Integer.parseInt(consola.readLine());
 	        				Symptoms s3=jpam.getSymptomsFromID(ids);
 	        		
 	        		
 	        				insertedIllness.addSymptom(s3);
-	        				System.out.println("does the illness produce any symptoms more?(yes/no");
+	        				System.out.println("does the illness produce any more symptoms?(yes/no");
 	        				String respuesta2=consola.readLine();
 	        				if(respuesta2.equals("yes")) {
 	        					a=0;
@@ -156,7 +156,7 @@ public class UI { // extends Application
 	        
 	        	
 	        	
-	        	break;}
+	        	break;}break;
 	        case 2: 
 	        	System.out.println("YOU SELECTED INTOLERANCE, SELECT AN OPTION:  ");
 	        	
