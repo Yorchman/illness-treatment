@@ -10,7 +10,7 @@ import illnessdisease.pojo.SideEffects;
 import illnessdisease.pojo.Medicines;
 import illnessdisease.pojo.Symptoms;
 import illnessdisease.pojo.Intolerance;
-import java.io.*;
+
 
 public class SQLManager implements DBManager {
 	private  Connection connection;
@@ -94,7 +94,7 @@ String symptoms ="CREATE TABLE symptoms "
 
 		statement.execute(symptoms);
 		
-String patient_illness= "CREATE TABLE patient_lillness"
+String patient_illness= "CREATE TABLE patient_illness"
 		+ "(patient_id INTEGER, "
 		+ "illness_id INTEGER, "  
 		+ "PRIMARY KEY (patient_id, illness_id), "
@@ -138,7 +138,7 @@ String illness_symptoms = "CREATE TABLE illness_symptoms"
 		+ " )";
 		statement.execute(illness_symptoms);
 
-String illness_medicines= "CREATE TABLE illness_medicines"
+String illness_medicines= "CREATE TABLE medicines_illness"
 		+ "(illness_id INTEGER, "
 		+ "medicines_id INTEGER, "
 		+ " FOREIGN KEY (illness_id) REFERENCES illnesses(id), "
@@ -146,7 +146,7 @@ String illness_medicines= "CREATE TABLE illness_medicines"
 		+ " )";
 		statement.execute(illness_medicines);
 
-String medicines_sidEffects= "CREATE TABLE medicines_sidEffects"
+String medicines_sidEffects= "CREATE TABLE medicines_sideEffects"
 		+ "(medicines_id INTEGER, "
 		+ "sidEffects_id INTEGER, "
 		+ " FOREIGN KEY (medicines_id) REFERENCES medicines(id), "

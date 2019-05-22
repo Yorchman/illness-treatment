@@ -34,7 +34,7 @@ private boolean contagious;
 @ManyToMany(mappedBy = "illnesses")
 private List<Patients> patients;
 @ManyToMany
-@JoinTable(name="illness-disease",
+@JoinTable(name="illness_symptoms",
 	joinColumns={@JoinColumn(name="illness_id", referencedColumnName="id")},
     inverseJoinColumns={@JoinColumn(name="symptoms_id", referencedColumnName="id")})
 private List<Symptoms> symptoms;

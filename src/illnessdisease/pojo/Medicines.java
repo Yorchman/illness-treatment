@@ -48,14 +48,14 @@ public class Medicines implements Serializable {
 	@XmlTransient
 	private List<Patients> patients;
 	@ManyToMany
-	@JoinTable(name="medicines-sideEffects",
+	@JoinTable(name="medicines_sideEffects",
 		joinColumns={@JoinColumn(name="medicines_id", referencedColumnName="id")},
 	    inverseJoinColumns={@JoinColumn(name="sideEffects_id", referencedColumnName="id")})
 	@XmlElement(name = "SideEffect")
     @XmlElementWrapper(name = "SideEffects")
 	private List<SideEffects> sideEffects;
 	@ManyToMany
-	@JoinTable(name="medicines-illness",
+	@JoinTable(name="medicines_illness",
 		joinColumns={@JoinColumn(name="medicines_id", referencedColumnName="id")},
 	    inverseJoinColumns={@JoinColumn(name="illnesses_id", referencedColumnName="id")})
 	@XmlTransient
