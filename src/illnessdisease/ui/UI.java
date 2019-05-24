@@ -1,4 +1,5 @@
 package illnessdisease.ui;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,6 +8,7 @@ import java.util.List;
 
 import illnessdisease.db.*;
 import illnessdisease.pojo.*;
+
 /*import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -101,8 +103,7 @@ public class UI { // extends Application
 	        		for(Illnesses il: li) {
 	        			System.out.println(il);
 	        		}
-	        		
-	        	
+	        			        	
 	        		break;
 	        		
 	        	case 2:
@@ -120,11 +121,14 @@ public class UI { // extends Application
 	        		break;
 	        	case 3: 
 	        		System.out.println("OPTION SELECTED: DELETE ILLNESS");
-	        		sqlm.printIllnes();
+	        		List <Illnesses> li3=sqlm.printIllnes(); 
+	        		for (Illnesses il3:li3) {
+	        		  System.out.println(il3);}
+	        		}
 	        		System.out.println("Insert the id of the illness that you want to delete: ");
 	        		int id = Integer.parseInt(consola.readLine());
 	        		Illnesses illness = jpam.getIllnessFromID(id);
-	        		
+	        		System.out.println(illness);
 	        		jpam.Delete_illness(illness);
 	        		jpam.close();//eliminamos el illness encontrado
 	        		//Se debería meter en un if pero no sé comprobar si el searchIllness ha devuelto algo valido 
@@ -156,8 +160,10 @@ public class UI { // extends Application
 	        
 	        	
 	        	
-	        	break;}break;
-	        case 2: 
+	        	break;
+	         
+	       
+	        	case 2: 
 	        	System.out.println("YOU SELECTED INTOLERANCE, SELECT AN OPTION:  ");
 	        	
 	        	menu2();
@@ -198,7 +204,7 @@ public class UI { // extends Application
 	        		System.out.println("OPTION SELECTED: DELETE INTOLERANCE");
 	        		sqlm.printIllnes();
 	        		System.out.println("Insert the id of the intolerance that you want to delete: ");
-	        		int id = Integer.parseInt(consola.readLine());
+	        		 id = Integer.parseInt(consola.readLine());
 	        		Intolerance intolerance = jpam.getIntoleranceFromID(id);
 	        		
 	        		sqlm.Delete_intolerance(intolerance);
@@ -216,7 +222,7 @@ public class UI { // extends Application
 	        		//Con lo que de esa busqueda:
 	        		intolerance = jpam.getIntoleranceFromID(id);
 	        		System.out.println("Insert the new name: ");
-	        		String newName = consola.readLine();
+	        		 newName = consola.readLine();
 	        		jpam.Update_intolerance_Name(newName, intolerance); //lo hacemos
 	        		//sqlm.Update_illness(i);
 	        		//Hacer UPDATE sobre lo que nos dio la busqueda anterior
@@ -234,12 +240,11 @@ public class UI { // extends Application
 	        }
 	        	}catch(IOException ex){
 			ex.printStackTrace();
-		} }
+	        	}} }
+
 	
-	
-	}
-	
-	public static void printMenu(){
+
+	public static void printMenu() {
 		System.out.println("-----WELCOME-----");
 		System.out.println("OPTION 1: ILLNESSES");
 		System.out.println("OPTION 2: INTOLERANCE");
@@ -247,25 +252,21 @@ public class UI { // extends Application
 		System.out.println("OPTION 4: PATIENTS");
 		System.out.println("OPTION 5: SIDE EFFECTS");
 		System.out.println("OPTION 6: SYMPTOMS");
-		//System.out.println("OPTION 7: INSERT DOCTOR"); HAY QUE DECIDIR DÓNDE PONER ESTO	
+		// System.out.println("OPTION 7: INSERT DOCTOR"); HAY QUE DECIDIR DÓNDE PONER
+		// ESTO
 	}
-	
-	//Try catch
+
+	// Try catch
 	/*
-	try{
-        BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Option 1: Insert an illness\n"
-        		+ "Option 2: Delete an illness\n");
-        System.out.println("Select an option: ");
-        option = Integer.parseInt(consola.readLine());
-        return option;
-	}catch(IOException ex){
-		ex.printStackTrace();
-	return 0;
-	} 
-	*/
-	
-	static void menu2(){
+	 * try{ BufferedReader consola = new BufferedReader(new
+	 * InputStreamReader(System.in));
+	 * System.out.println("Option 1: Insert an illness\n" +
+	 * "Option 2: Delete an illness\n"); System.out.println("Select an option: ");
+	 * option = Integer.parseInt(consola.readLine()); return option;
+	 * }catch(IOException ex){ ex.printStackTrace(); return 0; }
+	 */
+
+	static void menu2() {
 		System.out.println("Introduce 1 to insert ");
 		System.out.println("Introduce 2 to search");
 		System.out.println("Introduce 3 to delete");
@@ -273,173 +274,67 @@ public class UI { // extends Application
 		System.out.println("Introduce 5 to print");
 		System.out.println("Introduce 6 to exit");
 	}
-	
+
 	/*
-	static void inicilizeTables(){
-		try{
-		Illnesses ill = new Illnesses();
-		ill.SQLCreate();
-		}
-		catch(TableCreationException e ){
-			e.tableExists();
+	 * static void inicilizeTables(){ try{ Illnesses ill = new Illnesses();
+	 * ill.SQLCreate(); } catch(TableCreationException e ){ e.tableExists();
+	 * 
+	 * } try{ FunctionsDB<Nurse> nur = new DB_Nurse(); nur.SQLCreate(); }
+	 * catch(TableCreationException e ){ e.tableExists(); } try{ FunctionsDB<Cells>
+	 * cells = new DB_Cells(); cells.SQLCreate(); } catch(TableCreationException e
+	 * ){ e.tableExists(); } try{ FunctionsDB<Molecules> molecules = new
+	 * DB_Molecules(); molecules.SQLCreate(); } catch(TableCreationException e ){
+	 * e.tableExists(); } try{ FunctionsDB<Symptoms> syn = new DB_Symptoms();
+	 * syn.SQLCreate(); } catch(TableCreationException e ){ e.tableExists(); } try{
+	 * FunctionsDB<Illnes> ill = new DB_Illness(); ill.SQLCreate(); }
+	 * catch(TableCreationException e ){ e.tableExists(); } try{
+	 * FunctionsDB<Patient> pat = new DB_Patient(); pat.SQLCreate(); }
+	 * catch(TableCreationException e ){ e.tableExists(); }
+	 * 
+	 * 
+	 * }
+	 */
 
-		}
-		try{
-		FunctionsDB<Nurse> nur = new DB_Nurse();
-		nur.SQLCreate();
-		}
-		catch(TableCreationException e ){
-			e.tableExists();
-			}
-		try{
-		FunctionsDB<Cells> cells = new DB_Cells();
-		cells.SQLCreate();
-		}
-		catch(TableCreationException e ){
-			e.tableExists();
-			}
-		try{
-		FunctionsDB<Molecules> molecules = new DB_Molecules();
-		molecules.SQLCreate();
-		}		
-		catch(TableCreationException e ){
-			e.tableExists();
-			 			}
-		try{
-		FunctionsDB<Symptoms> syn = new DB_Symptoms();
-		syn.SQLCreate();
-		}
-		catch(TableCreationException e ){
-			 e.tableExists();
-			}
-		try{
-		FunctionsDB<Illnes> ill = new DB_Illness();
-		ill.SQLCreate();
-		}
-		catch(TableCreationException e ){
-			 e.tableExists();
-			}
-		try{
-		FunctionsDB<Patient> pat = new DB_Patient();
-		pat.SQLCreate();
-		}
-		catch(TableCreationException e ){
-			e.tableExists();
-			}
-			
-		
-	}
-	*/
-
-	
-	
 }
-	 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*{
-	 launch(args);
-	 }
-	
-	 
-	 
-	 Button btn;
-	 @Override public void start (Stage primaryStage)
-	 {
-	 // Create the button
-	 btn = new Button();
-	 btn.setText("Click me please!");
-	 btn.setOnAction(e -> buttonClick());
-	 // Add the button to a layout pane
-	 BorderPane pane = new BorderPane();
-	 pane.setCenter(btn);
-	 // Add the layout pane to a scene
-	 Scene scene = new Scene(pane, 300, 250);
-	 // Finalize and show the stage
-	 primaryStage.setScene(scene);
-	 primaryStage.setTitle("The Click Me App");
-	 primaryStage.show();
-	 }
-	 public void buttonClick()
-	 {
-	 if (btn.getText() == "Click me please!")
-	 {
-	 btn.setText("You clicked me!");
-	 }
-	 else
-	 {
-	 btn.setText("Click me please!");
-	 }
-	 }
-	
-	 }
-	 
-	 
-//YO creo los objetos y llamo al manager para que inserte movidas
-	/*public static void main(String args[]){
-		SQLManager manager;
-		int option;
-		manager = new SQLManager();
-		//Load tables
-		manager.createTables();
-		try{
-            BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("Select an option: ");
-            option = Integer.parseInt(consola.readLine());
-            while (true){
-            	printMenu();
-            	switch(option){
-            	case 1:
-            		System.out.println("Opción 1: Insert");
-            		manager.createTables();
-            		
-            	}
-            }
-            
-            
-		}catch(IOException ex){
-			ex.printStackTrace();
-		}
-	}
-	
-	public static int printMenu(){
-		int option;
-		try{
-            BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
-            System.out.println("Option 1: Insert an illness\n"
-            		+ "Option 2: Delete an illness\n");
-            System.out.println("Select an option: ");
-            option = Integer.parseInt(consola.readLine());
-            return option;
-		}catch(IOException ex){
-			ex.printStackTrace();
-		return 0;
-		}
-	}
-	}*/
 
+/*
+ * { launch(args); }
+ * 
+ * 
+ * 
+ * Button btn;
+ * 
+ * @Override public void start (Stage primaryStage) { // Create the button btn =
+ * new Button(); btn.setText("Click me please!"); btn.setOnAction(e ->
+ * buttonClick()); // Add the button to a layout pane BorderPane pane = new
+ * BorderPane(); pane.setCenter(btn); // Add the layout pane to a scene Scene
+ * scene = new Scene(pane, 300, 250); // Finalize and show the stage
+ * primaryStage.setScene(scene); primaryStage.setTitle("The Click Me App");
+ * primaryStage.show(); } public void buttonClick() { if (btn.getText() ==
+ * "Click me please!") { btn.setText("You clicked me!"); } else {
+ * btn.setText("Click me please!"); } }
+ * 
+ * }
+ * 
+ * 
+ * //YO creo los objetos y llamo al manager para que inserte movidas /*public
+ * static void main(String args[]){ SQLManager manager; int option; manager =
+ * new SQLManager(); //Load tables manager.createTables(); try{ BufferedReader
+ * consola = new BufferedReader(new InputStreamReader(System.in));
+ * System.out.println("Select an option: "); option =
+ * Integer.parseInt(consola.readLine()); while (true){ printMenu();
+ * switch(option){ case 1: System.out.println("Opción 1: Insert");
+ * manager.createTables();
+ * 
+ * } }
+ * 
+ * 
+ * }catch(IOException ex){ ex.printStackTrace(); } }
+ * 
+ * public static int printMenu(){ int option; try{ BufferedReader consola = new
+ * BufferedReader(new InputStreamReader(System.in));
+ * System.out.println("Option 1: Insert an illness\n" +
+ * "Option 2: Delete an illness\n"); System.out.println("Select an option: ");
+ * option = Integer.parseInt(consola.readLine()); return option;
+ * }catch(IOException ex){ ex.printStackTrace(); return 0; } } }
+ */
