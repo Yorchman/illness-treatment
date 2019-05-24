@@ -138,13 +138,13 @@ String illness_symptoms = "CREATE TABLE illness_symptoms"
 		+ " )";
 		statement.execute(illness_symptoms);
 
-String illness_medicines= "CREATE TABLE medicines_illness"
+String medicines_illness= "CREATE TABLE medicines_illness"
 		+ "(illness_id INTEGER, "
 		+ "medicines_id INTEGER, "
 		+ " FOREIGN KEY (illness_id) REFERENCES illnesses(id), "
 		+ " FOREIGN KEY (medicines_id) REFERENCES medicines(id) "
 		+ " )";
-		statement.execute(illness_medicines);
+		statement.execute(medicines_illness);
 
 String medicines_sidEffects= "CREATE TABLE medicines_sideEffects"
 		+ "(medicines_id INTEGER, "
@@ -384,7 +384,7 @@ public List<Patients> printPatient() throws SQLException {
 public void Delete_illness(Illnesses i) {
 	try {
 		
-		String sql="DELETE 	FROM illnesses WHERE id= ?;";
+		String sql="DELETE * FROM illnesses WHERE id= ?;";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, i.getId());
 		
@@ -399,7 +399,7 @@ public void Delete_illness(Illnesses i) {
 public void Delete_symptoms(Symptoms i) {
 	try {
 		
-		String sql="DELETE 	FROM symptoms WHERE id= ?;";
+		String sql="DELETE * FROM symptoms WHERE id= ?;";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, i.getId());
 		
@@ -413,7 +413,7 @@ public void Delete_symptoms(Symptoms i) {
 public void Delete_patients(Patients p) {
 	try {
 		
-		String sql="DELETE 	FROM patients WHERE id= ?;";
+		String sql="DELETE * FROM patients WHERE id= ?;";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, p.getId());
 		
@@ -428,7 +428,7 @@ public void Delete_patients(Patients p) {
 public void Delete_sideeffects(SideEffects s) {
 	try {
 		
-		String sql="DELETE 	FROM SideEffects WHERE id= ?;";
+		String sql="DELETE * FROM SideEffects WHERE id= ?;";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, s.getId());
 		
@@ -443,7 +443,7 @@ public void Delete_sideeffects(SideEffects s) {
 public void Delete_intolerance(Intolerance in) {
 	try {
 		
-		String sql="DELETE 	FROM intolerance WHERE id= ?;";
+		String sql="DELETE * FROM intolerance WHERE id= ?;";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, in.getId());
 		
@@ -458,7 +458,7 @@ public void Delete_intolerance(Intolerance in) {
 public void Delete_Medicines(Medicines j) {
 	try {
 		
-		String sql="DELETE 	FROM medicines WHERE id= ?;";
+		String sql="DELETE * FROM medicines WHERE id= ?;";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setInt(1, j.getId());
 		
