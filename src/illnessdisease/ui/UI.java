@@ -223,7 +223,7 @@ public class UI { // extends Application
 
 						break;
 					case 4:
-						Sys.tem.out.println("OPTION SELECTED: UPDATE INTOLERANCE");
+						System.out.println("OPTION SELECTED: UPDATE INTOLERANCE");
 						System.out.println("INTRODUCE THE ID OF THE INTOLERANCE THAT YOU WANT TO UPDATE: ");
 						id = Integer.parseInt(consola.readLine());
 						// Hacer busqueda igual que en el case 3
