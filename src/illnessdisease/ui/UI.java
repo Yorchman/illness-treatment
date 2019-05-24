@@ -25,149 +25,148 @@ public class UI { // extends Application
 		sqlm.createTables();
 		jpam.connect();
 		System.out.println("CREADAS CORRECTAMENTE (fuera del metodo)");
-	
-	int option;
-	while(true){
-		try{
-	        BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
-	        printMenu();
-	        option = Integer.parseInt(consola.readLine());
-	        switch(option){
-	        case 1:
-	        	System.out.println("YOU SELECTED: ILLNESS, SELECT AN OPTION: ");
-	        	Illnesses ill = new Illnesses();
-	        	menu2();
-	        	option = Integer.parseInt(consola.readLine());
-	        	switch(option){
-	        	case 1: 
-	        		
-	        		System.out.println("OPTION SELECTED: INSERT ILLNESS");
-	        		String name;
-	        		String type;
-	        		String causes;
-	        		boolean contagious;
-	        		
-	        		System.out.println("Insert name: ");
-	        		name = consola.readLine();
-	        		System.out.println("Insert type of illness: ");
-	        		type = consola.readLine();
-	        		System.out.println("Insert causes: ");
-	        		causes = consola.readLine();
-	        		while(true){
-	        		System.out.println("Is it contagious? (Y/N)");	 
-	        		String leido = consola.readLine();
-	        			if(leido.equals("Y")){
-	        			contagious = true;
-	        			break;
-	        			}else if(leido.equals("N")){
-	        				contagious = false;
-	        				break;
-	        			}
-	        			else System.out.println("ERROR - You didn´t type Y or N, try again :)");	
-	        		}
-	        		Illnesses insertedIllness = new Illnesses(name,type,causes,contagious); //sin id
-	        		System.out.println("Does this illness produce any symptom?(yes/no)");
-	        		String respuesta=consola.readLine();
-	        		if(respuesta.equals("yes")) {
-	        			
-	        		
-	        		
-	        			System.out.println("now i am going to print the symptoms: \n\n");
-	        			List<Symptoms> s=sqlm.printSymptoms();
-	        			for(Symptoms s2: s) {
-	        				System.out.println(s2);
-	     
-	        		
-	        			}
-	        			int a=0;
-	        			while( a==0) {
-	        				System.out.println("introduce the id of the symptom that the illness produces: ");
-	        				int ids=Integer.parseInt(consola.readLine());
-	        				Symptoms s3=jpam.getSymptomsFromID(ids);
-	        		
-	        		
-	        				insertedIllness.addSymptom(s3);
-	        				System.out.println("does the illness produce any more symptoms?(yes/no");
-	        				String respuesta2=consola.readLine();
-	        				if(respuesta2.equals("yes")) {
-	        					a=0;
-	        				}
-	        				else {
-	        					a++;
-	        				}
-	        			}
-	        		}
-	        		jpam.Insert_illness(insertedIllness);
-	        		System.out.println("AHORA VOY A IMPRIMIR LAS ILLNESSES: \n\n");
-	        		List<Illnesses> li=sqlm.printIllnes();
-	        		for(Illnesses il: li) {
-	        			System.out.println(il);
-	        		}
-	        			        	
-	        		break;
-	        		
-	        	case 2:
-	        		System.out.println("OPTION SELECTED: SEARCH ILLNESS");
-	        		System.out.println("Introduce the name of the illness you are looking for: ");
-	        		String nameIllness=consola.readLine();
-	        		List<Illnesses> listIllnesses= jpam.searchIllnessbyname(nameIllness);
-	        		if(listIllnesses!=null){		
-	        			for(Illnesses s: listIllnesses) {
-	        				System.out.println(s);
-	        			}
-	        		}else {
-	        			System.out.println("the illness with that name doesn't appear in our database");
-	        		}
-	        		break;
-	        	case 3: 
-	        		System.out.println("OPTION SELECTED: DELETE ILLNESS");
-	        		List <Illnesses> li3=sqlm.printIllnes(); 
-	        		for (Illnesses il3:li3) {
-	        			System.out.println(il3);
-	        		  }
-	        		
-	        		System.out.println("Insert the id of the illness that you want to delete: ");
-	        		int id = Integer.parseInt(consola.readLine());
-	        		Illnesses illness = jpam.getIllnessFromID(id);
-	        		System.out.println(illness);
-	        		jpam.Delete_illness(illness);
-	        		jpam.close();//eliminamos el illness encontrado
-	        		//Se debería meter en un if pero no sé comprobar si el searchIllness ha devuelto algo valido 
-	        		//o no. Se podría hacer if(esa movida != null) ???
-	        		break;
-	        
-		
-			
-	        	case 4: 
-	        		System.out.println("OPTION SELECTED: UPDATE ILLNESS");
-	        		System.out.println("INTRODUCE THE ID OF THE ILLNESS THAT YOU WANT TO DELETE: ");
-	        		id  = Integer.parseInt(consola.readLine());
-	        		//Hacer busqueda igual que en el case 3
-	        		//Con lo que de esa busqueda:
-	        		illness = jpam.getIllnessFromID(id);
-	        		System.out.println("Insert the new name: ");
-	        		String newName = consola.readLine();
-	        		System.out.println("Insert the new type: ");
-	        		String newType = consola.readLine();
-	        		System.out.println("Insert the new causes: ");
-	        		String newCauses = consola.readLine();
-	        		jpam.Update_Illnesses_Name(newName, illness); //lo hacemos
-	        		//sqlm.Update_illness(i);
-	        		//Hacer UPDATE sobre lo que nos dio la busqueda anterior
-	        		//sqlm.Update_illness_Name(newName, i);
-	        		break;
-	        	case 5: 
-	        		//Print illness
-	        		System.out.println("");
-	        		
-	        
-	        	
-	        	
-	        	break;
-	         
-	        }
-	        	break;
-	        
+
+		int option;
+		while (true) {
+			try {
+				BufferedReader consola = new BufferedReader(new InputStreamReader(System.in));
+				printMenu();
+				option = Integer.parseInt(consola.readLine());
+				switch (option) {
+				case 1:
+					System.out.println("YOU SELECTED: ILLNESS, SELECT AN OPTION: ");
+					Illnesses ill = new Illnesses();
+					menu2();
+					option = Integer.parseInt(consola.readLine());
+					switch (option) {
+					case 1:
+
+						System.out.println("OPTION SELECTED: INSERT ILLNESS");
+						String name;
+						String type;
+						String causes;
+						boolean contagious;
+
+						System.out.println("Insert name: ");
+						name = consola.readLine();
+						System.out.println("Insert type of illness: ");
+						type = consola.readLine();
+						System.out.println("Insert causes: ");
+						causes = consola.readLine();
+						while (true) {
+							System.out.println("Is it contagious? (Y/N)");
+							String leido = consola.readLine();
+							if (leido.equals("Y")) {
+								contagious = true;
+								break;
+							} else if (leido.equals("N")) {
+								contagious = false;
+								break;
+							} else
+								System.out.println("ERROR - You didn´t type Y or N, try again :)");
+						}
+						Illnesses insertedIllness = new Illnesses(name, type, causes, contagious); // sin
+																									// id
+						System.out.println("Does this illness produce any symptom?(yes/no)");
+						String respuesta = consola.readLine();
+						while (true) {
+
+							if (respuesta.equals("yes")) {
+
+								System.out.println("now i am going to print the symptoms: \n\n");
+								List<Symptoms> s = sqlm.printSymptoms();
+								for (Symptoms s2 : s) {
+									System.out.println(s2);
+
+								}
+								int a = 0;
+								while (a == 0) {
+									System.out.println("introduce the id of the symptom that the illness produces: ");
+									int ids = Integer.parseInt(consola.readLine());
+									Symptoms s3 = jpam.getSymptomsFromID(ids);
+
+									insertedIllness.addSymptom(s3);
+									System.out.println("does the illness produce any more symptoms?(yes/no");
+									String respuesta2 = consola.readLine();
+									if (respuesta2.equals("yes")) {
+										a = 0;
+									} else {
+										a++;
+									}
+								}
+								break;
+							}else if (respuesta.equals("no")){break;}
+				
+						}
+
+						jpam.Insert_illness(insertedIllness);
+						System.out.println("AHORA VOY A IMPRIMIR LAS ILLNESSES: \n\n");
+						List<Illnesses> li = sqlm.printIllnes();
+						for (Illnesses il : li) {
+							System.out.println(il);
+						}break;
+
+					case 2:
+						System.out.println("OPTION SELECTED: SEARCH ILLNESS");
+						System.out.println("Introduce the name of the illness you are looking for: ");
+						String nameIllness = consola.readLine();
+						List<Illnesses> listIllnesses = jpam.searchIllnessbyname(nameIllness);
+						if (listIllnesses != null) {
+							for (Illnesses s : listIllnesses) {
+								System.out.println(s);
+							}
+						} else {
+							System.out.println("the illness with that name doesn't appear in our database");
+						}
+						break;
+					case 3:
+						System.out.println("OPTION SELECTED: DELETE ILLNESS");
+						List<Illnesses> li3 = sqlm.printIllnes();
+						for (Illnesses il3 : li3) {
+							System.out.println(il3);
+						}
+
+						System.out.println("Insert the id of the illness that you want to delete: ");
+						//If no es un int pide otra vez
+						int id = Integer.parseInt(consola.readLine());
+						Illnesses illness = jpam.getIllnessFromID(id);
+						System.out.println(illness);
+						sqlm.Delete_illness(illness);
+						jpam.close();// eliminamos el illness encontrado
+						// Se debería meter en un if pero no sé comprobar si el
+						// searchIllness ha devuelto algo valido
+						// o no. Se podría hacer if(esa movida != null) ???
+						break;
+
+					case 4:
+						System.out.println("OPTION SELECTED: UPDATE ILLNESS");
+						System.out.println("INTRODUCE THE ID OF THE ILLNESS THAT YOU WANT TO DELETE: ");
+						id = Integer.parseInt(consola.readLine());
+						// Hacer busqueda igual que en el case 3
+						// Con lo que de esa busqueda:
+						illness = jpam.getIllnessFromID(id);
+						System.out.println("Insert the new name: ");
+						String newName = consola.readLine();
+						System.out.println("Insert the new type: ");
+						String newType = consola.readLine();
+						System.out.println("Insert the new causes: ");
+						String newCauses = consola.readLine();
+						jpam.Update_Illnesses_Name(newName, illness); // lo
+																		// hacemos
+						// sqlm.Update_illness(i);
+						// Hacer UPDATE sobre lo que nos dio la busqueda
+						// anterior
+						// sqlm.Update_illness_Name(newName, i);
+						break;
+					case 5:
+						// Print illness
+						System.out.println("");
+
+						break;
+
+					}
+					break;
+
 				case 2:
 					System.out.println("YOU SELECTED INTOLERANCE, SELECT AN OPTION:  ");
 
@@ -354,42 +353,44 @@ public class UI { // extends Application
 						 * ); } break;
 						 */
 					case 3:
-						
-						/*
-						System.out.println("OPTION SELECTED: DELETE INTOLERANCE");
-						sqlm.printIllnes();
-						System.out.println("Insert the id of the intolerance that you want to delete: ");
-						int id = Integer.parseInt(consola.readLine());
-						Intolerance intolerance = jpam.getIntoleranceFromID(id);
 
-						sqlm.Delete_intolerance(intolerance);
-						jpam.close();// eliminamos el illness encontrado
-						// Se debería meter en un if pero no sé comprobar si el
-						// searchIllness ha devuelto algo valido
-						// o no. Se podría hacer if(esa movida != null) ???
-						*/
+						/*
+						 * System.out.println(
+						 * "OPTION SELECTED: DELETE INTOLERANCE");
+						 * sqlm.printIllnes(); System.out.println(
+						 * "Insert the id of the intolerance that you want to delete: "
+						 * ); int id = Integer.parseInt(consola.readLine());
+						 * Intolerance intolerance =
+						 * jpam.getIntoleranceFromID(id);
+						 * 
+						 * sqlm.Delete_intolerance(intolerance); jpam.close();//
+						 * eliminamos el illness encontrado // Se debería meter
+						 * en un if pero no sé comprobar si el // searchIllness
+						 * ha devuelto algo valido // o no. Se podría hacer
+						 * if(esa movida != null) ???
+						 */
 						break;
 					case 4:
 						/*
-						System.out.println("OPTION SELECTED: UPDATE INTOLERANCE");
-						System.out.println("INTRODUCE THE ID OF THE INTOLERANCE THAT YOU WANT TO UPDATE: ");
-						id = Integer.parseInt(consola.readLine());
-						// Hacer busqueda igual que en el case 3
-						// Con lo que de esa busqueda:
-						intolerance = jpam.getIntoleranceFromID(id);
-						System.out.println("Insert the new name: ");
-						String newName = consola.readLine();
-						jpam.Update_intolerance_Name(newName, intolerance); // lo
-																			// hacemos
-						// sqlm.Update_illness(i);
-						// Hacer UPDATE sobre lo que nos dio la busqueda
-						// anterior
-						// sqlm.Update_illness_Name(newName, i);
-						 
+						 * System.out.println(
+						 * "OPTION SELECTED: UPDATE INTOLERANCE");
+						 * System.out.println(
+						 * "INTRODUCE THE ID OF THE INTOLERANCE THAT YOU WANT TO UPDATE: "
+						 * ); id = Integer.parseInt(consola.readLine()); //
+						 * Hacer busqueda igual que en el case 3 // Con lo que
+						 * de esa busqueda: intolerance =
+						 * jpam.getIntoleranceFromID(id); System.out.println(
+						 * "Insert the new name: "); String newName =
+						 * consola.readLine();
+						 * jpam.Update_intolerance_Name(newName, intolerance);
+						 * // lo // hacemos // sqlm.Update_illness(i); // Hacer
+						 * UPDATE sobre lo que nos dio la busqueda // anterior
+						 * // sqlm.Update_illness_Name(newName, i);
+						 * 
 						 */
 						break;
 					case 5:
-						
+
 						List<Patients> in2 = sqlm.printPatient();
 						for (Patients i : in2) {
 							System.out.println(i);
@@ -407,26 +408,24 @@ public class UI { // extends Application
 
 					switch (option2) {
 					case 1:
-						//INSERT SIDE EFFECT
+						// INSERT SIDE EFFECT
 						/*
-						System.out.println("OPTION SELECTED: INSERT SIDE EFFECT");
-						String name;
-
-						System.out.println("Insert name: ");
-						name = consola.readLine();
-						Intolerance insertedIntolerance = new Intolerance(name); // sin
-																					// id
-						sqlm.Insert_intolerance(insertedIntolerance);
-						System.out.println("now i am going to print the intolerances: \n\n");
-						List<Intolerance> in = sqlm.printIntolerance();
-						for (Intolerance i : in) {
-							System.out.println(i);
-						}
-						*/
+						 * System.out.println(
+						 * "OPTION SELECTED: INSERT SIDE EFFECT"); String name;
+						 * 
+						 * System.out.println("Insert name: "); name =
+						 * consola.readLine(); Intolerance insertedIntolerance =
+						 * new Intolerance(name); // sin // id
+						 * sqlm.Insert_intolerance(insertedIntolerance);
+						 * System.out.println(
+						 * "now i am going to print the intolerances: \n\n");
+						 * List<Intolerance> in = sqlm.printIntolerance(); for
+						 * (Intolerance i : in) { System.out.println(i); }
+						 */
 						break;
 
 					case 2:
-						
+
 						// SEARCH SIDE EFFECT
 						/*
 						 * System.out.println(
@@ -440,42 +439,45 @@ public class UI { // extends Application
 						 * listIntolerance) { System.out.println(into); } }else
 						 * { System.out.println(
 						 * "the intolerance with that name doesn't appear in our database"
-						 * ); } 
+						 * ); }
 						 */
 						break;
 					case 3:
-						//DELETE SIDE EFFECT
+						// DELETE SIDE EFFECT
 						/*
-						System.out.println("OPTION SELECTED: DELETE INTOLERANCE");
-						sqlm.printIllnes();
-						System.out.println("Insert the id of the intolerance that you want to delete: ");
-						int id = Integer.parseInt(consola.readLine());
-						Intolerance intolerance = jpam.getIntoleranceFromID(id);
-
-						sqlm.Delete_intolerance(intolerance);
-						jpam.close();// eliminamos el illness encontrado
-						// Se debería meter en un if pero no sé comprobar si el
-						// searchIllness ha devuelto algo valido
-						// o no. Se podría hacer if(esa movida != null) ???
-						*/
+						 * System.out.println(
+						 * "OPTION SELECTED: DELETE INTOLERANCE");
+						 * sqlm.printIllnes(); System.out.println(
+						 * "Insert the id of the intolerance that you want to delete: "
+						 * ); int id = Integer.parseInt(consola.readLine());
+						 * Intolerance intolerance =
+						 * jpam.getIntoleranceFromID(id);
+						 * 
+						 * sqlm.Delete_intolerance(intolerance); jpam.close();//
+						 * eliminamos el illness encontrado // Se debería meter
+						 * en un if pero no sé comprobar si el // searchIllness
+						 * ha devuelto algo valido // o no. Se podría hacer
+						 * if(esa movida != null) ???
+						 */
 						break;
 					case 4:
-						//UPDATE SIDE EFFECT
-						
+						// UPDATE SIDE EFFECT
+
 						/*
-						System.out.println("OPTION SELECTED: UPDATE INTOLERANCE");
-						System.out.println("INTRODUCE THE ID OF THE INTOLERANCE THAT YOU WANT TO UPDATE: ");
-						id = Integer.parseInt(consola.readLine());
-						// Hacer busqueda igual que en el case 3
-						// Con lo que de esa busqueda:
-						intolerance = jpam.getIntoleranceFromID(id);
-						System.out.println("Insert the new name: ");
-						String newName = consola.readLine();
-						jpam.Update_intolerance_Name(newName, intolerance); // lo hacemos
-						// sqlm.Update_illness(i);
-						// Hacer UPDATE sobre lo que nos dio la busqueda
-						// anterior
-						// sqlm.Update_illness_Name(newName, i);
+						 * System.out.println(
+						 * "OPTION SELECTED: UPDATE INTOLERANCE");
+						 * System.out.println(
+						 * "INTRODUCE THE ID OF THE INTOLERANCE THAT YOU WANT TO UPDATE: "
+						 * ); id = Integer.parseInt(consola.readLine()); //
+						 * Hacer busqueda igual que en el case 3 // Con lo que
+						 * de esa busqueda: intolerance =
+						 * jpam.getIntoleranceFromID(id); System.out.println(
+						 * "Insert the new name: "); String newName =
+						 * consola.readLine();
+						 * jpam.Update_intolerance_Name(newName, intolerance);
+						 * // lo hacemos // sqlm.Update_illness(i); // Hacer
+						 * UPDATE sobre lo que nos dio la busqueda // anterior
+						 * // sqlm.Update_illness_Name(newName, i);
 						 * 
 						 */
 						break;
@@ -490,32 +492,30 @@ public class UI { // extends Application
 
 				case 6:
 					System.out.println("YOU SELECTED: SYMPTOMS, SELECT AN OPTION: ");
-					
+
 					menu2();
 					option2 = Integer.parseInt(consola.readLine());
 
 					switch (option2) {
 					case 1:
-						//INSERT SYMPTOM
+						// INSERT SYMPTOM
 						/*
-						System.out.println("OPTION SELECTED: INSERT SIDE EFFECT");
-						String name;
-
-						System.out.println("Insert name: ");
-						name = consola.readLine();
-						Intolerance insertedIntolerance = new Intolerance(name); // sin
-																					// id
-						sqlm.Insert_intolerance(insertedIntolerance);
-						System.out.println("now i am going to print the intolerances: \n\n");
-						List<Intolerance> in = sqlm.printIntolerance();
-						for (Intolerance i : in) {
-							System.out.println(i);
-						}
-						*/
+						 * System.out.println(
+						 * "OPTION SELECTED: INSERT SIDE EFFECT"); String name;
+						 * 
+						 * System.out.println("Insert name: "); name =
+						 * consola.readLine(); Intolerance insertedIntolerance =
+						 * new Intolerance(name); // sin // id
+						 * sqlm.Insert_intolerance(insertedIntolerance);
+						 * System.out.println(
+						 * "now i am going to print the intolerances: \n\n");
+						 * List<Intolerance> in = sqlm.printIntolerance(); for
+						 * (Intolerance i : in) { System.out.println(i); }
+						 */
 						break;
 
 					case 2:
-						
+
 						// SEARCH SYMPTOM
 						/*
 						 * System.out.println(
@@ -529,42 +529,45 @@ public class UI { // extends Application
 						 * listIntolerance) { System.out.println(into); } }else
 						 * { System.out.println(
 						 * "the intolerance with that name doesn't appear in our database"
-						 * ); } 
+						 * ); }
 						 */
 						break;
 					case 3:
-						//DELETE SYMPTOM
+						// DELETE SYMPTOM
 						/*
-						System.out.println("OPTION SELECTED: DELETE INTOLERANCE");
-						sqlm.printIllnes();
-						System.out.println("Insert the id of the intolerance that you want to delete: ");
-						int id = Integer.parseInt(consola.readLine());
-						Intolerance intolerance = jpam.getIntoleranceFromID(id);
-
-						sqlm.Delete_intolerance(intolerance);
-						jpam.close();// eliminamos el illness encontrado
-						// Se debería meter en un if pero no sé comprobar si el
-						// searchIllness ha devuelto algo valido
-						// o no. Se podría hacer if(esa movida != null) ???
-						*/
+						 * System.out.println(
+						 * "OPTION SELECTED: DELETE INTOLERANCE");
+						 * sqlm.printIllnes(); System.out.println(
+						 * "Insert the id of the intolerance that you want to delete: "
+						 * ); int id = Integer.parseInt(consola.readLine());
+						 * Intolerance intolerance =
+						 * jpam.getIntoleranceFromID(id);
+						 * 
+						 * sqlm.Delete_intolerance(intolerance); jpam.close();//
+						 * eliminamos el illness encontrado // Se debería meter
+						 * en un if pero no sé comprobar si el // searchIllness
+						 * ha devuelto algo valido // o no. Se podría hacer
+						 * if(esa movida != null) ???
+						 */
 						break;
 					case 4:
-						//UPDATE SYMPTOM
-						
+						// UPDATE SYMPTOM
+
 						/*
-						System.out.println("OPTION SELECTED: UPDATE INTOLERANCE");
-						System.out.println("INTRODUCE THE ID OF THE INTOLERANCE THAT YOU WANT TO UPDATE: ");
-						id = Integer.parseInt(consola.readLine());
-						// Hacer busqueda igual que en el case 3
-						// Con lo que de esa busqueda:
-						intolerance = jpam.getIntoleranceFromID(id);
-						System.out.println("Insert the new name: ");
-						String newName = consola.readLine();
-						jpam.Update_intolerance_Name(newName, intolerance); // lo hacemos
-						// sqlm.Update_illness(i);
-						// Hacer UPDATE sobre lo que nos dio la busqueda
-						// anterior
-						// sqlm.Update_illness_Name(newName, i);
+						 * System.out.println(
+						 * "OPTION SELECTED: UPDATE INTOLERANCE");
+						 * System.out.println(
+						 * "INTRODUCE THE ID OF THE INTOLERANCE THAT YOU WANT TO UPDATE: "
+						 * ); id = Integer.parseInt(consola.readLine()); //
+						 * Hacer busqueda igual que en el case 3 // Con lo que
+						 * de esa busqueda: intolerance =
+						 * jpam.getIntoleranceFromID(id); System.out.println(
+						 * "Insert the new name: "); String newName =
+						 * consola.readLine();
+						 * jpam.Update_intolerance_Name(newName, intolerance);
+						 * // lo hacemos // sqlm.Update_illness(i); // Hacer
+						 * UPDATE sobre lo que nos dio la busqueda // anterior
+						 * // sqlm.Update_illness_Name(newName, i);
 						 * 
 						 */
 						break;
@@ -575,8 +578,7 @@ public class UI { // extends Application
 						}
 						break;
 					}
-					
-					
+
 					break;
 				}
 			} catch (IOException ex) {
@@ -585,12 +587,6 @@ public class UI { // extends Application
 		}
 
 	}
-
-	        		
-	        	
-	        	
-
-	
 
 	public static void printMenu() {
 		System.out.println("-----WELCOME-----");
