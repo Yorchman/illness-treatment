@@ -145,6 +145,11 @@ public class UI { // extends Application
 
 					case 4:
 						System.out.println("OPTION SELECTED: UPDATE ILLNESS");
+						System.out.println("NOW I AM GOING TO PRINT THE ILLNESSES: \n\n");
+						List<Illnesses> li2 = sqlm.printIllnes();
+						for (Illnesses il : li2) {
+							System.out.println(il);
+						}
 						System.out.println("INTRODUCE THE ID OF THE ILLNESS THAT YOU WANT TO DELETE: ");
 						id = Integer.parseInt(consola.readLine());
 						// Hacer busqueda igual que en el case 3
@@ -228,11 +233,6 @@ public class UI { // extends Application
 						break;
 					case 4:
 						System.out.println("OPTION SELECTED: UPDATE INTOLERANCE");
-						System.out.println("NOW I AM GOING TO PRINT THE ILLNESSES: \n\n");
-						List<Illnesses> li = sqlm.printIllnes();
-						for (Illnesses il : li) {
-							System.out.println(il);
-						}
 						System.out.println("INTRODUCE THE ID OF THE INTOLERANCE THAT YOU WANT TO UPDATE: ");
 						id = Integer.parseInt(consola.readLine());
 						// Hacer busqueda igual que en el case 3
