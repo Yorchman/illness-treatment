@@ -74,7 +74,7 @@ public class UI { // extends Application
 							if (respuesta.equals("yes")) {
 
 								System.out.println("now i am going to print the symptoms: \n\n");
-								System.out.print("if there isn't the symptoms wich the illnes is relationated return to the menu to introduce it");
+								System.out.print("if there isn't the symptoms wich the illnes is relationated return to the menu to introduce it \n");
 								List<Symptoms> s = sqlm.printSymptoms();
 								for (Symptoms s2 : s) {
 									System.out.println(s2);
@@ -105,7 +105,7 @@ public class UI { // extends Application
 						}
 
 						jpam.Insert_illness(insertedIllness);
-						System.out.println("AHORA VOY A IMPRIMIR LAS ILLNESSES: \n\n");
+						System.out.println("NOW I AM GOING TO PRINT THE ILLNESSES: \n\n");
 						List<Illnesses> li = sqlm.printIllnes();
 						for (Illnesses il : li) {
 							System.out.println(il);
@@ -228,6 +228,11 @@ public class UI { // extends Application
 						break;
 					case 4:
 						System.out.println("OPTION SELECTED: UPDATE INTOLERANCE");
+						System.out.println("NOW I AM GOING TO PRINT THE ILLNESSES: \n\n");
+						List<Illnesses> li = sqlm.printIllnes();
+						for (Illnesses il : li) {
+							System.out.println(il);
+						}
 						System.out.println("INTRODUCE THE ID OF THE INTOLERANCE THAT YOU WANT TO UPDATE: ");
 						id = Integer.parseInt(consola.readLine());
 						// Hacer busqueda igual que en el case 3
