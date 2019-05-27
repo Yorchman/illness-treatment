@@ -84,7 +84,7 @@ public class JPAManager implements DBManager {
 		//System.out.print("Write the illness' name: ");
 		//String name = reader.readLine();
 		//System.out.println("Matching illnesses:");
-		Query q1 = e.createNativeQuery("SELECT * FROM Illnesses WHERE name LIKE ?", Illnesses.class);
+		Query q1 = e.createNativeQuery("SELECT * FROM illnesses WHERE name LIKE ?", Illnesses.class);
 		q1.setParameter(1, "%" + name + "%");
 		listIllnesses = (List<Illnesses>) q1.getResultList();
 		if(listIllnesses.size()==0) return null;
@@ -93,6 +93,44 @@ public class JPAManager implements DBManager {
 	e.printStackTrace();	
 		}
 	return listIllnesses;
+	}
+	
+	public List<Doctor> searchDoctorbyname(String name) {
+		//BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		List<Doctor> listDoctor= null;
+	try {
+				
+		//System.out.print("Write the illness' name: ");
+		//String name = reader.readLine();
+		//System.out.println("Matching illnesses:");
+		Query q1 = e.createNativeQuery("SELECT * FROM doctors WHERE name LIKE ?", Doctor.class);
+		q1.setParameter(1, "%" + name + "%");
+		listDoctor = (List<Doctor>) q1.getResultList();
+		if(listDoctor.size()==0) return null;
+
+}catch (Exception e) {
+	e.printStackTrace();	
+		}
+	return listDoctor;
+	}
+	
+	public List<Intolerance> searchIntolerancebyname(String name) {
+		//BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		List<Intolerance> listIntolerance= null;
+	try {
+				
+		//System.out.print("Write the illness' name: ");
+		//String name = reader.readLine();
+		//System.out.println("Matching illnesses:");
+		Query q1 = e.createNativeQuery("SELECT * FROM intolerance WHERE name LIKE ?", Intolerance.class);
+		q1.setParameter(1, "%" + name + "%");
+		listIntolerance = (List<Intolerance>) q1.getResultList();
+		if(listIntolerance.size()==0) return null;
+
+}catch (Exception e) {
+	e.printStackTrace();	
+		}
+	return listIntolerance;
 	}
 	
 	public List<Patients> searchPatientsbyname(String name) {
@@ -149,6 +187,27 @@ public class JPAManager implements DBManager {
 		}
 	return listSideEffects;	
 	}
+	
+	public List<Symptoms> searchSymptomsbyname(String name) {
+		List<Symptoms> listSymptoms= null;
+		//BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	try {
+				
+		//System.out.print("Write the  SideEffects' name: ");
+		//String name = reader.readLine();
+		//System.out.println("Matching SideEffects:");
+		Query q1 = e.createNativeQuery("SELECT * FROM symptoms WHERE name LIKE ?", Symptoms.class);
+		q1.setParameter(1, "%" + name + "%");
+		listSymptoms = (List<Symptoms>) q1.getResultList();
+			
+		
+	}catch (Exception e) {
+		e.printStackTrace();
+		
+		}
+	return listSymptoms;	
+	}
+	
 	public void close() {
 		try {
 			e.close();
