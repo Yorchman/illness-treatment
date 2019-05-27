@@ -74,12 +74,17 @@ public class UI { // extends Application
 							if (respuesta.equals("yes")) {
 
 								System.out.println("now i am going to print the symptoms: \n\n");
+								System.out.print("if there isn't the symptoms wich the illnes is relationated return to the menu to introduce it");
 								List<Symptoms> s = sqlm.printSymptoms();
 								for (Symptoms s2 : s) {
 									System.out.println(s2);
 
 								}
+								
 								int a = 0;
+								if(s.size()==0) {
+									a=1;
+								}
 								while (a == 0) {
 									System.out.println("introduce the id of the symptom that the illness produces: ");
 									int ids = Integer.parseInt(consola.readLine());
