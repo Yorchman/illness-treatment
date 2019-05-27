@@ -36,7 +36,7 @@ public void marshallingMedicines(Medicines med) {
 	Marshaller marshaller = jaxbContext.createMarshaller();
 	marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
 	
-	File file = new File("./xmls/Sample-Medicines.xml");
+	File file = new File("./xmls/DTD.xml");
 	marshaller.marshal(med, file);
 	marshaller.marshal(med, System.out);
 } catch (JAXBException e) {
