@@ -14,7 +14,7 @@ import illnessdisease.pojo.Intolerance;
 
 public class SQLManager implements DBManager {
 	private  Connection connection;
-//	private Statement statement;
+
 
 
 public  void connect(String path, String classname) {
