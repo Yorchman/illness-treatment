@@ -25,7 +25,7 @@ public class XMLManager {
 
 public void marshallingMedicines(Medicines med) {
 	
-	em1 = Persistence.createEntityManagerFactory("illness-treatment").createEntityManager();
+	em1 = Persistence.createEntityManagerFactory("illnessdisease-provider").createEntityManager();
 	em1.getTransaction().begin();
 	em1.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 	em1.getTransaction().commit();
@@ -49,7 +49,7 @@ public void unmarshallingMedicines(File file) {
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 		Medicines med = (Medicines) unmarshaller.unmarshal(file);
 		System.out.println(med);
-		em2 = Persistence.createEntityManagerFactory(PERSISTENCE_PROVIDER);
+		em2 = Persistence.createEntityManagerFactory("illnessdisease-provider");
 		EntityManager em3 = em2.createEntityManager();
 		em3.getTransaction().begin();
 		em3.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();

@@ -1,28 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Medicine [
-   <!ELEMENT Medicine ( activePrinciple, price, SideEffects)>
-   <!ATTLIST Medicine id CDATA #REQUIRED
-                  	  name CDATA #REQUIRED
-                  	  seguridadSocial CDATA #REQUIRED>
-   <!ELEMENT activePrinciple (#PCDATA)>
-   <!ELEMENT price (#PCDATA)>
-   <!ELEMENT SideEffects (SideEffect*)>
-   <!ELEMENT SideEffect (area)>
-   <!ATTLIST SideEffect name CDATA #REQUIRED
-                  	  duration CDATA #REQUIRED>
-   <!ELEMENT area (#PCDATA)>
-  
-]>
-<Medicine id= "1"  name= "Aspirina"  seguridadSocial = "True">
-    <activePrinciple> Loratadina </activePrinciple>
-    <price>40.12 </price>
-    <SideEffects> 
-    	<SideEffect name= "dizziness"  duration= "2">
-    	<area> head </area>
-    	</SideEffect>
-    	
-    	<SideEffect name= "bleeding"  duration= "1">
-    	<area> nose </area>
-    	</SideEffect>
-    </SideEffects>
-  </Medicine>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Medicine name="a" ssCover="false" id="102">
+    <activePrinciple>a</activePrinciple>
+    <price>11.0</price>
+    <SideEffects/>
+</Medicine>

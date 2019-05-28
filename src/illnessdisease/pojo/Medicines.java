@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlType;
 @Table(name="medicines")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Medicine")
-@XmlType(propOrder = { "name", "activePrinciple", "price","seguridadSocial","sideEffects" })
+@XmlType(propOrder = { "name", "activePrinciple", "price","SSCover","sideEffects" })
 public class Medicines implements Serializable {
 
 	/**
@@ -180,6 +180,14 @@ public class Medicines implements Serializable {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Medicines [id=" + id + ", name=" + name + ", activePrinciple=" + activePrinciple + ", price=" + price
+				+ ", SSCover=" + SSCover + ", patients=" + patients + ", sideEffects=" + sideEffects + ", illnesses="
+				+ illnesses + "]";
+	}
+	
+	
 
 
 }

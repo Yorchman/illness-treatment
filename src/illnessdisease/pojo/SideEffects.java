@@ -32,6 +32,7 @@ public class SideEffects implements Serializable{
     @TableGenerator(name="sideEffects", table="sqlite_sequence",
 
        pkColumnName="name", valueColumnName="seq", pkColumnValue="sideEffects")
+	@XmlTransient
 	private Integer id;
 	@XmlAttribute
 	private String name;
