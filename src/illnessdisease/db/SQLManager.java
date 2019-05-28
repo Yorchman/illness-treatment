@@ -138,7 +138,7 @@ String illness_symptoms = "CREATE TABLE illness_symptoms"
 		+ " )";
 		statement.execute(illness_symptoms);
 
-String medicines_illness= "CREATE TABLE medicines_illness"
+String medicines_illness= "CREATE TABLE medicines_illness" 	
 		+ "(illness_id INTEGER, "
 		+ "medicines_id INTEGER, "
 		+ " FOREIGN KEY (illness_id) REFERENCES illnesses(id), "
