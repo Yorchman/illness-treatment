@@ -63,6 +63,14 @@ public class SideEffects implements Serializable{
 		this.medicines = new ArrayList<Medicines>();
 	}
 	
+	public SideEffects(String name, Integer duration, String area) {
+		super();
+		this.name = name;
+		this.duration = duration;
+		this.area = area;
+		this.medicines = new ArrayList<Medicines>();
+	}
+	
 	public void addMedicine(Medicines medicine){
 		medicines.add(medicine);
 	}
