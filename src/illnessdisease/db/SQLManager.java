@@ -347,7 +347,7 @@ public void Insert_intolerance(Intolerance in) {
 public void Insert_Medicines(Medicines j) {
 	try {
 		
-		String sql="INSERT INTO medicines( name, activePrinciple, price, seguridadSocial) "+ "VALUES (?,?,?,?);";
+		String sql="INSERT INTO medicines( name, activePrinciple, price, SSCover) "+ "VALUES (?,?,?,?);";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setString(1, j.getName());
 		prep.setString(2, j.getActivePrinciple());
@@ -697,7 +697,7 @@ public void Update_Medicines_ActivePrinciple(String new_ActivePrinciple, Medicin
 public void Update_Medicines_price(double new_price, Medicines m) {
 	try {
 		
-		String sql ="UPDATE medicines SET activePrinciple=? where id=?";
+		String sql ="UPDATE medicines SET price=? where id=?";
 		PreparedStatement prep = connection.prepareStatement(sql);
 		prep.setDouble(1, new_price);
 		prep.setInt(2, m.getId());
@@ -709,8 +709,7 @@ public void Update_Medicines_price(double new_price, Medicines m) {
 	}
 	
 }
-//System.out.println("Update finished.");
-//ESTA MAL ESTE METODO(el de abajo)
+
 public void Update_Medicines(Medicines j) {
 	try {
 		
