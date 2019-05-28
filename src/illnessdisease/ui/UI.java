@@ -33,7 +33,7 @@ public class UI { // extends Application
 		sqlm.connect("./db/illnessdisease.db", "org.sqlite.JDBC");
 		sqlm.createTables();
 		jpam.connect();
-		System.out.println("CREADAS CORRECTAMENTE (fuera del metodo)");
+		System.out.println("Tables properly created");
 
 		int option;
 		while (true) {
@@ -83,7 +83,7 @@ public class UI { // extends Application
 							if (respuesta.equals("yes")) {
 
 								System.out.println("now i am going to print the symptoms: \n\n");
-								System.out.print("if there isn't the symptoms wich the illnes is relationated return to the menu to introduce it \n");
+								System.out.print("if the symptom does not appear  return to the menu to introduce it first \n");
 								List<Symptoms> s = sqlm.printSymptoms();
 								for (Symptoms s2 : s) {
 									System.out.println(s2);
@@ -95,12 +95,12 @@ public class UI { // extends Application
 									a=1;
 								}
 								while (a == 0) {
-									System.out.println("introduce the id of the symptom that the illness produces: ");
+									System.out.println("Introduce the id of the symptom that the illness produces: ");
 									int ids = Integer.parseInt(consola.readLine());
 									Symptoms s3 = jpam.getSymptomsFromID(ids);
 
 									insertedIllness.addSymptom(s3);
-									System.out.println("does the illness produce any more symptoms?(yes/no");
+									System.out.println("Does the illness produce any more symptoms?(yes/no");
 									String respuesta2 = consola.readLine();
 									if (respuesta2.equals("yes")) {
 										a = 0;
@@ -130,7 +130,7 @@ public class UI { // extends Application
 								System.out.println(s);
 							}
 						} else {
-							System.out.println("the illness with that name doesn't appear in our database");
+							System.out.println("The illness with that name doesn't appear in our database");
 						}
 						break;
 					case 3:
@@ -210,14 +210,14 @@ public class UI { // extends Application
 						
 						Intolerance insertedIntolerance = new Intolerance(name); // sin
 																									// id
-						System.out.println("Do any patients suffered this intolerance?(yes/no)");
+						System.out.println("Does any patient suffer this intolerance?(yes/no)");
 						String respuesta = consola.readLine();
 						while (true) {
 
 							if (respuesta.equals("yes")) {
 
-								System.out.println("now i am going to print the patients: \n\n");
-								System.out.print("if there aren't any patient yet suffering the intolerance, return to the menu to introduce it \n");
+								System.out.println("Now i am going to print the patients: \n\n");
+								System.out.print("If there isn't any patient yet suffering the intolerance, return to the menu to introduce it first \n");
 								List<Patients> p = sqlm.printPatient();
 								for (Patients s2 : p) {
 									System.out.println(s2);
@@ -229,12 +229,12 @@ public class UI { // extends Application
 									a=1;
 								}
 								while (a == 0) {
-									System.out.println("introduce the id of the symptom that the illness produces: ");
+									System.out.println("Introduce the id of the symptom that the illness produces: ");
 									int ids = Integer.parseInt(consola.readLine());
 									Patients p3 = jpam.getPatientsFromID(ids);
 
 									insertedIntolerance.addPatient(p3);
-									System.out.println("does any more patient suffer this intolerance?(yes/no");
+									System.out.println("Does any other patient suffer this intolerance?(yes/no");
 									String respuesta2 = consola.readLine();
 									if (respuesta2.equals("yes")) {
 										a = 0;
