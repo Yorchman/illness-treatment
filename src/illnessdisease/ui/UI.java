@@ -29,6 +29,7 @@ public class UI { // extends Application
 
 		SQLManager sqlm = new SQLManager();
 		JPAManager jpam = new JPAManager();
+		XMLManager xml=new XMLManager();
 		sqlm.connect("./db/illnessdisease.db", "org.sqlite.JDBC");
 		sqlm.createTables();
 		jpam.connect();
@@ -320,17 +321,11 @@ public class UI { // extends Application
 				case 3:
 					System.out.println("YOU SELECTED: MEDICINES, SELECT AN OPTION: ");
 					menu2();
+					System.out.println("7. see html");
 					option = Integer.parseInt(consola.readLine());
 					switch (option) {
 					case 1:
-						System.out.println("YOU SELECTED: MEDICINES, SELECT AN OPTION: ");
-						Medicines med = new Medicines();
-						menu2();
-						option = Integer.parseInt(consola.readLine());
-						switch (option) {
-						case 1:
-
-							System.out.println("OPTION SELECTED: INSERT MEDICINES");
+                            System.out.println("OPTION SELECTED: INSERT MEDICINES");
 							String name;
 							String activePrinciple;
 							Double price;
@@ -465,9 +460,17 @@ public class UI { // extends Application
 							break;
 						case 6:
 							break;
+						case 7:
+							List<Medicines> medi = sqlm.printMedicines();
+							for (Medicines med5 : medi) {
+								xml.marshallingMedicines(med5);
 
 						}
-					
+							xml.xml2html("./xmls/DTD.xml", "./xmls/XSLT.xslt", "./xmls/DTD.html;");
+							File file = new File("./xmls/DTD.xml");
+							xml.unmarshallingMedicines(file);
+							break;}
+					break;
 
 				case 4:
 					System.out.println("YOU SELECTED: PATIENTS, SELECT AN OPTION: ");
@@ -773,7 +776,7 @@ public class UI { // extends Application
 
 					break;
 				}
-				}} catch (IOException ex) {
+				} catch (IOException ex) {
 				ex.printStackTrace();
 			}
 		}
