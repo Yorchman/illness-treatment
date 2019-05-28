@@ -58,6 +58,16 @@ public class Symptoms  implements Serializable{
 		Duration = duration;
 	}
 	
+	public Symptoms(String name, String diagnosis, String areas, Integer duration) {
+		super();
+		this.name = name;
+		Diagnosis = diagnosis;
+		Areas = areas;
+		Duration = duration;
+	}
+	
+	
+	
 	public void addIllness(Illnesses illness){
 		illnesses.add(illness);
 	}
