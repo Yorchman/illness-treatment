@@ -2,6 +2,7 @@ package illnessdisease.pojo;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,15 +108,24 @@ public class Patients implements Serializable { /**
 		this.intelorance=new  ArrayList<Intolerance>();
 	}
 		
-	
-	public Patients(Integer id, Integer SSN, String name, Date DOB, String gender, byte[] photo , String password) {
-		super();
-		this.id = id;
+
+	public Patients( Integer SSN, String name, Date DOB, String gender, byte[] photo , String password) {
 		this.SSN = SSN;
 		this.name = name;
 		this.DOB = DOB;
 		this.gender = gender;
 		this.photo= photo;
+		this.password=password;
+		this.illnesses = new ArrayList<Illnesses>();
+		this.symptoms = new ArrayList<Symptoms>();
+		this.medicines = new ArrayList<Medicines>();
+		this.intelorance=new  ArrayList<Intolerance>();
+	}
+	public Patients( Integer SSN, String name, Date DOB, String gender , String password) {
+		this.SSN = SSN;
+		this.name = name;
+		this.DOB = DOB;
+		this.gender = gender;
 		this.password=password;
 		this.illnesses = new ArrayList<Illnesses>();
 		this.symptoms = new ArrayList<Symptoms>();

@@ -373,7 +373,7 @@ public List<Patients> printPatient() throws SQLException {
 		String gender = rs.getString("gender");
 		byte[] photo = rs.getBytes("photo");
 		String password =rs.getString("password");
-	    Patients patient = new Patients( id, SSN, name, dob, gender, photo, password);
+	    Patients patient = new Patients( SSN, name, dob, gender,photo, password);
         list_patients.add(patient);
 	}
 	rs.close();
@@ -850,7 +850,7 @@ public List<Patients> searchByName(String name){
 		String gender = rs.getString("gender");
 		byte[] photo = rs.getBytes("photo");
 		String password =rs.getString("password");
-	    Patients patient = new Patients( id, SSN, name1, dob, gender, photo, password);
+	    Patients patient = new Patients( SSN, name1, dob, gender, photo, password);
         list_patients.add(patient);}
      return list_patients ;  
 	}
